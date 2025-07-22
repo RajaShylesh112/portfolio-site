@@ -103,9 +103,11 @@ export default function HeroSection() {
               className="w-64 h-64 md:w-80 md:h-80 rounded-full bg-gradient-to-br from-cyan-400 to-purple-500 dark:from-cyan-400 dark:to-purple-600 p-1 glow-effect"
             >
               <div className="w-full h-full rounded-full bg-background dark:bg-black flex items-center justify-center overflow-hidden backdrop-blur-sm border border-cyan-400/30">
-                <div className="w-full h-full rounded-full bg-gradient-to-br from-slate-200 to-slate-300 dark:from-slate-800 dark:to-slate-900 flex items-center justify-center text-4xl md:text-6xl text-slate-500 dark:text-slate-400">
-                  👨‍💻
-                </div>
+                <img 
+                  src="/attached_assets/1000025260-removebg_1753213343295.png"
+                  alt="Raja Shylesh - Backend Developer"
+                  className="w-full h-full object-cover object-center scale-110"
+                />
               </div>
             </motion.div>
             <motion.div

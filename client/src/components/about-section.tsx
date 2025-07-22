@@ -36,7 +36,7 @@ export default function AboutSection() {
             
             <div className="space-y-4">
               <div className="flex items-center space-x-3">
-                <GraduationCap className="text-primary dark:text-blue-400 text-xl" />
+                <GraduationCap className="text-primary dark:neon-text text-xl" />
                 <div>
                   <h4 className="font-semibold text-foreground">PSG College of Technology</h4>
                   <p className="text-muted-foreground">Bachelor of Computer Science and Engineering (Aug 2023 – Present)</p>
@@ -44,7 +44,7 @@ export default function AboutSection() {
               </div>
               
               <div className="flex items-center space-x-3">
-                <MapPin className="text-primary dark:text-blue-400 text-xl" />
+                <MapPin className="text-primary dark:neon-text text-xl" />
                 <div>
                   <h4 className="font-semibold text-foreground">Coimbatore, Tamil Nadu, India</h4>
                   <p className="text-muted-foreground">Available for remote and on-site opportunities</p>
@@ -52,7 +52,7 @@ export default function AboutSection() {
               </div>
               
               <div className="flex items-center space-x-3">
-                <Languages className="text-primary dark:text-blue-400 text-xl" />
+                <Languages className="text-primary dark:neon-text text-xl" />
                 <div>
                   <h4 className="font-semibold text-foreground">Languages</h4>
                   <p className="text-muted-foreground">Fluent in Tamil and English</p>
@@ -69,7 +69,7 @@ export default function AboutSection() {
           >
             <Card className="bg-card dark:bg-slate-800 border-border hover:border-cyan-400/50 transition-all duration-300 group hover:shadow-lg dark:hover:shadow-cyan-400/10">
               <CardContent className="p-8">
-                <h3 className="text-2xl font-semibold mb-6 text-primary dark:text-blue-400">Quick Facts</h3>
+                <h3 className="text-2xl font-semibold mb-6 text-primary dark:neon-text">Quick Facts</h3>
                 <div className="space-y-4">
                   <div className="flex justify-between items-center py-2 border-b border-border">
                     <span className="text-muted-foreground">Experience Level</span>
