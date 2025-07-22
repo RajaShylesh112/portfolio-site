@@ -17,7 +17,7 @@ export default function AboutSection() {
             About <span className="text-primary dark:text-blue-400">Me</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Passionate about creating efficient backend solutions and exploring the depths of systems engineering
+            Passionate about creating efficient backend solutions and building scalable applications
           </p>
         </motion.div>
 
@@ -30,7 +30,7 @@ export default function AboutSection() {
             className="space-y-6"
           >
             <p className="text-lg text-foreground leading-relaxed">
-              Adaptable and driven professional with a strong interest in backend development and systems engineering. 
+              Adaptable and driven professional with a strong interest in backend development. 
               Focused on building scalable, reliable solutions and eager to grow in high-impact, technically challenging environments.
             </p>
             

@@ -44,14 +44,14 @@ export default function HeroSection() {
           
           <div className="text-2xl lg:text-3xl text-muted-foreground mb-8 min-h-[3rem]">
             <TypingAnimation 
-              text="Backend Developer & Systems Engineering Enthusiast"
+              text="Backend Developer"
               speed={100}
               startDelay={1000}
             />
           </div>
           
           <p className="text-lg text-muted-foreground mb-8 max-w-2xl">
-            Adaptable and driven professional with a strong interest in backend development and systems engineering. 
+            Adaptable and driven professional with a strong interest in backend development. 
             Focused on building scalable, reliable solutions.
           </p>
           
