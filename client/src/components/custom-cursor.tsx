@@ -45,9 +45,9 @@ export default function CustomCursor() {
         }}
         transition={{
           type: "spring",
-          stiffness: 500,
-          damping: 28,
-          mass: 0.5,
+          stiffness: 800,
+          damping: 25,
+          mass: 0.3,
         }}
       >
         <div className="w-full h-full rounded-full border-2 border-white bg-white/20 backdrop-blur-sm" />
@@ -60,8 +60,8 @@ export default function CustomCursor() {
         }}
         transition={{
           type: "spring",
-          stiffness: 1000,
-          damping: 30,
+          stiffness: 1200,
+          damping: 28,
         }}
       >
         <div className="w-full h-full rounded-full bg-cyan-400" />

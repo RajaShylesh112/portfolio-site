@@ -6,11 +6,13 @@ import ScrollProgress from "@/components/scroll-progress";
 import CustomCursor from "@/components/custom-cursor";
 import AnimatedBackground from "@/components/animated-background";
 import SectionDivider from "@/components/section-divider";
+import FloatingElements from "@/components/floating-elements";
+import AnimatedDots from "@/components/animated-dots";
 import HeroSection from "@/components/hero-section";
 import AboutSection from "@/components/about-section";
 import ProjectsSection from "@/components/projects-section";
 import SkillsSection from "@/components/skills-section";
-import ExperienceSection from "@/components/experience-section";
+
 import CertificationsSection from "@/components/certifications-section";
 import ContactSection from "@/components/contact-section";
 import { Button } from "@/components/ui/button";
@@ -38,6 +40,11 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background dark:bg-black text-foreground custom-cursor relative">
       <AnimatedBackground />
+      <FloatingElements />
+      <AnimatedDots position="top-left" />
+      <AnimatedDots position="top-right" />
+      <AnimatedDots position="bottom-left" />
+      <AnimatedDots position="bottom-right" />
       <CustomCursor />
       <Navigation />
       <ScrollProgress />
@@ -49,8 +56,6 @@ export default function Home() {
       <SectionDivider variant="waves" />
       <SkillsSection />
       <SectionDivider variant="gradient" />
-      <ExperienceSection />
-      <SectionDivider variant="dots" />
       <CertificationsSection />
       <SectionDivider variant="gradient" />
       <ContactSection />

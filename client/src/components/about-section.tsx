@@ -67,7 +67,7 @@ export default function AboutSection() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <Card className="bg-card dark:bg-slate-800 border-border">
+            <Card className="bg-card dark:bg-slate-800 border-border hover:border-cyan-400/50 transition-all duration-300 group hover:shadow-lg dark:hover:shadow-cyan-400/10">
               <CardContent className="p-8">
                 <h3 className="text-2xl font-semibold mb-6 text-primary dark:text-blue-400">Quick Facts</h3>
                 <div className="space-y-4">

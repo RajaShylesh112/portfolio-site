@@ -43,7 +43,7 @@
   --card-foreground: hsl(0, 0%, 95%);
   --border: hsl(0, 0%, 15%);
   --input: hsl(0, 0%, 12%);
-  --primary: hsl(180, 100%, 50%);
+  --primary: hsl(180, 50%, 60%);
   --primary-foreground: hsl(0, 0%, 5%);
   --secondary: hsl(0, 0%, 12%);
   --secondary-foreground: hsl(0, 0%, 95%);
@@ -54,10 +54,10 @@
   --ring: hsl(180, 100%, 50%);
   --radius: 0.5rem;
   
-  /* Neon accents */
-  --neon-cyan: hsl(180, 100%, 50%);
-  --neon-purple: hsl(270, 100%, 75%);
-  --neon-green: hsl(120, 100%, 50%);
+  /* Neon accents - softer colors */
+  --neon-cyan: hsl(180, 60%, 65%);
+  --neon-purple: hsl(270, 60%, 70%);
+  --neon-green: hsl(120, 60%, 65%);
 }
 
 @layer base {

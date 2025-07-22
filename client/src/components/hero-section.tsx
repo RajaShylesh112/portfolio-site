@@ -3,6 +3,7 @@ import { Github, Linkedin, Mail, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import TypingAnimation from "./typing-animation";
 import Hero3DBackground from "./hero-3d-background";
+import ScrollIndicator from "./scroll-indicator";
 
 export default function HeroSection() {
   const scrollToSection = (sectionId: string) => {
@@ -130,15 +131,8 @@ export default function HeroSection() {
         </motion.div>
       </div>
 
-      {/* Scroll indicator */}
-      <motion.div
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer"
-        onClick={() => scrollToSection("about")}
-      >
-        <ChevronDown className="text-2xl text-muted-foreground" />
-      </motion.div>
+      {/* Enhanced Scroll indicator */}
+      <ScrollIndicator />
     </section>
   );
 }
