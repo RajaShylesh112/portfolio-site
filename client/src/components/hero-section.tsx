@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import TypingAnimation from "./typing-animation";
+import Hero3DBackground from "./hero-3d-background";
 
 export default function HeroSection() {
   const scrollToSection = (sectionId: string) => {
@@ -12,27 +13,11 @@ export default function HeroSection() {
   };
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-background to-slate-50 dark:from-slate-900 dark:to-slate-800">
-      {/* Animated background particles */}
-      <div className="absolute inset-0 overflow-hidden">
-        <motion.div
-          className="absolute top-1/4 left-1/4 w-2 h-2 bg-primary dark:bg-blue-400 rounded-full"
-          animate={{ scale: [1, 1.5, 1], opacity: [0.5, 1, 0.5] }}
-          transition={{ duration: 2, repeat: Infinity }}
-        />
-        <motion.div
-          className="absolute top-3/4 right-1/4 w-1 h-1 bg-primary dark:bg-blue-400 rounded-full"
-          animate={{ scale: [1, 2, 1], opacity: [0.3, 1, 0.3] }}
-          transition={{ duration: 3, repeat: Infinity, delay: 1 }}
-        />
-        <motion.div
-          className="absolute top-1/2 left-1/3 w-1.5 h-1.5 bg-primary dark:bg-blue-400 rounded-full"
-          animate={{ y: [0, -20, 0] }}
-          transition={{ duration: 4, repeat: Infinity, delay: 0.5 }}
-        />
-      </div>
+    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden bg-background dark:bg-black">
+      {/* 3D Dynamic Background */}
+      <Hero3DBackground />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
+      <div className="max-w-7xl mx-auto container-padding grid lg:grid-cols-2 gap-8 lg:gap-12 items-center relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -108,16 +93,16 @@ export default function HeroSection() {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="flex justify-center lg:justify-end"
+          className="flex justify-center lg:justify-end order-first lg:order-last"
         >
           <div className="relative">
             <motion.div
               animate={{ y: [0, -20, 0] }}
               transition={{ duration: 6, repeat: Infinity }}
-              className="w-80 h-80 rounded-full bg-gradient-to-br from-primary to-blue-700 dark:from-blue-500 dark:to-blue-700 p-1"
+              className="w-64 h-64 md:w-80 md:h-80 rounded-full bg-gradient-to-br from-cyan-400 to-purple-500 dark:from-cyan-400 dark:to-purple-600 p-1 glow-effect"
             >
-              <div className="w-full h-full rounded-full bg-secondary dark:bg-slate-700 flex items-center justify-center overflow-hidden">
-                <div className="w-full h-full rounded-full bg-gradient-to-br from-slate-200 to-slate-300 dark:from-slate-600 dark:to-slate-700 flex items-center justify-center text-6xl text-slate-500 dark:text-slate-400">
+              <div className="w-full h-full rounded-full bg-background dark:bg-black flex items-center justify-center overflow-hidden backdrop-blur-sm border border-cyan-400/30">
+                <div className="w-full h-full rounded-full bg-gradient-to-br from-slate-200 to-slate-300 dark:from-slate-800 dark:to-slate-900 flex items-center justify-center text-4xl md:text-6xl text-slate-500 dark:text-slate-400">
                   👨‍💻
                 </div>
               </div>
@@ -126,10 +111,21 @@ export default function HeroSection() {
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 1, duration: 0.5 }}
-              className="absolute -bottom-4 -right-4 bg-emerald-500 text-white px-4 py-2 rounded-full text-sm font-medium"
+              className="absolute -bottom-2 -right-2 md:-bottom-4 md:-right-4 bg-cyan-400 text-black px-3 py-1 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-medium neon-border"
             >
               Available for projects
             </motion.div>
+            {/* Floating elements around profile */}
+            <motion.div
+              className="absolute -top-4 -right-8 w-3 h-3 md:w-4 md:h-4 bg-cyan-400 rounded-full floating-particle"
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            />
+            <motion.div
+              className="absolute -bottom-8 -left-4 w-2 h-2 md:w-3 md:h-3 bg-purple-400/60 rounded-full floating-particle"
+              animate={{ y: [0, 10, 0] }}
+              transition={{ duration: 2.5, repeat: Infinity, delay: 0.5 }}
+            />
           </div>
         </motion.div>
       </div>

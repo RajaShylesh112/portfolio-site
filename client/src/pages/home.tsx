@@ -5,6 +5,7 @@ import Navigation from "@/components/navigation";
 import ScrollProgress from "@/components/scroll-progress";
 import CustomCursor from "@/components/custom-cursor";
 import AnimatedBackground from "@/components/animated-background";
+import SectionDivider from "@/components/section-divider";
 import HeroSection from "@/components/hero-section";
 import AboutSection from "@/components/about-section";
 import ProjectsSection from "@/components/projects-section";
@@ -41,11 +42,17 @@ export default function Home() {
       <Navigation />
       <ScrollProgress />
       <HeroSection />
+      <SectionDivider variant="gradient" />
       <AboutSection />
+      <SectionDivider variant="dots" />
       <ProjectsSection />
+      <SectionDivider variant="waves" />
       <SkillsSection />
+      <SectionDivider variant="gradient" />
       <ExperienceSection />
+      <SectionDivider variant="dots" />
       <CertificationsSection />
+      <SectionDivider variant="gradient" />
       <ContactSection />
 
       {/* Back to Top Button */}

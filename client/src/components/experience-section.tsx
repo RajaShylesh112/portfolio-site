@@ -5,8 +5,8 @@ import { Badge } from "@/components/ui/badge";
 
 export default function ExperienceSection() {
   return (
-    <section id="experience" className="py-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="experience" className="section-padding section-reveal">
+      <div className="max-w-7xl mx-auto container-padding">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -15,7 +15,7 @@ export default function ExperienceSection() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl lg:text-5xl font-bold mb-4 text-foreground">
-            Experience & <span className="text-primary dark:text-blue-400">Activities</span>
+            Experience & <span className="text-primary dark:neon-text">Activities</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             Leadership roles and volunteer experiences that showcase my collaborative spirit

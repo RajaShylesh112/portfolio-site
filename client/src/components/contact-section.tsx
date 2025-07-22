@@ -54,8 +54,8 @@ export default function ContactSection() {
   ];
 
   return (
-    <section id="contact" className="py-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="section-padding section-reveal">
+      <div className="max-w-7xl mx-auto container-padding">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -64,7 +64,7 @@ export default function ContactSection() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl lg:text-5xl font-bold mb-4 text-foreground">
-            Let's <span className="text-primary dark:text-blue-400">Connect</span>
+            Let's <span className="text-primary dark:neon-text">Connect</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             Ready to collaborate on exciting projects or discuss backend development opportunities

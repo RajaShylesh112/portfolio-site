@@ -14,8 +14,8 @@ export default function CertificationsSection() {
   ];
 
   return (
-    <section id="certifications" className="py-20 bg-muted/50 dark:bg-slate-800/50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="certifications" className="section-padding bg-muted/50 dark:bg-slate-900/50 backdrop-blur-sm section-reveal">
+      <div className="max-w-7xl mx-auto container-padding">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -24,7 +24,7 @@ export default function CertificationsSection() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl lg:text-5xl font-bold mb-4 text-foreground">
-            Certifications & <span className="text-primary dark:text-blue-400">Learning</span>
+            Certifications & <span className="text-primary dark:neon-text">Learning</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             Continuous learning and professional development achievements

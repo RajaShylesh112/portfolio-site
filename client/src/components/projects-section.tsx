@@ -98,8 +98,8 @@ function ProjectCard({ project, index }: { project: typeof projects[0], index: n
 
 export default function ProjectsSection() {
   return (
-    <section id="projects" className="py-20 section-reveal">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="projects" className="section-padding section-reveal">
+      <div className="max-w-7xl mx-auto container-padding">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
