@@ -1,0 +1,91 @@
+Goal: Rebuild Marc Friedman–style Portfolio
+✅ Full Feature List (with Implementation Suggestions)
+🔹 1. Hero Section with 3D Background
+Tech: Three.js or React Three Fiber
+
+Effect: Shader-distorted plane or blob that responds to mouse movement.
+
+Includes:
+
+Animated headline text (with GSAP)
+
+Place for your profile image
+
+Smooth entrance animations
+
+🔹 2. Scroll-Triggered Section Animations
+Tech: GSAP ScrollTrigger or Framer Motion
+
+Smooth fade-ins, scale-ups, text reveal line-by-line as user scrolls.
+
+🔹 3. Scroll Progress Bar (Under Navbar)
+Thin animated line that fills left-to-right as you scroll.
+
+Fixed to the top, just below navbar.
+
+Can be upgraded to show section progress or highlights.
+
+🔹 4. Custom Cursor
+Circle cursor that follows mouse with easing.
+
+Enlarges or morphs when hovering over interactive elements.
+
+Built using: canvas, GSAP, or CSS transform + JS
+
+🔹 5. Animated Navbar
+Sticky top navigation
+
+Fade-in on load, color change or underline on scroll
+
+Page section links animate on hover (scale/opacity/glow)
+
+🔹 6. Project Showcase Cards
+3D hover effect (card rotates subtly with mouse)
+
+On click: open modal or new page with more animation
+
+Can embed interactive 3D previews via Spline or R3F
+
+🔹 7. Page Transitions
+When switching sections or links, use:
+
+GSAP Timelines
+
+Framer Motion AnimatePresence (React only)
+
+🔹 8. Footer with Floating/Glowing Elements
+Custom animated glowing dots/particles
+
+Smooth slide-in of contact details or form
+
+🔹 9. Full Dark Theme + Neon Highlights
+Background: #0d0d0d
+
+Accent Colors: neon cyan, purple, electric green
+
+Fonts: Sora, Orbitron, Poppins (choose based on feel)
+
+🛠️ Suggested Tech Stack
+Layer	Tools
+Frontend	React (with Vite or Next.js)
+3D Rendering	Three.js or React Three Fiber
+Animation	GSAP 3 + ScrollTrigger / Framer Motion
+Custom Cursor	JS or canvas cursor logic
+Styling	Tailwind CSS or custom SCSS
+Fonts & Icons	Google Fonts + Phosphor Icons / Lucide
+Deployment	Vercel / Netlify
+
+🚀 Want a Starter Codebase?
+I can generate you a starter portfolio with:
+
+React + Tailwind
+
+GSAP animations
+
+Scroll progress bar
+
+3D background (basic blob or shader plane)
+
+Custom cursor
+
+Hero with profile image placeholder

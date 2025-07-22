@@ -38,11 +38,11 @@ export default function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h1 className="text-5xl lg:text-7xl font-bold leading-tight mb-4 text-foreground">
-            Hi, I'm <span className="text-primary dark:text-blue-400">Raja</span>
+          <h1 className="hero-title text-5xl lg:text-7xl font-bold leading-tight mb-4 text-foreground">
+            Hi, I'm <span className="text-primary dark:neon-text">Raja</span>
           </h1>
           
-          <div className="text-2xl lg:text-3xl text-muted-foreground mb-8 min-h-[3rem]">
+          <div className="hero-subtitle text-2xl lg:text-3xl text-muted-foreground mb-8 min-h-[3rem]">
             <TypingAnimation 
               text="Backend Developer"
               speed={100}
@@ -50,22 +50,22 @@ export default function HeroSection() {
             />
           </div>
           
-          <p className="text-lg text-muted-foreground mb-8 max-w-2xl">
+          <p className="hero-description text-lg text-muted-foreground mb-8 max-w-2xl">
             Adaptable and driven professional with a strong interest in backend development. 
             Focused on building scalable, reliable solutions.
           </p>
           
-          <div className="flex flex-wrap gap-4 mb-8">
+          <div className="hero-buttons flex flex-wrap gap-4 mb-8">
             <Button
               onClick={() => scrollToSection("contact")}
-              className="px-8 py-3 bg-primary hover:bg-primary/90 text-primary-foreground"
+              className="px-8 py-3 bg-primary hover:bg-primary/90 text-primary-foreground dark:bg-cyan-400 dark:text-black dark:hover:bg-cyan-300 cursor-pointer"
             >
               Get In Touch
             </Button>
             <Button
               variant="outline"
               onClick={() => scrollToSection("projects")}
-              className="px-8 py-3"
+              className="px-8 py-3 border-primary dark:border-cyan-400 dark:text-cyan-400 dark:hover:bg-cyan-400/10 cursor-pointer"
             >
               View Projects
             </Button>

@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronUp } from "lucide-react";
 import Navigation from "@/components/navigation";
+import ScrollProgress from "@/components/scroll-progress";
+import CustomCursor from "@/components/custom-cursor";
+import AnimatedBackground from "@/components/animated-background";
 import HeroSection from "@/components/hero-section";
 import AboutSection from "@/components/about-section";
 import ProjectsSection from "@/components/projects-section";
@@ -10,9 +13,13 @@ import ExperienceSection from "@/components/experience-section";
 import CertificationsSection from "@/components/certifications-section";
 import ContactSection from "@/components/contact-section";
 import { Button } from "@/components/ui/button";
+import { useGSAPAnimations } from "@/hooks/use-gsap-animations";
 
 export default function Home() {
   const [showBackToTop, setShowBackToTop] = useState(false);
+  
+  // Initialize GSAP animations
+  useGSAPAnimations();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,8 +35,11 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-background dark:bg-slate-900 text-foreground">
+    <div className="min-h-screen bg-background dark:bg-black text-foreground custom-cursor relative">
+      <AnimatedBackground />
+      <CustomCursor />
       <Navigation />
+      <ScrollProgress />
       <HeroSection />
       <AboutSection />
       <ProjectsSection />

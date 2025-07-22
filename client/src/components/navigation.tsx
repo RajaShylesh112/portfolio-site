@@ -43,7 +43,7 @@ export default function Navigation() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <div className="text-xl font-bold text-primary dark:text-blue-400">
+          <div className="text-xl font-bold text-primary dark:neon-text cursor-pointer">
             Raja Shylesh
           </div>
 
@@ -54,7 +54,7 @@ export default function Navigation() {
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className="text-foreground hover:text-primary dark:hover:text-blue-400 transition-colors duration-200"
+                  className="text-foreground hover:text-primary dark:hover:neon-text transition-colors duration-200 cursor-pointer"
                 >
                   {item.label}
                 </button>
@@ -68,7 +68,7 @@ export default function Navigation() {
               variant="ghost"
               size="icon"
               onClick={toggleTheme}
-              className="rounded-lg"
+              className="rounded-lg hover:bg-cyan-400/10 cursor-pointer"
             >
               {theme === "dark" ? (
                 <Sun className="h-5 w-5" />
@@ -81,7 +81,7 @@ export default function Navigation() {
             <Button
               variant="ghost"
               size="icon"
-              className="md:hidden"
+              className="md:hidden hover:bg-cyan-400/10 cursor-pointer"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? (
