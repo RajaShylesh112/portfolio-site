@@ -3,12 +3,9 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ExternalLink, Github, Filter } from "lucide-react";
+import { ExternalLink, Github, Filter, X } from "lucide-react";
 import Navigation from "@/components/navigation";
-import CustomCursor from "@/components/custom-cursor";
-import ScrollProgress from "@/components/scroll-progress";
-import FloatingElements from "@/components/floating-elements";
-import AnimatedDots from "@/components/animated-dots";
+import Footer from "@/components/footer";
 
 interface Project {
   id: string;
@@ -32,7 +29,7 @@ const projects: Project[] = [
     image: "/api/placeholder/400/300",
     technologies: ["Node.js", "Express", "MongoDB", "JWT", "Stripe"],
     category: "Backend",
-    githubUrl: "https://github.com/rajashylesh/ecommerce-api",
+    githubUrl: "https://github.com/RajaShylesh112/ecommerce-api",
     demoUrl: "https://ecommerce-api-demo.com",
     featured: true
   },
@@ -44,7 +41,7 @@ const projects: Project[] = [
     image: "/api/placeholder/400/300",
     technologies: ["Node.js", "Socket.io", "PostgreSQL", "React", "TypeScript"],
     category: "Full-stack",
-    githubUrl: "https://github.com/rajashylesh/task-manager",
+    githubUrl: "https://github.com/RajaShylesh112/task-manager",
     demoUrl: "https://task-manager-demo.com",
     featured: true
   },
@@ -56,7 +53,7 @@ const projects: Project[] = [
     image: "/api/placeholder/400/300",
     technologies: ["Node.js", "Express", "MySQL", "Redis", "TinyMCE"],
     category: "Backend",
-    githubUrl: "https://github.com/rajashylesh/blog-cms",
+    githubUrl: "https://github.com/RajaShylesh112/blog-cms",
     featured: true
   },
   {
@@ -67,7 +64,7 @@ const projects: Project[] = [
     image: "/api/placeholder/400/300",
     technologies: ["Node.js", "Socket.io", "MongoDB", "Multer", "bcrypt"],
     category: "Real-time",
-    githubUrl: "https://github.com/rajashylesh/chat-app",
+    githubUrl: "https://github.com/RajaShylesh112/chat-app",
     demoUrl: "https://chat-app-demo.com",
     featured: false
   },
@@ -79,7 +76,7 @@ const projects: Project[] = [
     image: "/api/placeholder/400/300",
     technologies: ["Node.js", "Redis", "PostgreSQL", "Cron", "External APIs"],
     category: "Backend",
-    githubUrl: "https://github.com/rajashylesh/weather-api",
+    githubUrl: "https://github.com/RajaShylesh112/weather-api",
     featured: false
   },
   {
@@ -90,7 +87,7 @@ const projects: Project[] = [
     image: "/api/placeholder/400/300",
     technologies: ["Node.js", "Express", "MongoDB", "QR Code", "Rate Limiting"],
     category: "Backend",
-    githubUrl: "https://github.com/rajashylesh/url-shortener",
+    githubUrl: "https://github.com/RajaShylesh112/url-shortener",
     demoUrl: "https://short.ly-demo.com",
     featured: false
   }
@@ -107,15 +104,9 @@ export default function Projects() {
     : projects.filter(project => project.category === selectedCategory);
 
   return (
-    <div className="min-h-screen bg-background dark:bg-black text-foreground relative">
-      <CustomCursor />
+    <div className="min-h-screen bg-white dark:bg-black text-gray-900 dark:text-white relative">
       <Navigation />
-      <ScrollProgress />
-      <FloatingElements />
-      <AnimatedDots position="top-left" />
-      <AnimatedDots position="top-right" />
-      <AnimatedDots position="bottom-left" />
-      <AnimatedDots position="bottom-right" />
+      
       {/* Header */}
       <section className="pt-24 pb-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
@@ -125,10 +116,10 @@ export default function Projects() {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-500 bg-clip-text text-transparent">
               My Projects
             </h1>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
               A collection of projects showcasing my backend development skills and passion for building scalable applications
             </p>
           </motion.div>
@@ -148,7 +139,7 @@ export default function Projects() {
                 className={`${
                   selectedCategory === category
                     ? "bg-cyan-600 hover:bg-cyan-700"
-                    : "border-cyan-400/50 hover:bg-cyan-400/10"
+                    : "border-cyan-500 dark:border-cyan-400/50 hover:bg-cyan-50 dark:hover:bg-cyan-400/10"
                 }`}
               >
                 <Filter className="w-4 h-4 mr-2" />
@@ -171,15 +162,15 @@ export default function Projects() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
               >
                 <Card 
-                  className="group bg-slate-800/50 border-cyan-400/20 hover:border-cyan-400/50 transition-all duration-300 cursor-pointer h-full"
+                  className="group bg-gray-50 dark:bg-slate-800/50 border-gray-200 dark:border-cyan-400/20 hover:border-cyan-500 dark:hover:border-cyan-400/50 transition-all duration-300 cursor-pointer h-full hover:shadow-lg"
                   onClick={() => setSelectedProject(project)}
                 >
-                  <div className="aspect-video bg-slate-700/50 rounded-t-lg flex items-center justify-center">
+                  <div className="aspect-video bg-gray-200 dark:bg-slate-700/50 rounded-t-lg flex items-center justify-center">
                     <div className="text-4xl">🚀</div>
                   </div>
                   <CardHeader>
                     <div className="flex items-start justify-between">
-                      <CardTitle className="text-lg group-hover:text-cyan-400 transition-colors">
+                      <CardTitle className="text-lg text-gray-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">
                         {project.title}
                       </CardTitle>
                       {project.featured && (
@@ -188,28 +179,44 @@ export default function Projects() {
                     </div>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-muted-foreground mb-4 line-clamp-3">
+                    <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-3">
                       {project.description}
                     </p>
                     <div className="flex flex-wrap gap-2 mb-4">
                       {project.technologies.slice(0, 3).map((tech) => (
-                        <Badge key={tech} variant="secondary" className="text-xs">
+                        <Badge key={tech} variant="secondary" className="text-xs bg-gray-100 dark:bg-gray-800">
                           {tech}
                         </Badge>
                       ))}
                       {project.technologies.length > 3 && (
-                        <Badge variant="secondary" className="text-xs">
+                        <Badge variant="secondary" className="text-xs bg-gray-100 dark:bg-gray-800">
                           +{project.technologies.length - 3}
                         </Badge>
                       )}
                     </div>
                     <div className="flex gap-2">
-                      <Button size="sm" variant="outline" className="border-cyan-400/50 hover:bg-cyan-400/10">
+                      <Button 
+                        size="sm" 
+                        variant="outline" 
+                        className="border-cyan-500 dark:border-cyan-400/50 hover:bg-cyan-50 dark:hover:bg-cyan-400/10"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          window.open(project.githubUrl, '_blank');
+                        }}
+                      >
                         <Github className="w-4 h-4 mr-2" />
                         Code
                       </Button>
                       {project.demoUrl && (
-                        <Button size="sm" variant="outline" className="border-cyan-400/50 hover:bg-cyan-400/10">
+                        <Button 
+                          size="sm" 
+                          variant="outline" 
+                          className="border-cyan-500 dark:border-cyan-400/50 hover:bg-cyan-50 dark:hover:bg-cyan-400/10"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            window.open(project.demoUrl, '_blank');
+                          }}
+                        >
                           <ExternalLink className="w-4 h-4 mr-2" />
                           Demo
                         </Button>
@@ -233,38 +240,38 @@ export default function Projects() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.3 }}
-            className="bg-slate-900 rounded-lg max-w-2xl w-full max-h-[80vh] overflow-y-auto"
+            className="bg-white dark:bg-slate-900 rounded-lg max-w-2xl w-full max-h-[80vh] overflow-y-auto border border-gray-200 dark:border-slate-700"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="p-8">
               <div className="flex items-start justify-between mb-6">
                 <div>
-                  <h2 className="text-2xl font-bold mb-2">{selectedProject.title}</h2>
+                  <h2 className="text-2xl font-bold mb-2 text-gray-900 dark:text-white">{selectedProject.title}</h2>
                   <Badge className="bg-cyan-600 text-white">{selectedProject.category}</Badge>
                 </div>
                 <Button
                   variant="ghost"
                   size="sm"
                   onClick={() => setSelectedProject(null)}
-                  className="text-muted-foreground hover:text-foreground"
+                  className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
                 >
-                  ✕
+                  <X className="w-4 h-4" />
                 </Button>
               </div>
               
-              <div className="aspect-video bg-slate-700/50 rounded-lg flex items-center justify-center mb-6">
+              <div className="aspect-video bg-gray-200 dark:bg-slate-700/50 rounded-lg flex items-center justify-center mb-6">
                 <div className="text-6xl">🚀</div>
               </div>
 
-              <p className="text-muted-foreground mb-6 leading-relaxed">
+              <p className="text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
                 {selectedProject.longDescription}
               </p>
 
               <div className="mb-6">
-                <h3 className="text-lg font-semibold mb-3">Technologies Used</h3>
+                <h3 className="text-lg font-semibold mb-3 text-gray-900 dark:text-white">Technologies Used</h3>
                 <div className="flex flex-wrap gap-2">
                   {selectedProject.technologies.map((tech) => (
-                    <Badge key={tech} variant="secondary">
+                    <Badge key={tech} variant="secondary" className="bg-gray-100 dark:bg-gray-800">
                       {tech}
                     </Badge>
                   ))}
@@ -272,12 +279,19 @@ export default function Projects() {
               </div>
 
               <div className="flex gap-4">
-                <Button className="bg-cyan-600 hover:bg-cyan-700">
+                <Button 
+                  className="bg-cyan-600 hover:bg-cyan-700"
+                  onClick={() => window.open(selectedProject.githubUrl, '_blank')}
+                >
                   <Github className="w-4 h-4 mr-2" />
                   View Code
                 </Button>
                 {selectedProject.demoUrl && (
-                  <Button variant="outline" className="border-cyan-400/50 hover:bg-cyan-400/10">
+                  <Button 
+                    variant="outline" 
+                    className="border-cyan-500 dark:border-cyan-400/50 hover:bg-cyan-50 dark:hover:bg-cyan-400/10"
+                    onClick={() => window.open(selectedProject.demoUrl, '_blank')}
+                  >
                     <ExternalLink className="w-4 h-4 mr-2" />
                     Live Demo
                   </Button>
@@ -287,6 +301,8 @@ export default function Projects() {
           </motion.div>
         </div>
       )}
+
+      <Footer />
     </div>
   );
 }
