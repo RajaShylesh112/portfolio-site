@@ -8,13 +8,12 @@ import AnimatedBackground from "@/components/animated-background";
 import SectionDivider from "@/components/section-divider";
 import FloatingElements from "@/components/floating-elements";
 import AnimatedDots from "@/components/animated-dots";
-import HeroSection from "@/components/hero-section";
-import AboutSection from "@/components/about-section";
-import ProjectsSection from "@/components/projects-section";
-import SkillsSection from "@/components/skills-section";
-
-import CertificationsSection from "@/components/certifications-section";
-import ContactSection from "@/components/contact-section";
+import HeroSectionSimplified from "@/components/hero-section-simplified";
+import FeaturedProjectsSection from "@/components/featured-projects-section";
+import ShortAboutSection from "@/components/short-about-section";
+import SkillsSummarySection from "@/components/skills-summary-section";
+import QuickContactSection from "@/components/quick-contact-section";
+import CallToActionSection from "@/components/call-to-action-section";
 import { Button } from "@/components/ui/button";
 import { useGSAPAnimations } from "@/hooks/use-gsap-animations";
 
@@ -48,17 +47,17 @@ export default function Home() {
       <CustomCursor />
       <Navigation />
       <ScrollProgress />
-      <HeroSection />
+      <HeroSectionSimplified />
       <SectionDivider variant="gradient" />
-      <AboutSection />
+      <FeaturedProjectsSection />
       <SectionDivider variant="dots" />
-      <ProjectsSection />
+      <ShortAboutSection />
       <SectionDivider variant="waves" />
-      <SkillsSection />
+      <SkillsSummarySection />
       <SectionDivider variant="gradient" />
-      <CertificationsSection />
+      <QuickContactSection />
       <SectionDivider variant="gradient" />
-      <ContactSection />
+      <CallToActionSection />
 
       {/* Back to Top Button */}
       <AnimatePresence>

@@ -1,0 +1,124 @@
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { ExternalLink, Github, ArrowRight } from "lucide-react";
+import { Link } from "wouter";
+
+const featuredProjects = [
+  {
+    id: "ecommerce-api",
+    title: "E-commerce API",
+    description: "RESTful API for online shopping platform with authentication and payment processing",
+    technologies: ["Node.js", "Express", "MongoDB", "JWT", "Stripe"],
+    githubUrl: "https://github.com/rajashylesh/ecommerce-api",
+    demoUrl: "https://ecommerce-api-demo.com"
+  },
+  {
+    id: "task-manager",
+    title: "Task Management System", 
+    description: "Full-stack task management application with real-time updates",
+    technologies: ["Node.js", "Socket.io", "PostgreSQL", "React", "TypeScript"],
+    githubUrl: "https://github.com/rajashylesh/task-manager",
+    demoUrl: "https://task-manager-demo.com"
+  },
+  {
+    id: "blog-cms",
+    title: "Blog CMS",
+    description: "Content Management System for blogs with admin dashboard",
+    technologies: ["Node.js", "Express", "MySQL", "Redis", "TinyMCE"],
+    githubUrl: "https://github.com/rajashylesh/blog-cms"
+  }
+];
+
+export default function FeaturedProjectsSection() {
+  return (
+    <section id="featured-projects" className="py-20 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">
+            <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+              Featured Projects
+            </span>
+          </h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            A selection of my best work showcasing backend development skills and modern technologies
+          </p>
+        </motion.div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          {featuredProjects.map((project, index) => (
+            <motion.div
+              key={project.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              viewport={{ once: true }}
+            >
+              <Card className="group bg-slate-800/50 border-cyan-400/20 hover:border-cyan-400/50 transition-all duration-300 h-full">
+                <div className="aspect-video bg-slate-700/50 rounded-t-lg flex items-center justify-center">
+                  <div className="text-4xl">🚀</div>
+                </div>
+                <CardHeader>
+                  <CardTitle className="text-lg group-hover:text-cyan-400 transition-colors">
+                    {project.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground mb-4 line-clamp-3">
+                    {project.description}
+                  </p>
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {project.technologies.slice(0, 3).map((tech) => (
+                      <Badge key={tech} variant="secondary" className="text-xs">
+                        {tech}
+                      </Badge>
+                    ))}
+                    {project.technologies.length > 3 && (
+                      <Badge variant="secondary" className="text-xs">
+                        +{project.technologies.length - 3}
+                      </Badge>
+                    )}
+                  </div>
+                  <div className="flex gap-2">
+                    <Button size="sm" variant="outline" className="border-cyan-400/50 hover:bg-cyan-400/10">
+                      <Github className="w-4 h-4 mr-2" />
+                      Code
+                    </Button>
+                    {project.demoUrl && (
+                      <Button size="sm" variant="outline" className="border-cyan-400/50 hover:bg-cyan-400/10">
+                        <ExternalLink className="w-4 h-4 mr-2" />
+                        Demo
+                      </Button>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          viewport={{ once: true }}
+          className="text-center"
+        >
+          <Link href="/projects">
+            <Button size="lg" variant="outline" className="border-cyan-400/50 text-cyan-400 hover:bg-cyan-400/10">
+              View All Projects
+              <ArrowRight className="w-5 h-5 ml-2" />
+            </Button>
+          </Link>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
