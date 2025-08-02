@@ -36,7 +36,7 @@ export default function AnimatedBackground() {
       {particles.map((particle) => (
         <motion.div
           key={particle.id}
-          className="absolute rounded-full opacity-20"
+          className="absolute rounded-full opacity-10"
           style={{
             width: particle.size,
             height: particle.size,
@@ -49,7 +49,7 @@ export default function AnimatedBackground() {
             y: [0, -50, 0],
             x: [0, Math.random() * 50 - 25, 0],
             scale: [1, 1.5, 1],
-            opacity: [0.2, 0.5, 0.2],
+            opacity: [0.05, 0.15, 0.05],
           }}
           transition={{
             duration: particle.duration,

@@ -58,10 +58,23 @@ export default function FeaturedProjectsSection() {
               key={project.id}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
+              whileHover={{ 
+                y: -10, 
+                scale: 1.02,
+                rotateY: 5,
+                rotateX: 5
+              }}
+              transition={{ 
+                duration: 0.6, 
+                delay: index * 0.1,
+                type: "spring", 
+                stiffness: 300, 
+                damping: 20 
+              }}
               viewport={{ once: true }}
+              style={{ perspective: 1000 }}
             >
-              <Card className="group bg-slate-800/50 border-cyan-400/20 hover:border-cyan-400/50 transition-all duration-300 h-full">
+              <Card className="group bg-slate-800/50 border-cyan-400/20 hover:border-cyan-400/50 hover:shadow-2xl hover:shadow-cyan-400/20 transition-all duration-300 h-full backdrop-blur-sm">
                 <div className="aspect-video bg-slate-700/50 rounded-t-lg flex items-center justify-center">
                   <div className="text-4xl">🚀</div>
                 </div>
