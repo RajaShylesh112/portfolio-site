@@ -24,8 +24,8 @@ export default function Navigation() {
 
   const navItems = [
     { path: "/", label: "Home" },
-    { path: "/projects", label: "Projects" },
-    { path: "/blog", label: "Blog" },
+    { path: "/projects", label: "Blueprints" },
+    { path: "/blog", label: "Field Notes" },
     { path: "/about", label: "About" },
   ];
 
@@ -33,84 +33,97 @@ export default function Navigation() {
     <nav
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-background/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-border"
-          : "bg-transparent"
+          ? "bg-[var(--architect-charcoal)]/95 backdrop-blur-md border-b border-[var(--architect-teal)]/30 blueprint-grid"
+          : "bg-[var(--architect-charcoal)]/80 backdrop-blur-sm"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <Link href="/" className="text-xl font-bold text-primary dark:neon-text cursor-pointer hover:text-cyan-400 transition-colors">
-            Portfolio
+          <Link href="/" className="text-xl font-bold font-mono text-[var(--architect-teal)] cursor-pointer hover:text-[var(--architect-rust)] transition-colors tracking-wider">
+            [PORTFOLIO]
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:block">
             <div className="flex items-center space-x-8">
-              {navItems.map((item) => (
+              {navItems.map((item, index) => (
                 <Link
                   key={item.path}
                   href={item.path}
-                  className={`transition-colors duration-200 cursor-pointer ${
+                  className={`font-mono text-sm tracking-wider uppercase transition-all duration-300 cursor-pointer relative group ${
                     location === item.path
-                      ? "text-cyan-400"
-                      : "text-foreground hover:text-cyan-400"
+                      ? "text-[var(--architect-teal)] after:w-full"
+                      : "text-[var(--architect-concrete)] hover:text-[var(--architect-teal)]"
+                  } after:absolute after:bottom-0 after:left-0 after:h-[1px] after:bg-[var(--architect-teal)] after:transition-all after:duration-300 ${
+                    location === item.path ? "after:w-full" : "after:w-0 group-hover:after:w-full"
                   }`}
                 >
-                  {item.label}
+                  <span className="relative">
+                    [{String(index + 1).padStart(2, '0')}] {item.label}
+                    {location === item.path && (
+                      <span className="absolute -right-3 top-0 w-1 h-1 bg-[var(--architect-teal)] animate-pulse" />
+                    )}
+                  </span>
                 </Link>
               ))}
             </div>
           </div>
 
-          {/* Theme Toggle and Mobile Menu */}
+          {/* System Controls */}
           <div className="flex items-center space-x-4">
+            <div className="hidden md:flex items-center space-x-2 font-mono text-xs text-[var(--architect-concrete)]/60">
+              <span>SYS:</span>
+              <span className="text-[var(--architect-teal)]">ONLINE</span>
+            </div>
             <Button
               variant="ghost"
               size="icon"
               onClick={toggleTheme}
-              className="rounded-lg hover:bg-cyan-400/10 cursor-pointer"
+              className="border border-[var(--architect-teal)]/30 hover:bg-[var(--architect-teal)]/10 cursor-pointer font-mono text-xs"
             >
               {theme === "dark" ? (
-                <Sun className="h-5 w-5" />
+                <Sun className="h-4 w-4" />
               ) : (
-                <Moon className="h-5 w-5" />
+                <Moon className="h-4 w-4" />
               )}
             </Button>
 
-            {/* Mobile Menu Button */}
+            {/* Mobile Command Menu */}
             <Button
               variant="ghost"
               size="icon"
-              className="md:hidden hover:bg-cyan-400/10 cursor-pointer"
+              className="md:hidden border border-[var(--architect-teal)]/30 hover:bg-[var(--architect-teal)]/10 cursor-pointer"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? (
-                <X className="h-5 w-5" />
+                <X className="h-4 w-4" />
               ) : (
-                <Menu className="h-5 w-5" />
+                <Menu className="h-4 w-4" />
               )}
             </Button>
           </div>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile Command Interface */}
         {isMenuOpen && (
           <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-background dark:bg-slate-900 border-t border-border">
-              {navItems.map((item) => (
-                <Link
-                  key={item.path}
-                  href={item.path}
-                  onClick={closeMenu}
-                  className={`block w-full text-left px-3 py-2 transition-colors duration-200 ${
-                    location === item.path
-                      ? "text-cyan-400"
-                      : "text-foreground hover:text-cyan-400"
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              ))}
+            <div className="px-4 py-4 bg-[var(--architect-navy)]/95 backdrop-blur-md border-t border-[var(--architect-teal)]/30">
+              <div className="space-y-2">
+                {navItems.map((item, index) => (
+                  <Link
+                    key={item.path}
+                    href={item.path}
+                    onClick={closeMenu}
+                    className={`block font-mono text-sm tracking-wider uppercase px-3 py-2 transition-colors duration-200 border-l-2 ${
+                      location === item.path
+                        ? "text-[var(--architect-teal)] border-[var(--architect-teal)]"
+                        : "text-[var(--architect-concrete)] hover:text-[var(--architect-teal)] border-transparent hover:border-[var(--architect-teal)]/50"
+                    }`}
+                  >
+                    [{String(index + 1).padStart(2, '0')}] {item.label}
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
         )}

@@ -11,6 +11,7 @@ import ShortAboutSection from "@/components/short-about-section";
 import SkillsSummarySection from "@/components/skills-summary-section";
 import QuickContactSection from "@/components/quick-contact-section";
 import CallToActionSection from "@/components/call-to-action-section";
+import SystemFooter from "@/components/system-footer";
 import { Button } from "@/components/ui/button";
 import { useGSAPAnimations } from "@/hooks/use-gsap-animations";
 
@@ -49,6 +50,7 @@ export default function Home() {
       <QuickContactSection />
       <BlueprintSectionDivider label="MISSION BRIEF" variant="primary" />
       <CallToActionSection />
+      <SystemFooter />
 
       {/* Back to Top Button */}
       <AnimatePresence>
