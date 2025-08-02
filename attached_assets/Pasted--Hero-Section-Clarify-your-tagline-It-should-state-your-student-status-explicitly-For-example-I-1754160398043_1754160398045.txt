@@ -1,0 +1,118 @@
+ Hero Section
+Clarify your tagline: It should state your student status explicitly.
+For example:
+
+“I’m Raja Shylesh – CS Undergraduate | Systems-Driven Developer”
+This tells people you’re learning, building, and thinking about systems.
+
+Background blueprint animation: Scale it back for subtlety. A light grid or pulsing node layout is enough—no drifting HUDs or full cyber overlays.
+
+Call-to-action buttons: Use clear labels like:
+
+[View Projects]
+
+[Download Resume]
+Treat them as plain language commands, not fantasy artifacts.
+
+🧭 Navbar
+Use exactly:
+
+nginx
+Copy
+Edit
+Home | Projects | Blog | About
+Styling tips:
+
+Font: monospace for engineering precision (JetBrains Mono, Fira Code)
+
+Hover: thin cyan underline or underline-right-from-left scan animation
+
+Background: semi-transparent dark panel, 1px cyan line along the bottom edge
+
+📂 Projects Page
+Curtail styling: No neon glows—go for flat, grid-based project cards.
+
+Project metadata: For each:
+
+title
+
+short description (~2 lines)
+
+tech stack tags (e.g. React | Node | PostgreSQL)
+
+your role (solo, team, coursework)
+
+README-centered: Have a visible link to the project’s GitHub with a short summary of learnings or achievements.
+
+📝 Blog (Learning Logs)
+Blog entries should be bite-size and explicit:
+
+Example: “2025‑08‑01_cart_auth_token_design.md”
+
+Format: Title, learning objective, takeaway.
+
+Minimal styling—think scanned log entries rather than fiction.
+
+👤 About Page
+Present yourself as a student on a journey:
+
+Year: CSE, Institution Name
+
+Timeline:
+
+Projects
+
+Hackathons
+
+Leadership roles or clubs
+
+Small statement: e.g. "A curious CS undergrad building backend systems and thinking about big-picture scalability."
+
+Add a clean “Download Resume (PDF)” button.
+
+🛠 Stack Section (within About or Projects)
+Show your toolset as structured data:
+
+Backend: Node.js, Express, PostgreSQL
+
+Frontend: React, Tailwind
+
+Infra: Docker, GitHub Actions
+
+Use labels like terminal output:
+
+shell
+Copy
+Edit
+> current_focus: Next.js, GraphQL  
+> exploring: Redis, Docker Swarm  
+This subtly reinforces the systems architect narrative.
+
+🔧 Footer
+Treat it like a simple system log:
+
+yaml
+Copy
+Edit
+RajaShylesh.dev v0.9 | CS Student: Project‑focused build | Last Updated: Aug 2025
+Minimal ASCII-styled separators, no flashy visuals.
+
+🚀 Quick Wins for Student Identity
+Add a small line somewhere:
+“Currently a third-year CS student with backend ↔ system design interests.”
+
+Include a coursework or project entry:
+
+E.g., “Built scalable REST API for university course project handling 1K+ concurrent users.”
+
+If you've contributed to open source, mention it. Even a single pull request signals initiative.
+
+📊 Summary Table
+Area	What to Show
+Hero	Student status + role + simple tech summary
+Navbar	Minimal labels, monospace font, CAD-style hover effect
+Projects	Clean cards: title, stack tags, GitHub link + outcome
+Blog	Learning logs with date filename structure
+About	Timeline of education & milestones, clear student intro
+Stack	Terminal-like list of tools in study / use
+Footer	Simple version log referencing current student identity

@@ -46,24 +46,25 @@ export default function ShortAboutSection() {
             >
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
                 <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-                  About Me
+                  Student Journey
                 </span>
               </h2>
               
               <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
                 <p>
-                  I'm a passionate Computer Science student with a deep fascination for backend development 
-                  and system architecture. My journey into programming began with curiosity about how 
-                  applications work behind the scenes.
+                  Currently pursuing Computer Science with a focus on backend development. 
+                  Started with basic programming concepts and gradually moved into web development, 
+                  discovering my passion for server-side architecture.
                 </p>
                 <p>
-                  Based in Coimbatore, India, I've been honing my skills in Node.js, Express, and 
-                  database technologies. I believe in writing clean, efficient code and am always 
-                  excited to learn new technologies.
+                  From Coimbatore, India, I spend my time learning Node.js, working with databases, 
+                  and building projects that solve real problems. Each project teaches me something 
+                  new about system design and code organization.
                 </p>
                 <p>
-                  When I'm not coding, I enjoy exploring new technologies and contributing to 
-                  open-source projects, particularly interested in API design and database optimization.
+                  My goal is to become proficient in building scalable backend systems. 
+                  I'm particularly interested in API design, database optimization, and 
+                  learning cloud technologies through hands-on projects.
                 </p>
               </div>
 
@@ -87,7 +88,7 @@ export default function ShortAboutSection() {
 
               <Link href="/about">
                 <Button size="lg" variant="outline" className="border-cyan-400/50 text-cyan-400 hover:bg-cyan-400/10">
-                  Learn More About Me
+                  View Full Bio
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </Button>
               </Link>

@@ -19,8 +19,16 @@ export default function HeroSectionSimplified() {
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <Hero3DBackground />
-      <FloatingTechIcons />
-      <ModernShapes />
+      {/* Subtle grid background */}
+      <div className="absolute inset-0 opacity-5">
+        <div 
+          className="w-full h-full"
+          style={{
+            backgroundImage: `linear-gradient(rgba(99, 102, 241, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(99, 102, 241, 0.1) 1px, transparent 1px)`,
+            backgroundSize: '50px 50px'
+          }}
+        />
+      </div>
       
       {/* Radial gradient overlay for better focus */}
       <div className="absolute inset-0 bg-gradient-radial from-transparent via-black/20 to-black/60 pointer-events-none" />
@@ -128,11 +136,9 @@ export default function HeroSectionSimplified() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-xl md:text-2xl text-gray-300 mb-8"
           >
-            <div className="text-xl md:text-2xl">
-              <TypingAnimation
-                text="I build backends that don't break."
-              />
-            </div>
+            <p className="text-xl md:text-2xl text-gray-300">
+              I'm Raja Shylesh – CS Undergraduate | Systems-Driven Developer
+            </p>
           </motion.div>
 
           {/* Brief Description */}
@@ -142,10 +148,10 @@ export default function HeroSectionSimplified() {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="text-lg text-gray-400 max-w-2xl mx-auto mb-12"
           >
-            I'm a backend developer who thrives on building systems that scale and ship fast. 
-            I turn complex logic into clean, maintainable APIs. Currently diving deep into cloud infra and distributed systems.
+            Computer Science student focused on backend development and system design. 
+            I build reliable APIs and enjoy working with databases and server architecture.
             <br /><br />
-            <span className="text-cyan-400 font-medium">Currently open to internship opportunities in backend or cloud dev.</span>
+            <span className="text-cyan-400 font-medium">Looking for internship opportunities in backend development.</span>
           </motion.p>
 
           {/* CTA Buttons with enhanced hover effects */}
@@ -179,7 +185,7 @@ export default function HeroSectionSimplified() {
                   variant="outline" 
                   className="border-cyan-400/50 text-cyan-400 hover:bg-cyan-400/10 hover:border-cyan-400 px-8 py-3 text-lg backdrop-blur-sm"
                 >
-                  Hire Me
+                  Download Resume
                 </Button>
               </motion.div>
             </Link>

@@ -52,57 +52,37 @@ const skillCategories = [
 export default function SkillsSummarySection() {
   return (
     <section id="skills-summary" className="py-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
+          <h2 className="text-3xl font-bold mb-8 text-center">
             <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-              Skills & Technologies
+              Technical Skills
             </span>
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            My technical expertise spans across modern backend technologies and development tools
-          </p>
+          
+          {/* Terminal-style output */}
+          <div className="bg-slate-900/80 border border-slate-700 rounded-lg p-6 font-mono text-sm">
+            <div className="text-cyan-400 mb-4">raja@portfolio:~$ cat technical_skills.txt</div>
+            
+            <div className="space-y-3 text-gray-300">
+              <div><span className="text-cyan-400">&gt;</span> primary_languages: JavaScript, TypeScript, Python</div>
+              <div><span className="text-cyan-400">&gt;</span> backend_frameworks: Node.js, Express.js</div>
+              <div><span className="text-cyan-400">&gt;</span> databases: PostgreSQL, MongoDB, Redis</div>
+              <div><span className="text-cyan-400">&gt;</span> frontend_tech: React, HTML5, CSS3, Tailwind CSS</div>
+              <div><span className="text-cyan-400">&gt;</span> tools: Git, Docker, Postman, VS Code</div>
+              <div><span className="text-cyan-400">&gt;</span> current_focus: API Design, Database Optimization</div>
+              <div><span className="text-cyan-400">&gt;</span> learning: Next.js, GraphQL, AWS</div>
+            </div>
+            
+            <div className="text-cyan-400 mt-4">raja@portfolio:~$ █</div>
+          </div>
         </motion.div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {skillCategories.map((category, index) => (
-            <motion.div
-              key={category.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
-            >
-              <Card className="bg-slate-800/50 border-cyan-400/20 hover:border-cyan-400/50 transition-all duration-300 h-full">
-                <CardHeader className="text-center">
-                  <div className="flex justify-center mb-4">
-                    <category.icon className={`w-8 h-8 ${category.color}`} />
-                  </div>
-                  <CardTitle className="text-lg">{category.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex flex-wrap gap-2 justify-center">
-                    {category.skills.map((skill) => (
-                      <Badge 
-                        key={skill} 
-                        variant="secondary" 
-                        className="text-xs bg-slate-700/50 text-gray-300 hover:bg-slate-600/50 transition-colors"
-                      >
-                        {skill}
-                      </Badge>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
-        </div>
       </div>
     </section>
   );

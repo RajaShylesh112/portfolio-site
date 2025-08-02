@@ -24,11 +24,11 @@ export default function CallToActionSection() {
                 viewport={{ once: true }}
               >
                 <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                  Ready to Start Your Project?
+                  Interested in My Work?
                 </h2>
                 <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
-                  Let's collaborate to build something amazing together. Whether you need a robust backend API, 
-                  a full-stack application, or technical consultation, I'm here to help.
+                  Check out my projects and see what I've been learning. I'm always open to discussing 
+                  backend development, databases, and system design.
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
@@ -38,7 +38,7 @@ export default function CallToActionSection() {
                     onClick={() => window.open('mailto:raja@example.com?subject=Project Inquiry', '_blank')}
                   >
                     <MessageCircle className="w-5 h-5 mr-2" />
-                    Start a Conversation
+                    View Projects
                   </Button>
 
                   <Button 

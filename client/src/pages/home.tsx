@@ -14,6 +14,7 @@ import ShortAboutSection from "@/components/short-about-section";
 import SkillsSummarySection from "@/components/skills-summary-section";
 import QuickContactSection from "@/components/quick-contact-section";
 import CallToActionSection from "@/components/call-to-action-section";
+import Footer from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { useGSAPAnimations } from "@/hooks/use-gsap-animations";
 
@@ -37,14 +38,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-background dark:bg-black text-foreground custom-cursor relative">
-      <AnimatedBackground />
-      <FloatingElements />
-      <AnimatedDots position="top-left" />
-      <AnimatedDots position="top-right" />
-      <AnimatedDots position="bottom-left" />
-      <AnimatedDots position="bottom-right" />
-      <CustomCursor />
+    <div className="min-h-screen bg-background dark:bg-black text-foreground relative">
       <Navigation />
       <ScrollProgress />
       <HeroSectionSimplified />
@@ -58,6 +52,7 @@ export default function Home() {
       <QuickContactSection />
       <SectionDivider variant="gradient" />
       <CallToActionSection />
+      <Footer />
 
       {/* Back to Top Button */}
       <AnimatePresence>
