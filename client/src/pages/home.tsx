@@ -4,10 +4,7 @@ import { ChevronUp } from "lucide-react";
 import Navigation from "@/components/navigation";
 import ScrollProgress from "@/components/scroll-progress";
 import CustomCursor from "@/components/custom-cursor";
-import AnimatedBackground from "@/components/animated-background";
-import SectionDivider from "@/components/section-divider";
-import FloatingElements from "@/components/floating-elements";
-import AnimatedDots from "@/components/animated-dots";
+import BlueprintSectionDivider from "@/components/blueprint-section-divider";
 import HeroSectionSimplified from "@/components/hero-section-simplified";
 import FeaturedProjectsSection from "@/components/featured-projects-section";
 import ShortAboutSection from "@/components/short-about-section";
@@ -37,26 +34,20 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-background dark:bg-black text-foreground custom-cursor relative">
-      <AnimatedBackground />
-      <FloatingElements />
-      <AnimatedDots position="top-left" />
-      <AnimatedDots position="top-right" />
-      <AnimatedDots position="bottom-left" />
-      <AnimatedDots position="bottom-right" />
+    <div className="min-h-screen bg-[var(--architect-charcoal)] text-[var(--blueprint-text)] custom-cursor relative">
       <CustomCursor />
       <Navigation />
       <ScrollProgress />
       <HeroSectionSimplified />
-      <SectionDivider variant="gradient" />
+      <BlueprintSectionDivider label="FEATURED WORKS" variant="primary" />
       <FeaturedProjectsSection />
-      <SectionDivider variant="dots" />
+      <BlueprintSectionDivider label="ARCHITECT PROFILE" variant="secondary" />
       <ShortAboutSection />
-      <SectionDivider variant="waves" />
+      <BlueprintSectionDivider label="TECHNICAL SPECIFICATIONS" variant="primary" />
       <SkillsSummarySection />
-      <SectionDivider variant="gradient" />
+      <BlueprintSectionDivider label="THE BACKROOM" variant="secondary" />
       <QuickContactSection />
-      <SectionDivider variant="gradient" />
+      <BlueprintSectionDivider label="MISSION BRIEF" variant="primary" />
       <CallToActionSection />
 
       {/* Back to Top Button */}
@@ -71,7 +62,7 @@ export default function Home() {
             <Button
               onClick={scrollToTop}
               size="icon"
-              className="w-12 h-12 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground dark:bg-blue-400 dark:hover:bg-blue-500 shadow-lg"
+              className="w-12 h-12 bg-[var(--architect-teal)] hover:bg-[var(--architect-teal)]/80 text-[var(--architect-charcoal)] shadow-lg border border-[var(--architect-teal)]/50"
             >
               <ChevronUp className="w-6 h-6" />
             </Button>

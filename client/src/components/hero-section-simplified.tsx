@@ -1,11 +1,8 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowDown, Mail, Github, Linkedin } from "lucide-react";
+import { ArrowDown, Mail, Github, Linkedin, MapPin, Clock } from "lucide-react";
 import { Link } from "wouter";
-import TypingAnimation from "./typing-animation";
-import Hero3DBackground from "./hero-3d-background";
-import FloatingTechIcons from "./floating-tech-icons";
-import ModernShapes from "./modern-shapes";
+import BlueprintBackground from "./blueprint-background";
 import profileImage from "@assets/1000025260-removebg_1753213343295.png";
 
 export default function HeroSectionSimplified() {
@@ -17,216 +14,208 @@ export default function HeroSectionSimplified() {
   };
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <Hero3DBackground />
-      <FloatingTechIcons />
-      <ModernShapes />
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[var(--architect-charcoal)]">
+      <BlueprintBackground />
       
-      {/* Radial gradient overlay for better focus */}
-      <div className="absolute inset-0 bg-gradient-radial from-transparent via-black/20 to-black/60 pointer-events-none" />
-      
-      <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="space-y-8"
-        >
-          {/* Profile Image with Enhanced Effects */}
-          <div className="relative w-48 h-48 mx-auto mb-8">
-            {/* Animated outer glow */}
-            <motion.div
-              className="absolute inset-0 rounded-full"
-              animate={{
-                boxShadow: [
-                  "0 0 40px rgba(99, 230, 222, 0.4)",
-                  "0 0 60px rgba(99, 230, 222, 0.6)",
-                  "0 0 40px rgba(99, 230, 222, 0.4)"
-                ]
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            />
-            
-            {/* Rotating border rings */}
-            <motion.div
-              className="absolute inset-0 rounded-full border-2 border-transparent"
-              style={{
-                background: "linear-gradient(45deg, #00ffff, #6366f1, #00ffff) border-box",
-                mask: "linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0)",
-                maskComposite: "subtract"
-              }}
-              animate={{ rotate: 360 }}
-              transition={{
-                duration: 8,
-                repeat: Infinity,
-                ease: "linear"
-              }}
-            />
-            
-            <motion.div
-              className="absolute -inset-2 rounded-full border border-cyan-400/20"
-              animate={{ rotate: -360 }}
-              transition={{
-                duration: 12,
-                repeat: Infinity,
-                ease: "linear"
-              }}
-            />
-            
-            <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-cyan-400/30 shadow-2xl z-10">
-              <img
-                src={profileImage}
-                alt="Raja Shylesh"
-                className="w-full h-full object-cover"
-              />
-            </div>
-            
-            {/* Gradient halo */}
-            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-cyan-400/20 to-blue-500/20"></div>
-          </div>
-
-          {/* Name with enhanced animations */}
-          <motion.h1
-            initial={{ opacity: 0, y: 20, scale: 0.9 }}
-            animate={{ 
-              opacity: 1, 
-              y: 0, 
-              scale: 1
-            }}
-            transition={{ 
-              duration: 0.8, 
-              delay: 0.2,
-              type: "spring",
-              stiffness: 100
-            }}
-            className="text-5xl md:text-7xl font-bold mb-6 relative z-10"
-          >
-            <motion.span 
-              className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              Raja{" "}
-            </motion.span>
-            <motion.span 
-              className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent"
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              Shylesh
-            </motion.span>
-          </motion.h1>
-
-          {/* Tagline */}
+      <div className="relative z-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-16 items-center min-h-screen py-20">
+          {/* Left side - Profile and Identity */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-xl md:text-2xl text-gray-300 mb-8"
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            className="relative"
           >
-            <div className="text-xl md:text-2xl">
-              <TypingAnimation
-                text="I build backends that don't break."
-              />
+            {/* Blueprint Frame */}
+            <div className="relative p-8 border-2 border-[var(--architect-teal)]/30 bg-[var(--architect-navy)]/20 backdrop-blur-sm">
+              {/* Corner markers */}
+              <div className="absolute -top-2 -left-2 w-6 h-6 border-l-2 border-t-2 border-[var(--architect-teal)]" />
+              <div className="absolute -top-2 -right-2 w-6 h-6 border-r-2 border-t-2 border-[var(--architect-teal)]" />
+              <div className="absolute -bottom-2 -left-2 w-6 h-6 border-l-2 border-b-2 border-[var(--architect-teal)]" />
+              <div className="absolute -bottom-2 -right-2 w-6 h-6 border-r-2 border-b-2 border-[var(--architect-teal)]" />
+              
+              {/* Technical specs overlay */}
+              <div className="absolute top-2 right-2 text-xs font-mono text-[var(--architect-concrete)]/60 tracking-wider">
+                REF.001
+              </div>
+              
+              {/* Profile Image */}
+              <div className="relative w-64 h-64 mx-auto mb-6">
+                <div className="absolute inset-0 bg-gradient-to-br from-[var(--architect-teal)]/20 to-[var(--architect-rust)]/20" />
+                <img
+                  src={profileImage}
+                  alt="Raja Shylesh - Backend Architect"
+                  className="w-full h-full object-cover filter contrast-110 brightness-90"
+                />
+                
+                {/* Crosshair overlay */}
+                <div className="absolute inset-0">
+                  <div className="absolute top-1/2 left-0 w-full h-[1px] bg-[var(--architect-teal)]/40" />
+                  <div className="absolute left-1/2 top-0 w-[1px] h-full bg-[var(--architect-teal)]/40" />
+                </div>
+              </div>
+              
+              {/* Identity Grid */}
+              <div className="space-y-2 text-center font-mono">
+                <div className="text-sm text-[var(--architect-concrete)]/60 tracking-[0.2em] uppercase">// DESIGNATION</div>
+                <div className="text-lg font-medium text-[var(--architect-teal)] tracking-wider">BACKEND ARCHITECT</div>
+                
+                <div className="flex justify-center items-center space-x-4 pt-4 text-xs text-[var(--architect-concrete)]/80">
+                  <div className="flex items-center space-x-1">
+                    <MapPin className="w-3 h-3" />
+                    <span>COIMBATORE, IN</span>
+                  </div>
+                  <div className="flex items-center space-x-1">
+                    <Clock className="w-3 h-3" />
+                    <span>GMT+5:30</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </motion.div>
 
-          {/* Brief Description */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-lg text-gray-400 max-w-2xl mx-auto mb-12"
-          >
-            I'm a backend developer who thrives on building systems that scale and ship fast. 
-            I turn complex logic into clean, maintainable APIs. Currently diving deep into cloud infra and distributed systems.
-            <br /><br />
-            <span className="text-cyan-400 font-medium">Currently open to internship opportunities in backend or cloud dev.</span>
-          </motion.p>
-
-          {/* CTA Buttons with enhanced hover effects */}
+          {/* Right side - Mission Statement */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center mb-16"
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
+            className="space-y-12"
           >
+            {/* Name and Title */}
+            <div className="space-y-6">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.5 }}
+                className="space-y-2"
+              >
+                <div className="text-sm font-mono text-[var(--architect-concrete)]/60 tracking-[0.3em] uppercase">// IDENTITY</div>
+                <h1 className="text-7xl lg:text-8xl font-bold text-white leading-none tracking-tight">
+                  <div>RAJA</div>
+                  <div className="text-[var(--architect-teal)]">SHYLESH</div>
+                </h1>
+              </motion.div>
+              
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.7 }}
+                className="text-2xl lg:text-3xl text-[var(--architect-rust)] font-medium tracking-wider uppercase"
+              >
+                The Underground Architect
+              </motion.div>
+            </div>
+
+            {/* Mission Statement */}
             <motion.div
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 300 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.9 }}
+              className="space-y-6"
+            >
+              <div className="text-sm font-mono text-[var(--architect-concrete)]/60 tracking-[0.2em] uppercase">// MISSION</div>
+              <p className="text-xl lg:text-2xl text-[var(--architect-concrete)] leading-relaxed font-light">
+                I architect systems in the shadows. <span className="text-[var(--architect-teal)]">No noise, no drama</span> — 
+                just bulletproof backends that scale quietly and deliver consistently.
+              </p>
+              <p className="text-lg text-[var(--architect-concrete)]/80 leading-relaxed">
+                While others chase trends, I build foundations. 
+                <span className="text-[var(--architect-rust)] font-medium">Infrastructure that endures. Code that survives.</span>
+              </p>
+            </motion.div>
+
+            {/* Status */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.1 }}
+              className="p-6 border border-[var(--architect-teal)]/30 bg-[var(--architect-navy)]/30 backdrop-blur-sm"
+            >
+              <div className="text-sm font-mono text-[var(--architect-concrete)]/60 tracking-[0.2em] uppercase mb-3">// STATUS</div>
+              <div className="text-lg text-[var(--architect-teal)] font-medium mb-2">Available for Strategic Partnerships</div>
+              <div className="text-sm text-[var(--architect-concrete)]/80">
+                Seeking backend engineering roles where precision and performance matter more than politics.
+              </div>
+            </motion.div>
+
+            {/* Action Grid */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.3 }}
+              className="grid grid-cols-2 gap-4"
             >
               <Button 
-                size="lg" 
                 onClick={scrollToProjects}
-                className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white px-8 py-3 text-lg shadow-lg shadow-cyan-500/25"
+                className="bg-[var(--architect-teal)] hover:bg-[var(--architect-teal)]/80 text-[var(--architect-charcoal)] font-medium tracking-wider uppercase px-6 py-4 h-auto"
               >
-                View Projects
+                <div className="text-center">
+                  <div className="text-sm">REVIEW</div>
+                  <div className="text-xs font-mono">PROJECTS</div>
+                </div>
               </Button>
-            </motion.div>
-            <Link href="/about">
-              <motion.div
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
+              
+              <Link href="/about">
                 <Button 
-                  size="lg" 
-                  variant="outline" 
-                  className="border-cyan-400/50 text-cyan-400 hover:bg-cyan-400/10 hover:border-cyan-400 px-8 py-3 text-lg backdrop-blur-sm"
+                  variant="outline"
+                  className="border-[var(--architect-rust)] text-[var(--architect-rust)] hover:bg-[var(--architect-rust)]/10 font-medium tracking-wider uppercase px-6 py-4 h-auto w-full"
                 >
-                  Hire Me
+                  <div className="text-center">
+                    <div className="text-sm">INITIATE</div>
+                    <div className="text-xs font-mono">CONTACT</div>
+                  </div>
                 </Button>
-              </motion.div>
-            </Link>
-          </motion.div>
-
-          {/* Social Links */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1 }}
-            className="flex justify-center space-x-6"
-          >
-            <a
-              href="mailto:raja@example.com"
-              className="text-gray-400 hover:text-cyan-400 transition-colors duration-200"
-            >
-              <Mail className="w-6 h-6" />
-            </a>
-            <a
-              href="https://github.com/rajashylesh"
-              className="text-gray-400 hover:text-cyan-400 transition-colors duration-200"
-            >
-              <Github className="w-6 h-6" />
-            </a>
-            <a
-              href="https://linkedin.com/in/rajashylesh"
-              className="text-gray-400 hover:text-cyan-400 transition-colors duration-200"
-            >
-              <Linkedin className="w-6 h-6" />
-            </a>
-          </motion.div>
-
-          {/* Scroll Indicator */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 1.2 }}
-            className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-          >
-            <motion.div
-              animate={{ y: [0, 10, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="cursor-pointer"
-              onClick={scrollToProjects}
-            >
-              <ArrowDown className="w-6 h-6 text-cyan-400" />
+              </Link>
+              
+              <a href="mailto:raja@example.com" className="col-span-2">
+                <Button 
+                  variant="ghost"
+                  className="w-full text-[var(--architect-concrete)] hover:text-[var(--architect-teal)] font-mono text-sm tracking-wider border border-[var(--architect-concrete)]/20 hover:border-[var(--architect-teal)]/50 py-3"
+                >
+                  <Mail className="w-4 h-4 mr-2" />
+                  ESTABLISH SECURE COMMUNICATION
+                </Button>
+              </a>
             </motion.div>
+            
+            {/* External Links */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 1.5 }}
+              className="flex justify-start space-x-6 pt-8"
+            >
+              <a
+                href="https://github.com/rajashylesh"
+                className="text-[var(--architect-concrete)]/60 hover:text-[var(--architect-teal)] transition-colors duration-200 font-mono text-xs tracking-wider uppercase"
+              >
+                GITHUB.REPO
+              </a>
+              <a
+                href="https://linkedin.com/in/rajashylesh"
+                className="text-[var(--architect-concrete)]/60 hover:text-[var(--architect-teal)] transition-colors duration-200 font-mono text-xs tracking-wider uppercase"
+              >
+                LINKEDIN.NETWORK
+              </a>
+            </motion.div>
+          </motion.div>
+        </div>
+        
+        {/* Scroll Indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 1.8 }}
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+        >
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="cursor-pointer text-center"
+            onClick={scrollToProjects}
+          >
+            <div className="text-xs font-mono text-[var(--architect-concrete)]/60 tracking-wider uppercase mb-2">SCROLL</div>
+            <ArrowDown className="w-4 h-4 text-[var(--architect-teal)] mx-auto" />
           </motion.div>
         </motion.div>
       </div>

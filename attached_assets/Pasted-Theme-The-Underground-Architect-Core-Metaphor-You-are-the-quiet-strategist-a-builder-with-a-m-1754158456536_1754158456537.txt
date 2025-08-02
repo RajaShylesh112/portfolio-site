@@ -1,0 +1,88 @@
+Theme: The Underground Architect
+🧠 Core Metaphor:
+You are the quiet strategist — a builder with a masterplan, operating from the shadows.
+Like Tommy Shelby or Dutch (when he wasn’t crazy) — you’re thinking in systems. You build for scale, but don’t chase the spotlight.
+
+🎨 1. Visual Design
+💻 Layout:
+Grid-based, almost like floorplans or blueprints — reflects logic + control.
+
+Section dividers use thin, blueprint-style lines, with labels like // PROJECTS, // ABOUT.
+
+Cards are rectangular with strong vertical rhythm — echoing industrial or plan-drawing aesthetics.
+
+🖋️ Typography:
+Tall, condensed fonts with strong lines (e.g., Space Grotesk, IBM Plex Sans)
+
+Optional: monospace subheadings to add a schematics feel.
+
+🎨 Colors:
+Element	Color	Rationale
+Background	Deep navy / charcoal	Nightwork, secrecy, blueprint base
+Accent 1	Cyan / teal	Blueprint lines, wireframes
+Accent 2	Desaturated orange/rust	Old-world industrial (RDR2), adds warmth
+Text	Light gray / white	Clean readability in a dark, high-contrast world
+
+Optional: on hover, cards light up like table blueprints under a lamp.
+
+🔲 2. Project Display (as “Blueprints”)
+Each project = a system blueprint
+
+Preview image = schematic view or API diagram (not just a screenshot)
+
+Add “Blueprint Tags” for each:
+
+makefile
+Copy
+Edit
+STACK: Node.js | Redis | Docker
+ROLE: Backend Lead
+OUTCOME: 10x perf gain
+On hover or click: micro-animations show the system flow (e.g., arrows animate to show backend flow).
+
+✨ 3. Hero Section
+💬 Headline Ideas:
+“I build systems that scale in silence.”
+“Quiet code. Loud outcomes.”
+“Developer by trade. Strategist by instinct.”
+
+Visual:
+
+Left side = Name + tagline + CTA
+
+Right side = slow-scan blueprint of a system diagram or “desk scene” (papers, map lines, maybe coffee mug?) — like a dev version of Tommy’s office.
+
+Subtle Framer Motion animations for:
+
+Cursor blink (like typing a command)
+
+Hover reveals blueprint lines
+
+Section fades that resemble old blueprints being unfolded
+
+🔧 4. Contact + Footer = “The Backroom”
+Treat the footer as your private workshop / smoke-filled backroom:
+
+Contact form like a “confidential note drop”
+
+Social icons subtly styled like file stamps (e.g., GitHub = “Archive #01”)
+
+Optional fun tag: // BUILDING THE FUTURE IN PLAIN SIGHT
+
+🎭 RDR2 & Peaky Blinders Inspiration — In Detail
+Element	Peaky Blinders	RDR2	Reflected in Design
+Strategy	Tommy’s quiet, ruthless logic	Dutch's early plans	Clean structure, system flow
+Visual Tone	Dark suits, whisky, minimal	Dusty noir, western tools	Muted palette, blueprint lines
+Mood	High-stakes calm	Stoic + layered	Sparse design, intentional spacing
+Character Type	Controlled chaos	Broken genius, tactician	Tagline & layout reflect silent complexity
+World Building	Industrial Birmingham	Frontier systems	Blueprint/drafting metaphor
+
+You’re not showing off — you’re revealing just enough to say, “I know what I’m doing.”
+
+✅ Summary: Why This Theme Fits You
+You're curious and chaotic, like someone mapping out big ideas late into the night.
+
+You're not loud, but your work speaks volumes — just like Tommy’s presence or Arthur’s outbursts.
+
+You’re drawn to deep, fictional worlds — this theme lets your own portfolio feel like a world, not just a webpage.
+
