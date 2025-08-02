@@ -26,7 +26,7 @@ export default function HeroSectionSimplified() {
           className="space-y-8"
         >
           {/* Profile Image */}
-          <div className="relative w-32 h-32 mx-auto mb-8">
+          <div className="relative w-48 h-48 mx-auto mb-8">
             <div className="w-full h-full rounded-full overflow-hidden border-4 border-cyan-400/30 shadow-2xl">
               <img
                 src={profileImage}

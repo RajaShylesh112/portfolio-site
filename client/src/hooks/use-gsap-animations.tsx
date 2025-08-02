@@ -11,54 +11,20 @@ export const useGSAPAnimations = () => {
     if (isInitialized.current) return;
     isInitialized.current = true;
 
-    // Hero section animations
-    gsap.fromTo(
-      ".hero-title",
-      { opacity: 0, y: 100 },
-      { 
-        opacity: 1, 
-        y: 0, 
-        duration: 1.2, 
-        ease: "power3.out",
-        delay: 0.3
-      }
-    );
-
-    gsap.fromTo(
-      ".hero-subtitle",
-      { opacity: 0, y: 50 },
-      { 
-        opacity: 1, 
-        y: 0, 
-        duration: 1, 
-        ease: "power3.out",
-        delay: 0.6
-      }
-    );
-
-    gsap.fromTo(
-      ".hero-description",
-      { opacity: 0, y: 30 },
-      { 
-        opacity: 1, 
-        y: 0, 
-        duration: 0.8, 
-        ease: "power3.out",
-        delay: 0.9
-      }
-    );
-
-    gsap.fromTo(
-      ".hero-buttons",
-      { opacity: 0, y: 30 },
-      { 
-        opacity: 1, 
-        y: 0, 
-        duration: 0.8, 
-        ease: "power3.out",
-        delay: 1.2
-      }
-    );
+    // Enhanced floating animations for background elements
+    const floatingElements = document.querySelectorAll('.floating-element');
+    floatingElements.forEach((element, index) => {
+      gsap.to(element, {
+        y: "random(-20, 20)",
+        x: "random(-15, 15)",
+        rotation: "random(-5, 5)",
+        duration: "random(3, 5)",
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+        delay: index * 0.2
+      });
+    });
 
     // Section reveal animations
     gsap.utils.toArray(".section-reveal").forEach((section: any) => {

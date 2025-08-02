@@ -23,7 +23,7 @@ export default function ShortAboutSection() {
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
-              className="relative w-80 h-80 mx-auto"
+              className="relative w-96 h-96 mx-auto"
             >
               <div className="w-full h-full rounded-2xl overflow-hidden border-4 border-cyan-400/30 shadow-2xl">
                 <img
