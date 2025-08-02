@@ -1,52 +1,45 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Download, Mail, Linkedin, Github, MapPin, Calendar, GraduationCap, User } from "lucide-react";
+import { Download, Mail, Linkedin, Github, MapPin, Calendar, GraduationCap } from "lucide-react";
 import Navigation from "@/components/navigation";
 import CustomCursor from "@/components/custom-cursor";
 import ScrollProgress from "@/components/scroll-progress";
+import FloatingElements from "@/components/floating-elements";
+import AnimatedDots from "@/components/animated-dots";
+import profileImage from "@assets/1000025260-removebg_1753213343295.png";
 
 export default function About() {
   const timeline = [
     {
-      year: "2025",
-      title: "Advanced System Design",
-      description: "Exploring distributed systems, microservices architecture, and cloud infrastructure"
-    },
-    {
       year: "2024",
-      title: "Backend Development Specialization",
-      description: "Deepening expertise in Node.js, Express, database optimization, and API design"
+      title: "Backend Development Focus",
+      description: "Deepening expertise in Node.js, Express, and database technologies"
     },
     {
       year: "2023",
       title: "Computer Science Studies",
-      description: "Pursuing CS degree with focus on software engineering and system architecture"
+      description: "Pursuing degree with focus on software engineering and backend systems"
     },
     {
       year: "2022",
       title: "Programming Journey Begins",
-      description: "Started with web development, discovered passion for backend systems and infrastructure"
+      description: "Started learning web development and discovered passion for backend"
     }
   ];
 
   return (
-    <div className="min-h-screen bg-slate-900 text-white relative">
-      {/* Blueprint grid background */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="h-full w-full" style={{
-          backgroundImage: `
-            linear-gradient(rgba(34, 197, 94, 0.3) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(34, 197, 94, 0.3) 1px, transparent 1px)
-          `,
-          backgroundSize: '50px 50px'
-        }} />
-      </div>
+    <div className="min-h-screen bg-background dark:bg-black text-foreground relative">
       <CustomCursor />
       <Navigation />
       <ScrollProgress />
+      <FloatingElements />
+      <AnimatedDots position="top-left" />
+      <AnimatedDots position="top-right" />
+      <AnimatedDots position="bottom-left" />
+      <AnimatedDots position="bottom-right" />
       {/* Hero Section */}
-      <section className="relative pt-24 pb-16 px-4 sm:px-6 lg:px-8">
+      <section className="pt-24 pb-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -54,38 +47,43 @@ export default function About() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <div className="flex items-center justify-center space-x-4 mb-8">
-              <User className="w-8 h-8 text-cyan-400" />
-              <h1 className="text-4xl md:text-5xl font-bold text-white font-mono">
-                About
-              </h1>
+            <div className="relative w-48 h-48 mx-auto mb-8">
+              <img
+                src={profileImage}
+                alt="Raja Shylesh"
+                className="w-full h-full object-cover rounded-full border-4 border-cyan-400/20 shadow-2xl"
+              />
+              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-cyan-400/20 to-blue-500/20"></div>
             </div>
-            <p className="text-xl text-gray-400 max-w-2xl mx-auto font-mono">
-              {">> CS Student | System Designer | Backend Developer"}
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+              About Raja Shylesh
+            </h1>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Computer Science student and passionate backend developer from Coimbatore, India
             </p>
           </motion.div>
 
           {/* Personal Info Cards */}
           <div className="grid md:grid-cols-3 gap-6 mb-16">
-            <Card className="bg-black/50 border border-cyan-400/20 backdrop-blur-sm">
+            <Card className="bg-slate-800/50 border-cyan-400/20">
               <CardContent className="p-6 text-center">
                 <MapPin className="w-8 h-8 text-cyan-400 mx-auto mb-4" />
-                <h3 className="font-semibold mb-2 font-mono">Location</h3>
-                <p className="text-gray-400 font-mono text-sm">Coimbatore, India</p>
+                <h3 className="font-semibold mb-2">Location</h3>
+                <p className="text-muted-foreground">Coimbatore, India</p>
               </CardContent>
             </Card>
-            <Card className="bg-black/50 border border-emerald-400/20 backdrop-blur-sm">
+            <Card className="bg-slate-800/50 border-cyan-400/20">
               <CardContent className="p-6 text-center">
-                <GraduationCap className="w-8 h-8 text-emerald-400 mx-auto mb-4" />
-                <h3 className="font-semibold mb-2 font-mono">Education</h3>
-                <p className="text-gray-400 font-mono text-sm">Computer Science</p>
+                <GraduationCap className="w-8 h-8 text-cyan-400 mx-auto mb-4" />
+                <h3 className="font-semibold mb-2">Education</h3>
+                <p className="text-muted-foreground">Computer Science Student</p>
               </CardContent>
             </Card>
-            <Card className="bg-black/50 border border-amber-400/20 backdrop-blur-sm">
+            <Card className="bg-slate-800/50 border-cyan-400/20">
               <CardContent className="p-6 text-center">
-                <Calendar className="w-8 h-8 text-amber-400 mx-auto mb-4" />
-                <h3 className="font-semibold mb-2 font-mono">Experience</h3>
-                <p className="text-gray-400 font-mono text-sm">3+ Years Building</p>
+                <Calendar className="w-8 h-8 text-cyan-400 mx-auto mb-4" />
+                <h3 className="font-semibold mb-2">Experience</h3>
+                <p className="text-muted-foreground">2+ Years Coding</p>
               </CardContent>
             </Card>
           </div>
@@ -176,38 +174,36 @@ export default function About() {
       </section>
 
       {/* Timeline */}
-      <section className="relative py-16 px-4 sm:px-6 lg:px-8">
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-slate-900/30">
         <div className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
           >
-            <h2 className="text-3xl font-bold mb-12 text-center font-mono text-white">Development Timeline</h2>
-            <div className="space-y-6">
+            <h2 className="text-3xl font-bold mb-12 text-center">My Journey</h2>
+            <div className="space-y-8">
               {timeline.map((item, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, x: -30 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: 0.8 + index * 0.1 }}
+                  transition={{ duration: 0.6, delay: 0.8 + index * 0.2 }}
                   className="flex gap-6"
                 >
                   <div className="flex flex-col items-center">
-                    <div className="w-3 h-3 rounded-full bg-cyan-400"></div>
+                    <div className="w-4 h-4 rounded-full bg-cyan-400"></div>
                     {index < timeline.length - 1 && (
-                      <div className="w-0.5 h-20 bg-cyan-400/30 mt-2"></div>
+                      <div className="w-0.5 h-16 bg-cyan-400/30 mt-2"></div>
                     )}
                   </div>
-                  <Card className="flex-1 bg-black/50 border border-cyan-400/20 backdrop-blur-sm">
+                  <Card className="flex-1 bg-slate-800/50 border-cyan-400/20">
                     <CardContent className="p-6">
-                      <div className="flex items-center gap-4 mb-3">
-                        <span className="font-mono text-sm text-cyan-400 bg-cyan-400/10 px-2 py-1 border border-cyan-400/30">
-                          {item.year}
-                        </span>
-                        <h3 className="text-lg font-semibold text-white font-mono">{item.title}</h3>
+                      <div className="flex items-center gap-4 mb-2">
+                        <span className="text-sm font-mono text-cyan-400">{item.year}</span>
+                        <h3 className="text-lg font-semibold">{item.title}</h3>
                       </div>
-                      <p className="text-gray-400 leading-relaxed">{item.description}</p>
+                      <p className="text-muted-foreground">{item.description}</p>
                     </CardContent>
                   </Card>
                 </motion.div>
@@ -218,53 +214,31 @@ export default function About() {
       </section>
 
       {/* Contact & Resume */}
-      <section className="relative py-16 px-4 sm:px-6 lg:px-8">
+      <section className="py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 1 }}
           >
-            <h2 className="text-3xl font-bold mb-8 font-mono text-white">Connect & Collaborate</h2>
-            <p className="text-lg text-gray-400 mb-12 font-mono max-w-2xl mx-auto">
-              {">> Open to internship opportunities in backend development and system design"}
+            <h2 className="text-3xl font-bold mb-8">Let's Connect</h2>
+            <p className="text-xl text-muted-foreground mb-12">
+              Interested in working together or have questions? I'd love to hear from you.
             </p>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto">
-              <Button 
-                size="lg" 
-                className="bg-cyan-600 hover:bg-cyan-700 font-mono transition-all duration-300 hover:scale-105"
-                onClick={() => {
-                  // In a real app, this would trigger a download
-                  console.log('Download resume');
-                }}
-              >
+            <div className="flex flex-wrap justify-center gap-4">
+              <Button size="lg" className="bg-cyan-600 hover:bg-cyan-700">
                 <Download className="w-5 h-5 mr-2" />
-                Resume
+                Download Resume
               </Button>
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="border-cyan-400/50 text-cyan-400 hover:bg-cyan-400/10 font-mono transition-all duration-300 hover:scale-105"
-                onClick={() => window.open('mailto:raja@example.com', '_blank')}
-              >
+              <Button size="lg" variant="outline" className="border-cyan-400/50 hover:bg-cyan-400/10">
                 <Mail className="w-5 h-5 mr-2" />
-                Email
+                Email Me
               </Button>
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="border-emerald-400/50 text-emerald-400 hover:bg-emerald-400/10 font-mono transition-all duration-300 hover:scale-105"
-                onClick={() => window.open('https://linkedin.com/in/rajashylesh', '_blank')}
-              >
+              <Button size="lg" variant="outline" className="border-cyan-400/50 hover:bg-cyan-400/10">
                 <Linkedin className="w-5 h-5 mr-2" />
                 LinkedIn
               </Button>
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="border-amber-400/50 text-amber-400 hover:bg-amber-400/10 font-mono transition-all duration-300 hover:scale-105"
-                onClick={() => window.open('https://github.com/rajashylesh', '_blank')}
-              >
+              <Button size="lg" variant="outline" className="border-cyan-400/50 hover:bg-cyan-400/10">
                 <Github className="w-5 h-5 mr-2" />
                 GitHub
               </Button>

@@ -1,8 +1,11 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowDown, Mail, Github, Linkedin, MapPin, Clock } from "lucide-react";
+import { ArrowDown, Mail, Github, Linkedin } from "lucide-react";
 import { Link } from "wouter";
-import BlueprintBackground from "./blueprint-background";
+import TypingAnimation from "./typing-animation";
+import Hero3DBackground from "./hero-3d-background";
+import FloatingTechIcons from "./floating-tech-icons";
+import ModernShapes from "./modern-shapes";
 import profileImage from "@assets/1000025260-removebg_1753213343295.png";
 
 export default function HeroSectionSimplified() {
@@ -14,17 +17,13 @@ export default function HeroSectionSimplified() {
   };
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-900">
-      {/* Blueprint grid background */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="h-full w-full" style={{
-          backgroundImage: `
-            linear-gradient(rgba(34, 197, 94, 0.3) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(34, 197, 94, 0.3) 1px, transparent 1px)
-          `,
-          backgroundSize: '50px 50px'
-        }} />
-      </div>
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <Hero3DBackground />
+      <FloatingTechIcons />
+      <ModernShapes />
+      
+      {/* Radial gradient overlay for better focus */}
+      <div className="absolute inset-0 bg-gradient-radial from-transparent via-black/20 to-black/60 pointer-events-none" />
       
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
         <motion.div
@@ -33,76 +32,156 @@ export default function HeroSectionSimplified() {
           transition={{ duration: 0.8 }}
           className="space-y-8"
         >
-          {/* Profile Image */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative w-48 h-48 mx-auto mb-8"
-          >
-            <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-cyan-400/30 shadow-2xl">
+          {/* Profile Image with Enhanced Effects */}
+          <div className="relative w-48 h-48 mx-auto mb-8">
+            {/* Animated outer glow */}
+            <motion.div
+              className="absolute inset-0 rounded-full"
+              animate={{
+                boxShadow: [
+                  "0 0 40px rgba(99, 230, 222, 0.4)",
+                  "0 0 60px rgba(99, 230, 222, 0.6)",
+                  "0 0 40px rgba(99, 230, 222, 0.4)"
+                ]
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            />
+            
+            {/* Rotating border rings */}
+            <motion.div
+              className="absolute inset-0 rounded-full border-2 border-transparent"
+              style={{
+                background: "linear-gradient(45deg, #00ffff, #6366f1, #00ffff) border-box",
+                mask: "linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0)",
+                maskComposite: "subtract"
+              }}
+              animate={{ rotate: 360 }}
+              transition={{
+                duration: 8,
+                repeat: Infinity,
+                ease: "linear"
+              }}
+            />
+            
+            <motion.div
+              className="absolute -inset-2 rounded-full border border-cyan-400/20"
+              animate={{ rotate: -360 }}
+              transition={{
+                duration: 12,
+                repeat: Infinity,
+                ease: "linear"
+              }}
+            />
+            
+            <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-cyan-400/30 shadow-2xl z-10">
               <img
                 src={profileImage}
                 alt="Raja Shylesh"
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-cyan-400/10 to-emerald-400/10"></div>
-          </motion.div>
+            
+            {/* Gradient halo */}
+            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-cyan-400/20 to-blue-500/20"></div>
+          </div>
 
-          {/* Name and Title */}
+          {/* Name with enhanced animations */}
           <motion.h1
+            initial={{ opacity: 0, y: 20, scale: 0.9 }}
+            animate={{ 
+              opacity: 1, 
+              y: 0, 
+              scale: 1
+            }}
+            transition={{ 
+              duration: 0.8, 
+              delay: 0.2,
+              type: "spring",
+              stiffness: 100
+            }}
+            className="text-5xl md:text-7xl font-bold mb-6 relative z-10"
+          >
+            <motion.span 
+              className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              Raja{" "}
+            </motion.span>
+            <motion.span 
+              className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent"
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              Shylesh
+            </motion.span>
+          </motion.h1>
+
+          {/* Tagline */}
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-5xl md:text-7xl font-bold text-white mb-6"
+            className="text-xl md:text-2xl text-gray-300 mb-8"
           >
-            Raja Shylesh
-          </motion.h1>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-xl md:text-2xl text-cyan-400 font-mono mb-8"
-          >
-            CS Student | Developer | System Designer
+            <div className="text-xl md:text-2xl">
+              <TypingAnimation
+                text="I build backends that don't break."
+              />
+            </div>
           </motion.div>
 
-          {/* Description */}
+          {/* Brief Description */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="text-lg text-gray-300 max-w-2xl mx-auto mb-12 leading-relaxed"
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="text-lg text-gray-400 max-w-2xl mx-auto mb-12"
           >
-            I'm passionate about building robust systems and studying computer science. 
-            My focus is on creating scalable architectures and clean code that solves real problems. 
-            Currently exploring backend development, distributed systems, and modern web technologies.
+            I'm a backend developer who thrives on building systems that scale and ship fast. 
+            I turn complex logic into clean, maintainable APIs. Currently diving deep into cloud infra and distributed systems.
+            <br /><br />
+            <span className="text-cyan-400 font-medium">Currently open to internship opportunities in backend or cloud dev.</span>
           </motion.p>
 
-          {/* CTA Buttons */}
+          {/* CTA Buttons with enhanced hover effects */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
             className="flex flex-col sm:flex-row gap-4 justify-center mb-16"
           >
-            <Button 
-              size="lg" 
-              onClick={scrollToProjects}
-              className="bg-cyan-600 hover:bg-cyan-700 text-white px-8 py-3 text-lg transition-all duration-300 hover:scale-105"
+            <motion.div
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 300 }}
             >
-              View Projects
-            </Button>
-            <Link href="/about">
               <Button 
                 size="lg" 
-                variant="outline" 
-                className="border-cyan-400/50 text-cyan-400 hover:bg-cyan-400/10 hover:border-cyan-400 px-8 py-3 text-lg backdrop-blur-sm transition-all duration-300 hover:scale-105"
+                onClick={scrollToProjects}
+                className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white px-8 py-3 text-lg shadow-lg shadow-cyan-500/25"
               >
-                About Me
+                View Projects
               </Button>
+            </motion.div>
+            <Link href="/about">
+              <motion.div
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <Button 
+                  size="lg" 
+                  variant="outline" 
+                  className="border-cyan-400/50 text-cyan-400 hover:bg-cyan-400/10 hover:border-cyan-400 px-8 py-3 text-lg backdrop-blur-sm"
+                >
+                  Hire Me
+                </Button>
+              </motion.div>
             </Link>
           </motion.div>
 
@@ -110,7 +189,7 @@ export default function HeroSectionSimplified() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.2 }}
+            transition={{ duration: 0.8, delay: 1 }}
             className="flex justify-center space-x-6"
           >
             <a
@@ -132,12 +211,12 @@ export default function HeroSectionSimplified() {
               <Linkedin className="w-6 h-6" />
             </a>
           </motion.div>
-        
+
           {/* Scroll Indicator */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 1.4 }}
+            transition={{ duration: 0.8, delay: 1.2 }}
             className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
           >
             <motion.div

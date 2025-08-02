@@ -24,8 +24,8 @@ export default function Navigation() {
 
   const navItems = [
     { path: "/", label: "Home" },
-    { path: "/projects", label: "Blueprints" },
-    { path: "/blog", label: "Field Notes" },
+    { path: "/projects", label: "Projects" },
+    { path: "/blog", label: "Blog" },
     { path: "/about", label: "About" },
   ];
 
@@ -33,47 +33,42 @@ export default function Navigation() {
     <nav
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-black/80 backdrop-blur-md border-b border-cyan-400/50"
-          : "bg-black/60 backdrop-blur-sm border-b border-cyan-400/20"
+          ? "bg-background/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-border"
+          : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <Link href="/" className="text-xl font-bold font-mono text-cyan-400 cursor-pointer hover:text-cyan-300 transition-colors tracking-wider">
-            RAJA.DEV
+          <Link href="/" className="text-xl font-bold text-primary dark:neon-text cursor-pointer hover:text-cyan-400 transition-colors">
+            Portfolio
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:block">
             <div className="flex items-center space-x-8">
-              {navItems.map((item, index) => (
+              {navItems.map((item) => (
                 <Link
                   key={item.path}
                   href={item.path}
-                  className={`font-mono text-sm tracking-wider transition-all duration-300 cursor-pointer relative group ${
+                  className={`transition-colors duration-200 cursor-pointer ${
                     location === item.path
                       ? "text-cyan-400"
-                      : "text-gray-300 hover:text-cyan-400"
+                      : "text-foreground hover:text-cyan-400"
                   }`}
                 >
-                  <span className="relative">
-                    {item.label}
-                    <span className={`absolute bottom-0 left-0 h-[2px] bg-cyan-400 transition-all duration-300 ${
-                      location === item.path ? "w-full" : "w-0 group-hover:w-full"
-                    }`} />
-                  </span>
+                  {item.label}
                 </Link>
               ))}
             </div>
           </div>
 
-          {/* Theme Toggle */}
-          <div className="flex items-center">
+          {/* Theme Toggle and Mobile Menu */}
+          <div className="flex items-center space-x-4">
             <Button
               variant="ghost"
               size="icon"
               onClick={toggleTheme}
-              className="text-gray-400 hover:text-cyan-400 transition-colors"
+              className="rounded-lg hover:bg-cyan-400/10 cursor-pointer"
             >
               {theme === "dark" ? (
                 <Sun className="h-5 w-5" />
@@ -82,11 +77,11 @@ export default function Navigation() {
               )}
             </Button>
 
-            {/* Mobile Menu */}
+            {/* Mobile Menu Button */}
             <Button
               variant="ghost"
               size="icon"
-              className="md:hidden text-gray-400 hover:text-cyan-400 transition-colors ml-2"
+              className="md:hidden hover:bg-cyan-400/10 cursor-pointer"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? (
@@ -101,23 +96,21 @@ export default function Navigation() {
         {/* Mobile Navigation */}
         {isMenuOpen && (
           <div className="md:hidden">
-            <div className="px-4 py-4 bg-black/90 backdrop-blur-md border-t border-cyan-400/30">
-              <div className="space-y-2">
-                {navItems.map((item) => (
-                  <Link
-                    key={item.path}
-                    href={item.path}
-                    onClick={closeMenu}
-                    className={`block font-mono text-sm px-3 py-2 transition-colors duration-200 ${
-                      location === item.path
-                        ? "text-cyan-400"
-                        : "text-gray-300 hover:text-cyan-400"
-                    }`}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
+            <div className="px-2 pt-2 pb-3 space-y-1 bg-background dark:bg-slate-900 border-t border-border">
+              {navItems.map((item) => (
+                <Link
+                  key={item.path}
+                  href={item.path}
+                  onClick={closeMenu}
+                  className={`block w-full text-left px-3 py-2 transition-colors duration-200 ${
+                    location === item.path
+                      ? "text-cyan-400"
+                      : "text-foreground hover:text-cyan-400"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              ))}
             </div>
           </div>
         )}
