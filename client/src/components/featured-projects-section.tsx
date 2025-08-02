@@ -5,173 +5,108 @@ import { Badge } from "@/components/ui/badge";
 import { ExternalLink, Github, ArrowRight } from "lucide-react";
 import { Link } from "wouter";
 
-const systemBlueprints = [
+const featuredProjects = [
   {
     id: "ecommerce-api",
-    designation: "COMMERCE GATEWAY",
-    objective: "High-throughput transaction processing with integrated payment infrastructure",
-    specifications: {
-      "CPU": "Node.js",
-      "FRAMEWORK": "Express",
-      "DATA_STORE": "MongoDB",
-      "AUTH_PROTOCOL": "JWT",
-      "PAYMENT_BUS": "Stripe"
-    },
-    status: "OPERATIONAL",
-    classification: "LEVEL-3",
+    title: "E-commerce API",
+    description: "RESTful API for online shopping platform with authentication, payment processing, and order management. Built with scalability and security in mind.",
+    technologies: ["Node.js", "Express", "MongoDB", "JWT", "Stripe"],
     githubUrl: "https://github.com/rajashylesh/ecommerce-api",
-    deploymentUrl: "https://ecommerce-api-demo.com",
-    strategyNote: "Microservice architecture chosen for horizontal scaling under variable load conditions."
+    demoUrl: "https://ecommerce-api-demo.com"
   },
   {
     id: "task-manager",
-    designation: "WORKFLOW ENGINE",
-    objective: "Real-time task coordination with persistent state management",
-    specifications: {
-      "CPU": "Node.js",
-      "COMM_LAYER": "Socket.io",
-      "DATA_STORE": "PostgreSQL",
-      "UI_INTERFACE": "React",
-      "TYPE_SYSTEM": "TypeScript"
-    },
-    status: "OPERATIONAL",
-    classification: "LEVEL-2",
+    title: "Task Management System",
+    description: "Full-stack task management application with real-time updates, user collaboration, and project organization features.",
+    technologies: ["Node.js", "Socket.io", "PostgreSQL", "React", "TypeScript"],
     githubUrl: "https://github.com/rajashylesh/task-manager",
-    deploymentUrl: "https://task-manager-demo.com",
-    strategyNote: "WebSocket implementation ensures sub-100ms update propagation across client nodes."
+    demoUrl: "https://task-manager-demo.com"
   },
   {
     id: "blog-cms",
-    designation: "CONTENT CONTROL SYSTEM",
-    objective: "Centralized content management with administrative oversight",
-    specifications: {
-      "CPU": "Node.js",
-      "FRAMEWORK": "Express",
-      "DATA_STORE": "MySQL",
-      "CACHE_LAYER": "Redis",
-      "EDITOR_MODULE": "TinyMCE"
-    },
-    status: "PROTOTYPE",
-    classification: "LEVEL-1",
-    githubUrl: "https://github.com/rajashylesh/blog-cms",
-    strategyNote: "Redis caching reduces database queries by 75% during peak content delivery."
+    title: "Blog CMS",
+    description: "Content Management System for blogs with admin dashboard, rich text editor, and caching for optimal performance.",
+    technologies: ["Node.js", "Express", "MySQL", "Redis", "TinyMCE"],
+    githubUrl: "https://github.com/rajashylesh/blog-cms"
   }
 ];
 
 export default function FeaturedProjectsSection() {
   return (
-    <section id="featured-projects" className="py-20 px-4 sm:px-6 lg:px-8 bg-[var(--architect-navy)]/20">
-      <div className="max-w-7xl mx-auto">
+    <section id="featured-projects" className="py-20 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="mb-16"
+          className="text-center mb-16"
         >
-          <div className="text-xs font-mono text-[var(--architect-concrete)]/60 tracking-[0.3em] uppercase mb-4">
-            // SYSTEM BLUEPRINTS
-          </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 font-mono tracking-tight">
-            DEPLOYED SYSTEMS
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+            Featured Projects
           </h2>
-          <p className="text-lg text-[var(--architect-concrete)] max-w-3xl font-light leading-relaxed">
-            Strategic implementations demonstrating systems thinking, scalable architecture, and operational excellence.
+          <p className="text-lg text-gray-400 max-w-2xl mx-auto">
+            A selection of my best work showcasing full-stack development skills and modern technologies
           </p>
         </motion.div>
 
-        <div className="space-y-8 mb-12">
-          {systemBlueprints.map((system, index) => (
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          {featuredProjects.map((project, index) => (
             <motion.div
-              key={system.id}
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.2 }}
+              key={project.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
               className="group"
             >
-              <Card className="bg-[var(--architect-navy)]/30 border-2 border-[var(--architect-teal)]/30 hover:border-[var(--architect-teal)]/60 transition-all duration-300 backdrop-blur-sm">
-                <CardContent className="p-8">
-                  <div className="grid lg:grid-cols-3 gap-8">
-                    {/* System Header */}
-                    <div className="lg:col-span-2 space-y-6">
-                      <div className="flex items-start justify-between">
-                        <div>
-                          <div className="flex items-center space-x-4 mb-2">
-                            <div className="text-xs font-mono text-[var(--architect-concrete)]/60 tracking-[0.2em] uppercase">
-                              REF.{String(index + 1).padStart(3, '0')}
-                            </div>
-                            <div className={`px-2 py-1 text-xs font-mono border ${
-                              system.status === 'OPERATIONAL' 
-                                ? 'text-[var(--architect-teal)] border-[var(--architect-teal)]/50 bg-[var(--architect-teal)]/10'
-                                : 'text-[var(--architect-rust)] border-[var(--architect-rust)]/50 bg-[var(--architect-rust)]/10'
-                            }`}>
-                              {system.status}
-                            </div>
-                            <div className="px-2 py-1 text-xs font-mono text-[var(--architect-concrete)] border border-[var(--architect-concrete)]/30">
-                              {system.classification}
-                            </div>
-                          </div>
-                          <h3 className="text-2xl font-bold text-white font-mono tracking-wider mb-3">
-                            {system.designation}
-                          </h3>
-                          <p className="text-[var(--architect-concrete)] leading-relaxed mb-4">
-                            {system.objective}
-                          </p>
-                          <div className="bg-[var(--architect-charcoal)]/50 p-4 border-l-2 border-[var(--architect-rust)]/50">
-                            <div className="text-xs font-mono text-[var(--architect-concrete)]/60 tracking-[0.2em] uppercase mb-2">
-                              // STRATEGY NOTES
-                            </div>
-                            <p className="text-sm text-[var(--architect-concrete)] italic">
-                              {system.strategyNote}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    {/* Technical Specifications */}
-                    <div className="space-y-4">
-                      <div className="text-xs font-mono text-[var(--architect-concrete)]/60 tracking-[0.2em] uppercase">
-                        // TECH SPECIFICATIONS
-                      </div>
-                      <div className="space-y-2">
-                        {Object.entries(system.specifications).map(([key, value]) => (
-                          <div key={key} className="flex justify-between items-center py-1 border-b border-[var(--architect-teal)]/20">
-                            <span className="text-xs font-mono text-[var(--architect-concrete)]/80 tracking-wider">
-                              {key}:
-                            </span>
-                            <span className="text-sm font-medium text-[var(--architect-teal)]">
-                              {value}
-                            </span>
-                          </div>
-                        ))}
-                      </div>
-                      
-                      {/* Action Controls */}
-                      <div className="pt-4 space-y-2">
-                        <Button 
-                          size="sm" 
-                          variant="outline" 
-                          className="w-full border-[var(--architect-teal)]/50 text-[var(--architect-teal)] hover:bg-[var(--architect-teal)]/10 font-mono text-xs tracking-wider"
-                          onClick={() => window.open(system.githubUrl, '_blank')}
-                        >
-                          <Github className="w-3 h-3 mr-2" />
-                          ACCESS REPOSITORY
-                        </Button>
-                        {system.deploymentUrl && (
-                          <Button 
-                            size="sm" 
-                            variant="outline" 
-                            className="w-full border-[var(--architect-rust)]/50 text-[var(--architect-rust)] hover:bg-[var(--architect-rust)]/10 font-mono text-xs tracking-wider"
-                            onClick={() => window.open(system.deploymentUrl, '_blank')}
-                          >
-                            <ExternalLink className="w-3 h-3 mr-2" />
-                            VIEW DEPLOYMENT
-                          </Button>
-                        )}
-                      </div>
-                    </div>
+              <Card className="bg-slate-800/50 border border-cyan-400/20 hover:border-cyan-400/50 hover:shadow-lg hover:shadow-cyan-400/10 transition-all duration-300 h-full">
+                <div className="aspect-video bg-gradient-to-br from-slate-700/50 to-slate-800/50 rounded-t-lg flex items-center justify-center border-b border-cyan-400/20">
+                  <div className="text-4xl opacity-60">🚀</div>
+                </div>
+                <CardHeader>
+                  <CardTitle className="text-xl text-white group-hover:text-cyan-400 transition-colors">
+                    {project.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <p className="text-gray-400 leading-relaxed text-sm">
+                    {project.description}
+                  </p>
+                  
+                  <div className="flex flex-wrap gap-2">
+                    {project.technologies.map((tech) => (
+                      <Badge 
+                        key={tech} 
+                        variant="secondary" 
+                        className="text-xs bg-slate-700/50 text-gray-300 border border-slate-600/50 font-mono"
+                      >
+                        {tech}
+                      </Badge>
+                    ))}
+                  </div>
+                  
+                  <div className="flex gap-2 pt-2">
+                    <Button 
+                      size="sm" 
+                      variant="outline" 
+                      className="flex-1 border-cyan-400/50 text-cyan-400 hover:bg-cyan-400/10 font-mono text-xs"
+                      onClick={() => window.open(project.githubUrl, '_blank')}
+                    >
+                      <Github className="w-4 h-4 mr-1" />
+                      Code
+                    </Button>
+                    {project.demoUrl && (
+                      <Button 
+                        size="sm" 
+                        variant="outline" 
+                        className="flex-1 border-emerald-400/50 text-emerald-400 hover:bg-emerald-400/10 font-mono text-xs"
+                        onClick={() => window.open(project.demoUrl, '_blank')}
+                      >
+                        <ExternalLink className="w-4 h-4 mr-1" />
+                        Demo
+                      </Button>
+                    )}
                   </div>
                 </CardContent>
               </Card>
@@ -189,9 +124,10 @@ export default function FeaturedProjectsSection() {
           <Link href="/projects">
             <Button 
               size="lg" 
-              className="bg-[var(--architect-teal)] hover:bg-[var(--architect-teal)]/80 text-[var(--architect-charcoal)] font-mono tracking-wider uppercase px-8 py-4"
+              variant="outline"
+              className="border-cyan-400/50 text-cyan-400 hover:bg-cyan-400/10 hover:border-cyan-400 px-8 py-3 font-mono transition-all duration-300 hover:scale-105"
             >
-              ACCESS FULL ARCHIVE
+              View All Projects
               <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
           </Link>
