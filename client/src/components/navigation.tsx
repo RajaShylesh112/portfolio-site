@@ -23,7 +23,7 @@ export default function Navigation() {
   };
 
   const navItems = [
-    { path: "/", label: "Portfolio" },
+    { path: "/", label: "Home" },
     { path: "/projects", label: "Projects" },
     { path: "/blog", label: "Blog" },
     { path: "/about", label: "About" },
@@ -40,7 +40,7 @@ export default function Navigation() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="text-xl font-bold text-primary dark:neon-text cursor-pointer hover:text-cyan-400 transition-colors">
-            Raja Shylesh
+            Portfolio
           </Link>
 
           {/* Desktop Navigation */}
