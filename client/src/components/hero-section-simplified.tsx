@@ -61,7 +61,7 @@ export default function HeroSectionSimplified() {
           >
             <div className="text-xl md:text-2xl">
               <TypingAnimation
-                text="Backend Developer & Computer Science Student"
+                text="I build backends that don't break."
               />
             </div>
           </motion.div>
@@ -73,8 +73,10 @@ export default function HeroSectionSimplified() {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="text-lg text-gray-400 max-w-2xl mx-auto mb-12"
           >
-            Passionate about building scalable backend systems and creating efficient APIs. 
-            Currently pursuing Computer Science while developing robust web applications.
+            I'm a backend developer who thrives on building systems that scale and ship fast. 
+            I turn complex logic into clean, maintainable APIs. Currently diving deep into cloud infra and distributed systems.
+            <br /><br />
+            <span className="text-cyan-400 font-medium">Currently open to internship opportunities in backend or cloud dev.</span>
           </motion.p>
 
           {/* CTA Buttons */}
