@@ -1,238 +1,372 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, Clock, ArrowRight } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Search, Filter, Calendar, Tag, ExternalLink, ArrowRight } from "lucide-react";
 import Navigation from "@/components/navigation";
-import CustomCursor from "@/components/custom-cursor";
-import ScrollProgress from "@/components/scroll-progress";
-import FloatingElements from "@/components/floating-elements";
-import AnimatedDots from "@/components/animated-dots";
+import Footer from "@/components/footer";
 
-interface BlogPost {
+interface LearningEntry {
   id: string;
-  title: string;
-  excerpt: string;
-  content: string;
   date: string;
-  readTime: string;
+  title: string;
+  category: string;
+  context: string;
+  attempt: string;
+  outcome: string;
+  links?: {
+    github?: string;
+    demo?: string;
+    docs?: string;
+  };
   tags: string[];
-  featured: boolean;
+  status: 'completed' | 'in-progress' | 'stuck' | 'revisited';
 }
 
-const blogPosts: BlogPost[] = [
+const learningEntries: LearningEntry[] = [
   {
-    id: "building-scalable-apis",
-    title: "Building Scalable REST APIs with Node.js",
-    excerpt: "Learn best practices for designing and implementing scalable REST APIs that can handle thousands of requests per second.",
-    content: "Full blog content here...",
-    date: "2024-01-15",
-    readTime: "8 min read",
-    tags: ["Node.js", "API Design", "Performance"],
-    featured: true
+    id: "session-store-design",
+    date: "2025-01-15",
+    title: "Session Store Design: JWT vs Redis",
+    category: "Backend",
+    context: "Need to implement user sessions for a multi-user chat app. Debating between stateless JWT tokens and Redis-based sessions.",
+    attempt: "Built sample auth microservice with both approaches. Tested JWT with refresh tokens and Redis with TTL sessions.",
+    outcome: "JWT works for simple auth, but Redis gives better control for chat presence. Stuck on cache invalidation patterns.",
+    links: {
+      github: "https://github.com/RajaShylesh112/auth-comparison",
+      demo: "https://auth-demo.vercel.app"
+    },
+    tags: ["Authentication", "Redis", "JWT", "Node.js"],
+    status: "in-progress"
   },
   {
-    id: "database-optimization",
-    title: "Database Optimization Techniques",
-    excerpt: "Explore advanced database optimization strategies to improve query performance and reduce response times.",
-    content: "Full blog content here...",
-    date: "2024-01-08",
-    readTime: "12 min read",
-    tags: ["Database", "PostgreSQL", "Performance"],
-    featured: true
+    id: "database-indexing-experiment",
+    date: "2025-01-08",
+    title: "PostgreSQL Query Optimization Deep Dive",
+    category: "Database",
+    context: "University project queries were taking 2+ seconds on 10k records. Professor mentioned indexing but didn't explain how.",
+    attempt: "Read PostgreSQL docs, experimented with B-tree, Hash, and GIN indexes. Used EXPLAIN ANALYZE extensively.",
+    outcome: "Query time down to 15ms with composite index. Learned about index bloat and maintenance overhead.",
+    links: {
+      github: "https://github.com/RajaShylesh112/pg-indexing-study",
+      docs: "https://wiki.postgresql.org/wiki/Performance_Optimization"
+    },
+    tags: ["PostgreSQL", "Performance", "Indexing"],
+    status: "completed"
   },
   {
-    id: "microservices-patterns",
-    title: "Microservices Design Patterns",
-    excerpt: "Understanding common microservices patterns and when to use them in your backend architecture.",
-    content: "Full blog content here...",
-    date: "2024-01-01",
-    readTime: "15 min read",
-    tags: ["Microservices", "Architecture", "Backend"],
-    featured: false
+    id: "docker-networking-confusion",
+    date: "2025-01-02",
+    title: "Docker Container Communication Patterns",
+    category: "DevOps",
+    context: "Containers couldn't talk to each other in my 3-tier app setup. Bridge networks, host networking - all confusing.",
+    attempt: "Built test app with frontend, API, and database containers. Tried different network configurations.",
+    outcome: "Docker Compose with custom networks solved it. Still don't fully understand overlay networks for production.",
+    links: {
+      github: "https://github.com/RajaShylesh112/docker-networking-test"
+    },
+    tags: ["Docker", "Networking", "DevOps"],
+    status: "stuck"
   },
   {
-    id: "jwt-authentication",
-    title: "Implementing JWT Authentication",
-    excerpt: "A comprehensive guide to implementing secure JWT-based authentication in Node.js applications.",
-    content: "Full blog content here...",
-    date: "2023-12-25",
-    readTime: "10 min read",
-    tags: ["Authentication", "JWT", "Security"],
-    featured: false
+    id: "api-rate-limiting",
+    date: "2024-12-20",
+    title: "Implementing Rate Limiting in Express.js",
+    category: "System Design",
+    context: "Assignment required API rate limiting. Simple in-memory counters vs Redis-backed sliding window.",
+    attempt: "Implemented both approaches. Tested with artillery.js load testing tool.",
+    outcome: "In-memory works for single instance, Redis needed for horizontal scaling. Rate limiting is harder than expected.",
+    links: {
+      github: "https://github.com/RajaShylesh112/rate-limiting-study"
+    },
+    tags: ["Rate Limiting", "Express.js", "System Design"],
+    status: "completed"
+  },
+  {
+    id: "event-driven-architecture",
+    date: "2024-12-15",
+    title: "Message Queues: RabbitMQ vs Redis Pub/Sub",
+    category: "University",
+    context: "Distributed systems course project. Need to implement event-driven communication between microservices.",
+    attempt: "Built order processing system with both RabbitMQ and Redis. Compared reliability and performance.",
+    outcome: "RabbitMQ better for guaranteed delivery, Redis faster for simple pub/sub. Updated after feedback from TA.",
+    links: {
+      github: "https://github.com/RajaShylesh112/message-queue-comparison"
+    },
+    tags: ["Message Queues", "RabbitMQ", "Redis", "Microservices"],
+    status: "revisited"
   }
 ];
 
 export default function Blog() {
-  const featuredPosts = blogPosts.filter(post => post.featured);
-  const recentPosts = blogPosts.filter(post => !post.featured);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [selectedEntry, setSelectedEntry] = useState<LearningEntry | null>(null);
+  
+  const categories = ['all', ...Array.from(new Set(learningEntries.map(entry => entry.category)))];
+  
+  const filteredEntries = learningEntries.filter(entry => {
+    const matchesSearch = entry.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         entry.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
+    const matchesCategory = selectedCategory === 'all' || entry.category === selectedCategory;
+    return matchesSearch && matchesCategory;
+  });
+  
+  const handleEntryClick = (entry: LearningEntry) => {
+    setSelectedEntry(entry);
+  };
+  
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'completed': return 'text-green-400';
+      case 'in-progress': return 'text-yellow-400';
+      case 'stuck': return 'text-red-400';
+      case 'revisited': return 'text-blue-400';
+      default: return 'text-gray-400';
+    }
+  };
+  
+  if (selectedEntry) {
+    return (
+      <div className="min-h-screen bg-background dark:bg-black text-foreground relative">
+        <Navigation />
+        <div className="pt-24 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto">
+            <Button 
+              variant="ghost" 
+              onClick={() => setSelectedEntry(null)}
+              className="mb-6 text-cyan-400 hover:text-cyan-300"
+            >
+              <ArrowRight className="w-4 h-4 mr-2 rotate-180" />
+              Back to Learning Log
+            </Button>
+            
+            <motion.article
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="space-y-8"
+            >
+              <header>
+                <div className="flex items-center gap-3 text-sm text-gray-400 mb-4">
+                  <Calendar className="w-4 h-4" />
+                  <span>{selectedEntry.date}</span>
+                  <Badge variant="secondary">{selectedEntry.category}</Badge>
+                  <span className={`font-mono ${getStatusColor(selectedEntry.status)}`}>
+                    [{selectedEntry.status}]
+                  </span>
+                </div>
+                <h1 className="text-3xl font-bold mb-4">{selectedEntry.title}</h1>
+                <div className="flex flex-wrap gap-2">
+                  {selectedEntry.tags.map(tag => (
+                    <Badge key={tag} variant="outline" className="text-xs">
+                      {tag}
+                    </Badge>
+                  ))}
+                </div>
+              </header>
+              
+              <div className="space-y-6">
+                <section>
+                  <h2 className="text-xl font-semibold mb-3 text-cyan-400">Context / Problem</h2>
+                  <div className="bg-slate-900/50 border border-slate-700 rounded-lg p-4">
+                    <p className="text-gray-300">{selectedEntry.context}</p>
+                  </div>
+                </section>
+                
+                <section>
+                  <h2 className="text-xl font-semibold mb-3 text-cyan-400">Attempt / Exploration</h2>
+                  <div className="bg-slate-900/50 border border-slate-700 rounded-lg p-4">
+                    <p className="text-gray-300">{selectedEntry.attempt}</p>
+                  </div>
+                </section>
+                
+                <section>
+                  <h2 className="text-xl font-semibold mb-3 text-cyan-400">Outcome / What I Learned</h2>
+                  <div className="bg-slate-900/50 border border-slate-700 rounded-lg p-4">
+                    <p className="text-gray-300">{selectedEntry.outcome}</p>
+                  </div>
+                </section>
+                
+                {selectedEntry.links && (
+                  <section>
+                    <h2 className="text-xl font-semibold mb-3 text-cyan-400">Links / Code / Resources</h2>
+                    <div className="bg-slate-900/50 border border-slate-700 rounded-lg p-4">
+                      <div className="space-y-2">
+                        {selectedEntry.links.github && (
+                          <a 
+                            href={selectedEntry.links.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300"
+                          >
+                            <ExternalLink className="w-4 h-4" />
+                            GitHub Repository
+                          </a>
+                        )}
+                        {selectedEntry.links.demo && (
+                          <a 
+                            href={selectedEntry.links.demo}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300"
+                          >
+                            <ExternalLink className="w-4 h-4" />
+                            Live Demo
+                          </a>
+                        )}
+                        {selectedEntry.links.docs && (
+                          <a 
+                            href={selectedEntry.links.docs}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300"
+                          >
+                            <ExternalLink className="w-4 h-4" />
+                            Documentation
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  </section>
+                )}
+              </div>
+            </motion.article>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background dark:bg-black text-foreground relative">
-      <CustomCursor />
       <Navigation />
-      <ScrollProgress />
-      <FloatingElements />
-      <AnimatedDots position="top-left" />
-      <AnimatedDots position="top-right" />
-      <AnimatedDots position="bottom-left" />
-      <AnimatedDots position="bottom-right" />
       {/* Header */}
-      <section className="pt-24 pb-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
+      <section className="pt-24 pb-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-5xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-12"
+            className="mb-12"
           >
             <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-              Blog
+              Learning Lab
             </h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Thoughts, tutorials, and insights about backend development, system design, and technology
+            <p className="text-xl text-gray-400 font-mono mb-8">
+              Things I've broken, built, and understood as I study CS and systems.
             </p>
+            
+            {/* Search and Filter */}
+            <div className="flex flex-col sm:flex-row gap-4 mb-8">
+              <div className="relative flex-1">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                <Input
+                  placeholder="Search experiments, tags, or topics..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-10 bg-slate-900/50 border-slate-700 focus:border-cyan-400"
+                />
+              </div>
+              <div className="flex items-center gap-2">
+                <Filter className="w-4 h-4 text-gray-400" />
+                <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+                  <SelectTrigger className="w-[180px] bg-slate-900/50 border-slate-700">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {categories.map(category => (
+                      <SelectItem key={category} value={category}>
+                        {category === 'all' ? 'All Categories' : category}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Featured Posts */}
+      {/* Learning Entries Table */}
       <section className="pb-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <h2 className="text-2xl font-bold mb-8">Featured Posts</h2>
-            <div className="grid md:grid-cols-2 gap-8 mb-16">
-              {featuredPosts.map((post, index) => (
+            <div className="space-y-3">
+              {filteredEntries.map((entry, index) => (
                 <motion.div
-                  key={post.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-                >
-                  <Card className="group bg-slate-800/50 border-cyan-400/20 hover:border-cyan-400/50 transition-all duration-300 h-full cursor-pointer">
-                    <CardHeader>
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground mb-3">
-                        <Calendar className="w-4 h-4" />
-                        <span>{new Date(post.date).toLocaleDateString()}</span>
-                        <Clock className="w-4 h-4 ml-2" />
-                        <span>{post.readTime}</span>
-                      </div>
-                      <CardTitle className="group-hover:text-cyan-400 transition-colors">
-                        {post.title}
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-muted-foreground mb-4 line-clamp-3">
-                        {post.excerpt}
-                      </p>
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {post.tags.map((tag) => (
-                          <Badge key={tag} variant="secondary" className="text-xs">
-                            {tag}
-                          </Badge>
-                        ))}
-                      </div>
-                      <Button variant="ghost" className="p-0 h-auto text-cyan-400 hover:text-cyan-300">
-                        Read more
-                        <ArrowRight className="w-4 h-4 ml-2" />
-                      </Button>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Recent Posts */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-slate-900/30">
-        <div className="max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-          >
-            <h2 className="text-2xl font-bold mb-8">Recent Posts</h2>
-            <div className="space-y-6">
-              {recentPosts.map((post, index) => (
-                <motion.div
-                  key={post.id}
-                  initial={{ opacity: 0, x: -30 }}
+                  key={entry.id}
+                  initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: 0.5 + index * 0.1 }}
+                  transition={{ duration: 0.4, delay: index * 0.05 }}
+                  onClick={() => handleEntryClick(entry)}
+                  className="cursor-pointer"
                 >
-                  <Card className="group bg-slate-800/50 border-cyan-400/20 hover:border-cyan-400/50 transition-all duration-300 cursor-pointer">
-                    <CardContent className="p-6">
-                      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                        <div className="flex-1">
-                          <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
-                            <Calendar className="w-4 h-4" />
-                            <span>{new Date(post.date).toLocaleDateString()}</span>
-                            <Clock className="w-4 h-4 ml-2" />
-                            <span>{post.readTime}</span>
-                          </div>
-                          <h3 className="text-xl font-semibold mb-2 group-hover:text-cyan-400 transition-colors">
-                            {post.title}
-                          </h3>
-                          <p className="text-muted-foreground mb-3 line-clamp-2">
-                            {post.excerpt}
-                          </p>
-                          <div className="flex flex-wrap gap-2">
-                            {post.tags.map((tag) => (
-                              <Badge key={tag} variant="secondary" className="text-xs">
-                                {tag}
-                              </Badge>
-                            ))}
+                  <Card className="bg-slate-900/30 border-slate-700 hover:border-cyan-400/50 transition-all duration-200 hover:bg-slate-900/50">
+                    <CardContent className="p-4">
+                      <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
+                        {/* Date */}
+                        <div className="md:col-span-2">
+                          <div className="flex items-center gap-2 text-sm text-gray-400 font-mono">
+                            <Calendar className="w-3 h-3" />
+                            <span>{entry.date}</span>
                           </div>
                         </div>
-                        <Button variant="ghost" className="text-cyan-400 hover:text-cyan-300 md:ml-4">
-                          Read more
-                          <ArrowRight className="w-4 h-4 ml-2" />
-                        </Button>
+                        
+                        {/* Title */}
+                        <div className="md:col-span-4">
+                          <h3 className="font-semibold text-white hover:text-cyan-400 transition-colors">
+                            {entry.title}
+                          </h3>
+                        </div>
+                        
+                        {/* Category & Status */}
+                        <div className="md:col-span-2">
+                          <div className="flex flex-col gap-1">
+                            <Badge variant="outline" className="text-xs w-fit">
+                              <Tag className="w-3 h-3 mr-1" />
+                              {entry.category}
+                            </Badge>
+                            <span className={`text-xs font-mono ${getStatusColor(entry.status)}`}>
+                              [{entry.status}]
+                            </span>
+                          </div>
+                        </div>
+                        
+                        {/* Outcome Hint */}
+                        <div className="md:col-span-3">
+                          <p className="text-sm text-gray-400 line-clamp-2">
+                            {entry.outcome.split('.')[0]}...
+                          </p>
+                        </div>
+                        
+                        {/* Arrow */}
+                        <div className="md:col-span-1 text-right">
+                          <ArrowRight className="w-4 h-4 text-gray-500 hover:text-cyan-400 transition-colors" />
+                        </div>
                       </div>
                     </CardContent>
                   </Card>
                 </motion.div>
               ))}
             </div>
+            
+            {filteredEntries.length === 0 && (
+              <div className="text-center py-12">
+                <p className="text-gray-400 font-mono">No entries found matching your criteria.</p>
+              </div>
+            )}
           </motion.div>
         </div>
       </section>
-
-      {/* Newsletter Signup */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-          >
-            <Card className="bg-gradient-to-r from-cyan-900/20 to-blue-900/20 border-cyan-400/30">
-              <CardContent className="p-8">
-                <h2 className="text-2xl font-bold mb-4">Stay Updated</h2>
-                <p className="text-muted-foreground mb-6">
-                  Get notified when I publish new articles about backend development and system design
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-                  <input
-                    type="email"
-                    placeholder="Enter your email"
-                    className="flex-1 px-4 py-2 bg-slate-800 border border-cyan-400/30 rounded-lg focus:outline-none focus:border-cyan-400"
-                  />
-                  <Button className="bg-cyan-600 hover:bg-cyan-700">
-                    Subscribe
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-        </div>
-      </section>
+      <Footer />
     </div>
   );
 }

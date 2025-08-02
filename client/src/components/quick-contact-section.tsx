@@ -67,7 +67,7 @@ export default function QuickContactSection() {
                 <Button 
                   variant="outline" 
                   className="border-cyan-400/50 hover:bg-cyan-400/10"
-                  onClick={() => window.open('https://linkedin.com/in/rajashylesh', '_blank')}
+                  onClick={() => window.open('https://www.linkedin.com/in/raja-shylesh-886421256', '_blank')}
                 >
                   <Linkedin className="w-4 h-4 mr-2" />
                   Connect
@@ -90,7 +90,7 @@ export default function QuickContactSection() {
               variant="ghost"
               size="lg"
               className="text-muted-foreground hover:text-cyan-400"
-              onClick={() => window.open('https://github.com/rajashylesh', '_blank')}
+              onClick={() => window.open('https://github.com/RajaShylesh112', '_blank')}
             >
               <Github className="w-6 h-6 mr-2" />
               GitHub

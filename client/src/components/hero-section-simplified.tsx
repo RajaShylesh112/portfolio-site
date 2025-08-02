@@ -137,7 +137,7 @@ export default function HeroSectionSimplified() {
             className="text-xl md:text-2xl text-gray-300 mb-8"
           >
             <p className="text-xl md:text-2xl text-gray-300">
-              I'm Raja Shylesh – CS Undergraduate | Systems-Driven Developer
+              CS Undergraduate | Systems-Driven Developer
             </p>
           </motion.div>
 
@@ -205,13 +205,13 @@ export default function HeroSectionSimplified() {
               <Mail className="w-6 h-6" />
             </a>
             <a
-              href="https://github.com/rajashylesh"
+              href="https://github.com/RajaShylesh112"
               className="text-gray-400 hover:text-cyan-400 transition-colors duration-200"
             >
               <Github className="w-6 h-6" />
             </a>
             <a
-              href="https://linkedin.com/in/rajashylesh"
+              href="https://www.linkedin.com/in/raja-shylesh-886421256"
               className="text-gray-400 hover:text-cyan-400 transition-colors duration-200"
             >
               <Linkedin className="w-6 h-6" />
