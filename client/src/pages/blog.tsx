@@ -34,125 +34,35 @@ interface BlogEntry {
 
 const blogEntries: BlogEntry[] = [
   {
-    id: "designing-cache-strategy",
-    date: "2025-01-15",
-    title: "Designing a Cache Strategy for My Student Project",
-    category: "System Design",
+    id: "how-i-built-wanderguide",
+    date: "2026-04-09",
+    title: "How I Built WanderGuide: Architecture, APIs, and Real-World Tradeoffs",
+    category: "Full-stack",
     level: "Student Project",
-    readTime: "7 min read",
-    hook: "While building a project management app for my CS course, I realized my database queries were getting slower as data grew. Users were complaining about 3-second load times. This led me down a rabbit hole of caching strategies that completely changed how I think about performance.",
-    background: "The project was a simple task management system with users, projects, and tasks. Initially, I was making direct database calls for every page load, including nested queries to fetch user permissions and project details. With 1000+ tasks, the main dashboard query took 2.8 seconds.",
-    whatITried: "I experimented with three approaches: Redis for session storage, application-level caching with Node.js Map objects, and database query optimization with indexes. I also tried implementing a simple LRU cache for frequently accessed project data.",
-    whereItFailed: "The in-memory cache worked locally but failed when I deployed to multiple server instances. Redis helped but introduced complexity around cache invalidation. My biggest mistake was caching too aggressively without considering data consistency.",
-    finalDecision: "I ended up using Redis for session data and a hybrid approach for application data: aggressive caching for read-heavy operations with TTL-based invalidation, and immediate cache clearing for write operations. Added database indexes as the foundation.",
+    readTime: "11 min read",
+    hook: "I wanted to build a travel planner that felt practical, not just pretty: multi-stop itineraries, route visualization, and realistic cost estimates in one place. WanderGuide became that project, and it taught me how to connect UX decisions to backend architecture.",
+    background: "WanderGuide is a full-stack travel planning application built with Next.js 15 (App Router), React 19, TypeScript, Tailwind CSS, and Supabase. From day one, I scoped it around three core workflows: discover destinations, build a multi-stop trip, and understand expected costs before booking anything.",
+    whatITried: "I designed the backend around Supabase tables for cities, destinations, trips, trip_stops, trip_activities, reviews, and user_profiles. For mapping and travel calculations, I integrated Geoapify for geocoding and OpenRouteService for route/distance logic, then used Leaflet for map rendering. For destination visuals, I implemented a fallback chain (Pexels to Unsplash to Wikimedia Commons) so the UI would remain rich even when one provider had limited results.",
+    whereItFailed: "My first iterations surfaced common full-stack issues: API response shape mismatches between route services and map components, cost estimates that felt inconsistent when not normalized by route distance, and UI loading states that looked broken when external APIs were slow. I also had to tighten how trip-stop ordering was persisted to avoid itinerary sequencing bugs.",
+    finalDecision: "I standardized API adapters for geospatial providers, moved cost estimation into a dedicated pricing flow, and treated trip ordering as first-class data in the schema. On the frontend, I paired server-rendered screens with clear loading/error states and used reusable UI primitives (shadcn + Tailwind) for consistency. This gave me a project that is easier to extend and significantly more reliable during real usage.",
     whatILearned: [
-      "Cache invalidation is genuinely one of the hardest problems in CS",
-      "Start with database optimization before adding cache layers",
-      "TTL-based caching is safer than manual invalidation for student projects",
-      "Monitor cache hit rates - I was only getting 40% initially",
-      "Redis cluster setup is overkill for most student projects"
+      "A clear data model for trips and stop ordering prevents a lot of downstream bugs",
+      "External API integration is mostly about normalization and resilience, not just fetch calls",
+      "Pricing logic should be explicit and testable instead of scattered across UI components",
+      "Fallback content pipelines noticeably improve perceived product quality",
+      "Docker support and reproducible setup docs make collaboration and deployment much smoother"
     ],
     references: [
-      "Redis documentation on TTL patterns",
-      "High Performance Browser Networking by Ilya Grigorik",
-      "My GitHub repo with benchmarking results"
+      "WanderGuide README architecture and setup notes",
+      "Supabase docs for relational schema and auth",
+      "OpenRouteService + Geoapify API docs"
     ],
-    tags: ["Caching", "Redis", "Performance", "Node.js"],
+    tags: ["Next.js", "Supabase", "System Design", "Mapping APIs", "Full-stack"],
     featured: true,
     links: {
-      github: "https://github.com/RajaShylesh112/cache-strategy-study",
-      demo: "https://task-manager-cached.vercel.app"
-    }
-  },
-  {
-    id: "ditching-mongodb-for-postgresql",
-    date: "2025-01-08",
-    title: "Why I Ditched MongoDB for PostgreSQL in My Backend",
-    category: "Database",
-    level: "Deep Dive",
-    readTime: "10 min read",
-    hook: "Everyone said MongoDB was perfect for rapid prototyping. After three weeks of schema changes and query headaches on my social media clone project, I made the painful decision to migrate everything to PostgreSQL. Here's what I learned about choosing the right database.",
-    background: "I was building a Twitter-like app with posts, comments, likes, and user relationships. MongoDB seemed ideal because of flexible schemas and the JSON-like document structure. The initial setup was indeed faster - no migrations, just start coding.",
-    whatITried: "I started with MongoDB's flexible schema, using embedded documents for comments and references for user data. When relationships got complex, I tried population, aggregation pipelines, and even considered denormalization patterns from MongoDB's best practices.",
-    whereItFailed: "Three major issues emerged: (1) Complex queries became unreadable with nested aggregations, (2) No referential integrity led to orphaned data when I deleted users, (3) Schema flexibility became a curse when I needed to refactor data structures.",
-    finalDecision: "I migrated to PostgreSQL with a properly normalized schema. Used foreign keys for data integrity, created indexes for performance, and leveraged SQL's mature query capabilities. The migration took two days but solved months of headaches.",
-    whatILearned: [
-      "Schema flexibility is overrated for most applications",
-      "SQL joins are more intuitive than MongoDB aggregations for relational data",
-      "Database constraints prevent bugs that manual validation misses",
-      "ACID transactions matter more than I initially thought",
-      "PostgreSQL's JSON columns give you flexibility when you actually need it"
-    ],
-    references: [
-      "PostgreSQL documentation on JSON types",
-      "Use The Index, Luke! by Markus Winand",
-      "MongoDB to PostgreSQL migration guide"
-    ],
-    tags: ["PostgreSQL", "MongoDB", "Database Design", "Migration"],
-    featured: true,
-    links: {
-      github: "https://github.com/RajaShylesh112/mongo-to-postgres-migration"
-    }
-  },
-  {
-    id: "github-actions-journey",
-    date: "2024-12-28",
-    title: "My Journey with GitHub Actions: From Clueless to Confident",
-    category: "DevOps",
-    level: "Beginner",
-    readTime: "6 min read",
-    hook: "I used to manually deploy every project by SSH-ing into my server and running git pull. Then I discovered GitHub Actions. What started as a simple deployment automation turned into a deep dive into CI/CD that transformed my development workflow.",
-    background: "My deployment process was manual and error-prone: pull code, install dependencies, restart services, and pray nothing broke. I wanted to automate this but was intimidated by complex CI/CD tools like Jenkins. GitHub Actions seemed approachable.",
-    whatITried: "Started with a basic workflow that ran tests on push. Then added deployment to my VPS using SSH actions. Experimented with different triggers, environment variables, and tried to set up automated testing with a test database.",
-    whereItFailed: "My first workflows were overly complex with unnecessary steps. I struggled with secrets management and environment differences between CI and production. Several deployments failed because I forgot to handle database migrations.",
-    finalDecision: "Simplified to two workflows: one for testing (runs on all PRs) and one for deployment (runs on main branch). Used GitHub secrets for sensitive data and added proper error handling with rollback capabilities.",
-    whatILearned: [
-      "Start simple with basic test automation before complex deployments",
-      "Environment parity between CI and production is crucial",
-      "Secrets management is harder than it looks",
-      "Failed deployments teach you more than successful ones",
-      "Automation saves time but requires upfront investment"
-    ],
-    references: [
-      "GitHub Actions documentation",
-      "Continuous Integration by Martin Fowler",
-      "My workflow templates repository"
-    ],
-    tags: ["GitHub Actions", "CI/CD", "DevOps", "Automation"],
-    featured: false,
-    links: {
-      github: "https://github.com/RajaShylesh112/github-actions-templates"
-    }
-  },
-  {
-    id: "state-management-nextjs",
-    date: "2024-12-15",
-    title: "State Management in Next.js — What They Don't Tell You",
-    category: "Web Dev",
-    level: "Student Project",
-    readTime: "8 min read",
-    hook: "Building my first serious Next.js app, I thought I could just use useState everywhere. Wrong. After prop drilling hell and state synchronization nightmares, I learned why state management libraries exist and when you actually need them.",
-    background: "I was building a multi-page dashboard with user authentication, settings, and real-time notifications. Started with local component state and passing props down. It worked for the first few components, then became unmaintainable.",
-    whatITried: "Experimented with Context API, Zustand, Redux Toolkit, and even tried SWR for server state. Each solution had different mental models and trade-offs. I built the same feature with different approaches to compare.",
-    whereItFailed: "Context API caused unnecessary re-renders. Redux felt like overkill for simple state. Zustand was nice but I struggled with persistence. My biggest mistake was not separating server state from client state early on.",
-    finalDecision: "Settled on TanStack Query for server state management and Zustand for client-side state. This separation clarified my mental model and reduced complexity significantly. Used Next.js built-in state for truly local component state.",
-    whatILearned: [
-      "Separate server state from client state from the beginning",
-      "Not all state needs to be global - most can stay local",
-      "State management libraries solve real problems, not imaginary ones",
-      "Performance optimization should come after functionality",
-      "The best state management is often no state management"
-    ],
-    references: [
-      "TanStack Query documentation",
-      "State Machines in React by David Khourshid",
-      "Zustand GitHub repository"
-    ],
-    tags: ["Next.js", "State Management", "React", "Frontend"],
-    featured: false,
-    links: {
-      github: "https://github.com/RajaShylesh112/nextjs-state-management",
-      demo: "https://state-demo.vercel.app"
+      github: "https://github.com/RajaShylesh112/WanderGuide",
+      demo: "https://wander-guide-website.vercel.app/",
+      docs: "https://github.com/RajaShylesh112/WanderGuide#readme"
     }
   }
 ];

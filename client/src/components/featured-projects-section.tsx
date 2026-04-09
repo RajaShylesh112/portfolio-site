@@ -7,27 +7,12 @@ import { Link } from "wouter";
 
 const featuredProjects = [
   {
-    id: "ecommerce-api",
-    title: "E-commerce API",
-    description: "RESTful API for online shopping platform with authentication and payment processing",
-    technologies: ["Node.js", "Express", "MongoDB", "JWT", "Stripe"],
-    githubUrl: "https://github.com/rajashylesh/ecommerce-api",
-    demoUrl: "https://ecommerce-api-demo.com"
-  },
-  {
-    id: "task-manager",
-    title: "Task Management System", 
-    description: "Full-stack task management application with real-time updates",
-    technologies: ["Node.js", "Socket.io", "PostgreSQL", "React", "TypeScript"],
-    githubUrl: "https://github.com/rajashylesh/task-manager",
-    demoUrl: "https://task-manager-demo.com"
-  },
-  {
-    id: "blog-cms",
-    title: "Blog CMS",
-    description: "Content Management System for blogs with admin dashboard",
-    technologies: ["Node.js", "Express", "MySQL", "Redis", "TinyMCE"],
-    githubUrl: "https://github.com/rajashylesh/blog-cms"
+    id: "wanderguide",
+    title: "WanderGuide",
+    description: "An intelligent travel planning app for building multi-stop itineraries with dynamic routing, pricing estimates, and personalized recommendations.",
+    technologies: ["Next.js 15", "React 19", "Supabase", "Leaflet", "TypeScript"],
+    githubUrl: "https://github.com/RajaShylesh112/WanderGuide",
+    demoUrl: "https://wander-guide-website.vercel.app/"
   }
 ];
 
@@ -100,12 +85,22 @@ export default function FeaturedProjectsSection() {
                     )}
                   </div>
                   <div className="flex gap-2">
-                    <Button size="sm" variant="outline" className="border-cyan-400/50 hover:bg-cyan-400/10">
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="border-cyan-400/50 hover:bg-cyan-400/10"
+                      onClick={() => window.open(project.githubUrl, "_blank")}
+                    >
                       <Github className="w-4 h-4 mr-2" />
                       Code
                     </Button>
                     {project.demoUrl && (
-                      <Button size="sm" variant="outline" className="border-cyan-400/50 hover:bg-cyan-400/10">
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="border-cyan-400/50 hover:bg-cyan-400/10"
+                        onClick={() => window.open(project.demoUrl, "_blank")}
+                      >
                         <ExternalLink className="w-4 h-4 mr-2" />
                         Demo
                       </Button>

@@ -8,18 +8,11 @@ import { useRef } from "react";
 
 const projects = [
   {
-    title: "MuseMap",
-    description: "A full-stack museum ticketing site with intelligent chatbot for guided reservations. Built with React.js frontend, Supabase backend, and integrated Stripe payments for seamless user experience.",
-    technologies: ["React.js", "Supabase", "Stripe API", "Chatbot"],
-    period: "March 2025 – June 2025",
-    icon: "🏛️",
-  },
-  {
-    title: "Sidekick",
-    description: "A comprehensive mobile platform designed to streamline everyday college life. Built with Flutter for cross-platform compatibility and Firebase for real-time data synchronization.",
-    technologies: ["Flutter", "Firebase", "Real-time", "Cross-platform"],
-    period: "July 2025 – Present",
-    icon: "📱",
+    title: "WanderGuide",
+    description: "An intelligent travel planning application for building multi-stop itineraries, visualizing routes, and estimating trip costs with personalized recommendations.",
+    technologies: ["Next.js 15", "Supabase", "Leaflet", "OpenRouteService"],
+    period: "2026",
+    icon: "🧭",
   },
 ];
 

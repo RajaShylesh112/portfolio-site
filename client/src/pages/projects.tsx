@@ -22,78 +22,20 @@ interface Project {
 
 const projects: Project[] = [
   {
-    id: "ecommerce-api",
-    title: "E-commerce API",
-    description: "RESTful API for online shopping platform with authentication and payment processing",
-    longDescription: "A comprehensive e-commerce backend API built with Node.js and Express, featuring user authentication, product management, shopping cart functionality, order processing, and Stripe payment integration. Includes JWT-based authentication, role-based access control, and comprehensive API documentation.",
+    id: "wanderguide",
+    title: "WanderGuide",
+    description: "Intelligent travel planning app for building multi-stop itineraries with dynamic routing and pricing estimates",
+    longDescription: "WanderGuide is a premium full-stack travel planning application built with Next.js 15, React 19, and Supabase. It lets users create multi-stop itineraries, visualize routes in real time with Leaflet and OpenRouteService, estimate travel costs, and personalize recommendations with travel preferences and community reviews.",
     image: "/api/placeholder/400/300",
-    technologies: ["Node.js", "Express", "MongoDB", "JWT", "Stripe"],
-    category: "Backend",
-    githubUrl: "https://github.com/RajaShylesh112/ecommerce-api",
-    demoUrl: "https://ecommerce-api-demo.com",
-    featured: true
-  },
-  {
-    id: "task-manager",
-    title: "Task Management System",
-    description: "Full-stack task management application with real-time updates",
-    longDescription: "A collaborative task management system with real-time updates using WebSocket connections. Features include project creation, task assignment, progress tracking, team collaboration, and notification system. Built with modern tech stack focusing on performance and user experience.",
-    image: "/api/placeholder/400/300",
-    technologies: ["Node.js", "Socket.io", "PostgreSQL", "React", "TypeScript"],
+    technologies: ["Next.js 15", "React 19", "TypeScript", "Supabase", "Leaflet", "OpenRouteService", "Geoapify"],
     category: "Full-stack",
-    githubUrl: "https://github.com/RajaShylesh112/task-manager",
-    demoUrl: "https://task-manager-demo.com",
+    githubUrl: "https://github.com/RajaShylesh112/WanderGuide",
+    demoUrl: "https://wander-guide-website.vercel.app/",
     featured: true
-  },
-  {
-    id: "blog-cms",
-    title: "Blog CMS",
-    description: "Content Management System for blogs with admin dashboard",
-    longDescription: "A complete content management system designed for bloggers and content creators. Features include rich text editor, media management, SEO optimization, comment system, user roles, and analytics dashboard. Built with focus on performance and SEO best practices.",
-    image: "/api/placeholder/400/300",
-    technologies: ["Node.js", "Express", "MySQL", "Redis", "TinyMCE"],
-    category: "Backend",
-    githubUrl: "https://github.com/RajaShylesh112/blog-cms",
-    featured: true
-  },
-  {
-    id: "chat-app",
-    title: "Real-time Chat Application",
-    description: "WebSocket-based chat application with rooms and file sharing",
-    longDescription: "A real-time chat application supporting multiple chat rooms, private messaging, file sharing, and emoji reactions. Built with Socket.io for real-time communication, featuring message encryption, user presence indicators, and message history.",
-    image: "/api/placeholder/400/300",
-    technologies: ["Node.js", "Socket.io", "MongoDB", "Multer", "bcrypt"],
-    category: "Real-time",
-    githubUrl: "https://github.com/RajaShylesh112/chat-app",
-    demoUrl: "https://chat-app-demo.com",
-    featured: false
-  },
-  {
-    id: "weather-api",
-    title: "Weather Dashboard API",
-    description: "Weather data aggregation service with caching and analytics",
-    longDescription: "A weather data aggregation service that collects data from multiple weather APIs, provides caching for improved performance, and offers analytics on weather patterns. Features include location-based forecasts, historical data analysis, and alert notifications.",
-    image: "/api/placeholder/400/300",
-    technologies: ["Node.js", "Redis", "PostgreSQL", "Cron", "External APIs"],
-    category: "Backend",
-    githubUrl: "https://github.com/RajaShylesh112/weather-api",
-    featured: false
-  },
-  {
-    id: "url-shortener",
-    title: "URL Shortener Service",
-    description: "Custom URL shortening service with analytics and QR codes",
-    longDescription: "A URL shortening service similar to bit.ly, featuring custom short URLs, click analytics, QR code generation, and link expiration. Built with focus on performance and scalability, including rate limiting and spam protection.",
-    image: "/api/placeholder/400/300",
-    technologies: ["Node.js", "Express", "MongoDB", "QR Code", "Rate Limiting"],
-    category: "Backend",
-    githubUrl: "https://github.com/RajaShylesh112/url-shortener",
-    demoUrl: "https://short.ly-demo.com",
-    featured: false
   }
 ];
 
-const categories = ["All", "Backend", "Full-stack", "Real-time"];
+const categories = ["All", "Full-stack"];
 
 export default function Projects() {
   const [selectedCategory, setSelectedCategory] = useState("All");

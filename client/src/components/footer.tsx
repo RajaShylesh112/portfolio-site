@@ -11,7 +11,7 @@ export default function Footer() {
             <div>[{currentTime}] user: raja_shylesh logged in</div>
             <div>[{currentTime}] status: all systems operational</div>
             <div>[{currentTime}] location: coimbatore, india</div>
-            <div>[{currentTime}] contact: raja@example.com</div>
+            <div>[{currentTime}] contact: rajashylesh@gmail.com</div>
             <div className="pt-2 border-t border-slate-600 mt-3 text-center">
               © {currentYear} Raja Shylesh. Built with React + TypeScript.
             </div>
