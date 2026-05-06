@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight, MapPin, GraduationCap } from "lucide-react";
 import { Link } from "wouter";
-import profileImage from "@assets/1000025260-removebg_1753213343295.png";
+import profileImage from "@assets/image.png";
 
 export default function ShortAboutSection() {
   return (

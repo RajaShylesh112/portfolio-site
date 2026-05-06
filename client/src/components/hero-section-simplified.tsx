@@ -6,7 +6,7 @@ import TypingAnimation from "./typing-animation";
 import Hero3DBackground from "./hero-3d-background";
 import FloatingTechIcons from "./floating-tech-icons";
 import ModernShapes from "./modern-shapes";
-import profileImage from "@assets/1000025260-removebg_1753213343295.png";
+import profileImage from "@assets/image.png";
 
 export default function HeroSectionSimplified() {
   const scrollToProjects = () => {

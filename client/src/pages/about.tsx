@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Download, Mail, Linkedin, Github, MapPin, Calendar, GraduationCap } from "lucide-react";
 import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
-import profileImage from "@assets/1000025260-removebg_1753213343295.png";
+import profileImage from "@assets/image.png";
 
 export default function About() {
   const timeline = [
