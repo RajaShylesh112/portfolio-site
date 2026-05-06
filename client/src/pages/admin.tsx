@@ -111,7 +111,6 @@ function parseMarkdownBlog(content: string): { frontmatter: FrontmatterData; sec
     tags: [] as string[],
     whatILearned: [] as string[],
     references: [] as string[],
-    thumbnail: "",
   };
 
   const lines = frontmatterStr.split("\n");
@@ -139,8 +138,6 @@ function parseMarkdownBlog(content: string): { frontmatter: FrontmatterData; sec
         frontmatter.level = value as "Beginner" | "Student Project" | "Deep Dive";
       } else if (key === "featured") {
         frontmatter.featured = value.toLowerCase() === "true";
-      } else if (key === "thumbnail") {
-        frontmatter.thumbnail = value.replace(/^["']|["']$/g, "");
       } else if (key === "tags") {
         currentKey = key;
         inArray = true;
@@ -225,7 +222,6 @@ function blogToMarkdown(entry: BlogEntryRecord): string {
     `level: ${entry.level}`,
     `readTime: ${entry.readTime}`,
     `featured: ${entry.featured}`,
-    `thumbnail: "${entry.thumbnail ?? ""}"`,
     "tags:",
   ];
 
@@ -272,7 +268,6 @@ function markdownToBlog(markdown: string, id: string): BlogEntryRecord {
     whatITried: sections["What I Tried"] || "",
     whereItFailed: sections["Where It Failed"] || "",
     finalDecision: sections["Final Decision"] || "",
-    thumbnail: frontmatter.thumbnail || "",
   };
 }
 
@@ -857,31 +852,6 @@ links:
                     </CardHeader>
                     <CardContent>
                       <div className="space-y-4">
-                        <div className="space-y-2">
-                          <label className="text-sm font-medium">Thumbnail</label>
-                          <Input
-                            type="file"
-                            accept="image/*"
-                            onChange={async (event) => {
-                              const base64 = await readFileAsDataUrl(event.target.files?.[0]!);
-                              // Update frontmatter in markdown string
-                              setBlogMarkdown(prev => {
-                                const match = prev.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
-                                if (match) {
-                                  let fm = match[1];
-                                  if (fm.includes("thumbnail:")) {
-                                    fm = fm.replace(/thumbnail:.*?\n/, `thumbnail: "${base64}"\n`);
-                                  } else {
-                                    fm += `thumbnail: "${base64}"\n`;
-                                  }
-                                  return `---\n${fm}---\n${match[2]}`;
-                                }
-                                return prev;
-                              });
-                            }}
-                          />
-                          <ThumbnailPreview src={blogDraft?.thumbnail} alt={blogDraft?.title ?? "Blog thumbnail"} />
-                        </div>
                         <div className="space-y-2">
                           <label className="text-sm font-medium">Blog Content</label>
                         <Textarea 

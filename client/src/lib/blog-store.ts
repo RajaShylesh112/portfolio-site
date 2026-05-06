@@ -14,7 +14,6 @@ export interface BlogEntryRecord {
   references: string[];
   tags: string[];
   featured: boolean;
-  thumbnail?: string;
   links?: {
     github?: string;
     demo?: string;
@@ -49,7 +48,6 @@ export const defaultBlogEntries: BlogEntryRecord[] = [
     ],
     tags: ["Next.js", "Supabase", "System Design", "Mapping APIs", "Full-stack"],
     featured: true,
-    thumbnail: "/portfolio-site/blog-thumbnail.png",
     links: {
       github: "https://github.com/RajaShylesh112/WanderGuide",
       demo: "https://wander-guide-website.vercel.app/",
@@ -87,7 +85,6 @@ export function createEmptyBlogEntry(): BlogEntryRecord {
     references: [],
     tags: [],
     featured: false,
-    thumbnail: "",
     links: {
       github: "",
       demo: "",

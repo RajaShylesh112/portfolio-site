@@ -18,10 +18,13 @@ function getBase64Image(relativePath) {
       : relativePath;
       
     const fullPath = path.join(__dirname, localPath);
+    console.log(`Checking file: ${fullPath}, exists: ${fs.existsSync(fullPath)}`);
     if (fs.existsSync(fullPath)) {
       const ext = path.extname(fullPath).substring(1);
       const data = fs.readFileSync(fullPath, { encoding: 'base64' });
-      return `data:image/${ext === 'png' ? 'png' : 'jpeg'};base64,${data}`;
+      const base64Str = `data:image/${ext === 'png' ? 'png' : 'jpeg'};base64,${data}`;
+      console.log(`Successfully converted ${relativePath} to base64!`);
+      return base64Str;
     }
   } catch (e) {
     console.error(`Failed to convert ${relativePath} to base64`, e);
@@ -50,10 +53,7 @@ async function run() {
     await projectsCollection.insertMany(projectsToInsert);
     
     // Process Blogs
-    const blogsToInsert = defaultBlogEntries.map(b => ({
-      ...b,
-      thumbnail: b.thumbnail ? getBase64Image(b.thumbnail) : b.thumbnail
-    }));
+    const blogsToInsert = defaultBlogEntries;
     
     const blogsCollection = db.collection("blogs");
     console.log(`Clearing and seeding ${blogsToInsert.length} blogs with Base64 images...`);
