@@ -32,13 +32,17 @@ app.get('/api/projects', async (req, res) => {
 });
 
 app.post('/api/projects', async (req, res) => {
+  console.log("Received POST request to /api/projects");
   try {
     const project = req.body;
+    console.log("Project payload size:", JSON.stringify(project).length);
     if (!project.id) project.id = new ObjectId().toString();
     delete project._id;
-    await db.collection("projects").updateOne({ id: project.id }, { $set: project }, { upsert: true });
+    const result = await db.collection("projects").updateOne({ id: project.id }, { $set: project }, { upsert: true });
+    console.log("MongoDB update result:", result);
     res.json({ success: true, project });
   } catch (error) {
+    console.error("Error in POST /api/projects:", error);
     res.status(500).json({ error: "Failed to save project" });
   }
 });

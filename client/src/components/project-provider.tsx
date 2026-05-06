@@ -43,32 +43,28 @@ export function ProjectProvider({ children }: { children: React.ReactNode }) {
         }
       },
       updateProject: async (projectId, updates) => {
-        let updatedProject: ProjectRecord | null = null;
+        const projectToUpdate = projects.find(p => p.id === projectId);
+        if (!projectToUpdate) return;
         
-        setProjects((currentProjects) =>
-          currentProjects.map((project) => {
-            if (project.id === projectId) {
-              updatedProject = {
-                ...project,
-                ...updates,
-                technologies: updates.technologies ? [...updates.technologies] : project.technologies,
-              };
-              return updatedProject;
-            }
-            return project;
-          }),
-        );
+        const updatedProject = {
+          ...projectToUpdate,
+          ...updates,
+          technologies: updates.technologies ? [...updates.technologies] : projectToUpdate.technologies,
+        };
         
-        if (updatedProject) {
-          try {
-            await fetch(`${import.meta.env.BASE_URL}api/projects`, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(updatedProject),
-            });
-          } catch (err) {
-            console.error("Failed to update project", err);
+        setProjects((currentProjects) => currentProjects.map((project) => project.id === projectId ? updatedProject : project));
+        
+        try {
+          const res = await fetch(`${import.meta.env.BASE_URL}api/projects`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(updatedProject),
+          });
+          if (!res.ok) {
+            console.error(`Failed to update project: ${res.status} ${res.statusText}`);
           }
+        } catch (err) {
+          console.error("Failed to update project network error", err);
         }
       },
       deleteProject: async (projectId) => {

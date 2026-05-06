@@ -49,35 +49,31 @@ export function BlogProvider({ children }: { children: React.ReactNode }) {
         }
       },
       updateBlogEntry: async (entryId, updates) => {
-        let updatedEntry: BlogEntryRecord | null = null;
+        const entryToUpdate = blogEntries.find(e => e.id === entryId);
+        if (!entryToUpdate) return;
         
-        setBlogEntries((currentEntries) =>
-          currentEntries.map((entry) => {
-            if (entry.id === entryId) {
-              updatedEntry = {
-                ...entry,
-                ...updates,
-                whatILearned: updates.whatILearned ? [...updates.whatILearned] : entry.whatILearned,
-                references: updates.references ? [...updates.references] : entry.references,
-                tags: updates.tags ? [...updates.tags] : entry.tags,
-                links: updates.links ? { ...updates.links } : entry.links,
-              };
-              return updatedEntry;
-            }
-            return entry;
-          }),
-        );
+        const updatedEntry = {
+          ...entryToUpdate,
+          ...updates,
+          whatILearned: updates.whatILearned ? [...updates.whatILearned] : entryToUpdate.whatILearned,
+          references: updates.references ? [...updates.references] : entryToUpdate.references,
+          tags: updates.tags ? [...updates.tags] : entryToUpdate.tags,
+          links: updates.links ? { ...updates.links } : entryToUpdate.links ? { ...entryToUpdate.links } : undefined,
+        };
+
+        setBlogEntries((currentEntries) => currentEntries.map((entry) => entry.id === entryId ? updatedEntry : entry));
         
-        if (updatedEntry) {
-          try {
-            await fetch(`${import.meta.env.BASE_URL}api/blogs`, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(updatedEntry),
-            });
-          } catch (err) {
-            console.error("Failed to update blog", err);
+        try {
+          const res = await fetch(`${import.meta.env.BASE_URL}api/blogs`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(updatedEntry),
+          });
+          if (!res.ok) {
+            console.error(`Failed to update blog: ${res.status} ${res.statusText}`);
           }
+        } catch (err) {
+          console.error("Failed to update blog network error", err);
         }
       },
       deleteBlogEntry: async (entryId) => {
