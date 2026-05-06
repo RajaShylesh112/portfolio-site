@@ -7,6 +7,7 @@ import Hero3DBackground from "./hero-3d-background";
 import FloatingTechIcons from "./floating-tech-icons";
 import ModernShapes from "./modern-shapes";
 import profileImage from "@assets/image.png";
+import resumePDF from "@assets/Resume.pdf";
 
 export default function HeroSectionSimplified() {
   const scrollToProjects = () => {
@@ -113,19 +114,15 @@ export default function HeroSectionSimplified() {
             }}
             className="text-5xl md:text-7xl font-bold mb-6 relative z-10"
           >
-            <motion.span 
+            <motion.span
               className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 300 }}
             >
-              Raja{" "}
+              Backend Developer
             </motion.span>
             <motion.span 
-              className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent"
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 300 }}
+              className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent ml-2"
             >
-              Shylesh
+              | AI Explorer
             </motion.span>
           </motion.h1>
 
@@ -137,22 +134,21 @@ export default function HeroSectionSimplified() {
             className="text-xl md:text-2xl text-gray-300 mb-8"
           >
             <p className="text-xl md:text-2xl text-gray-300">
-              CS Undergraduate | Systems-Driven Developer
+              Building scalable backend systems with an interest in intelligent applications.
             </p>
           </motion.div>
 
           {/* Brief Description */}
-          <motion.p
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
             className="text-lg text-gray-400 max-w-2xl mx-auto mb-12"
           >
-            Computer Science student focused on backend development and system design. 
-            I build reliable APIs and enjoy working with databases and server architecture.
-            <br /><br />
-            <span className="text-cyan-400 font-medium">Looking for internship opportunities in backend development.</span>
-          </motion.p>
+            <span className="text-gray-400">
+              Experienced in building reliable APIs, database-backed services, and scalable server architectures.
+            </span>
+          </motion.div>
 
           {/* CTA Buttons with enhanced hover effects */}
           <motion.div
@@ -168,7 +164,7 @@ export default function HeroSectionSimplified() {
             >
               <Button 
                 size="lg" 
-                onClick={scrollToProjects}
+                onClick={() => window.open("https://github.com/RajaShylesh112?tab=repositories", "_blank")}
                 className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white px-8 py-3 text-lg shadow-lg shadow-cyan-500/25"
               >
                 View Projects
@@ -185,10 +181,26 @@ export default function HeroSectionSimplified() {
                   variant="outline" 
                   className="border-cyan-400/50 text-cyan-400 hover:bg-cyan-400/10 hover:border-cyan-400 px-8 py-3 text-lg backdrop-blur-sm"
                 >
-                  Download Resume
+                  View Bio
                 </Button>
               </motion.div>
             </Link>
+
+            <a href={resumePDF} download className="ml-0 sm:ml-4">
+              <motion.div
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <Button 
+                  size="lg" 
+                  variant="ghost" 
+                  className="text-cyan-300 hover:text-cyan-100 px-8 py-3 text-lg"
+                >
+                  Download Resume
+                </Button>
+              </motion.div>
+            </a>
           </motion.div>
 
           {/* Social Links */}
