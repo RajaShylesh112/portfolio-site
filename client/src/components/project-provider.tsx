@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import { cloneProjects, defaultProjects, projectsStorageKey, type ProjectRecord } from "@/lib/project-store";
+import { cloneProjects, defaultProjects, type ProjectRecord } from "@/lib/project-store";
 
 type ProjectStoreValue = {
   projects: ProjectRecord[];
@@ -11,77 +11,74 @@ type ProjectStoreValue = {
 
 const ProjectStoreContext = createContext<ProjectStoreValue | undefined>(undefined);
 
-function readStoredProjects() {
-  if (typeof window === "undefined") {
-    return cloneProjects(defaultProjects);
-  }
-
-  const storedValue = window.localStorage.getItem(projectsStorageKey);
-  if (!storedValue) {
-    return cloneProjects(defaultProjects);
-  }
-
-  try {
-    const parsedValue = JSON.parse(storedValue) as ProjectRecord[];
-    if (!Array.isArray(parsedValue)) {
-      return cloneProjects(defaultProjects);
-    }
-
-    return parsedValue.map((project) => ({
-      ...project,
-      technologies: Array.isArray(project.technologies) ? project.technologies : [],
-    }));
-  } catch {
-    return cloneProjects(defaultProjects);
-  }
-}
-
 export function ProjectProvider({ children }: { children: React.ReactNode }) {
   const [projects, setProjects] = useState<ProjectRecord[]>(cloneProjects(defaultProjects));
-  const [hasHydrated, setHasHydrated] = useState(false);
 
   useEffect(() => {
-    setProjects(readStoredProjects());
-    setHasHydrated(true);
+    fetch(`${import.meta.env.BASE_URL}api/projects`)
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data) && data.length > 0) {
+          setProjects(data);
+        }
+      })
+      .catch(err => console.error("Failed to load projects", err));
   }, []);
-
-  useEffect(() => {
-    if (!hasHydrated) {
-      return;
-    }
-
-    window.localStorage.setItem(projectsStorageKey, JSON.stringify(projects));
-  }, [hasHydrated, projects]);
 
   const value = useMemo<ProjectStoreValue>(() => {
     return {
       projects,
-      addProject: (project) => {
-        setProjects((currentProjects) => [
-          ...currentProjects,
-          {
-            ...project,
-            technologies: [...project.technologies],
-          },
-        ]);
+      addProject: async (project) => {
+        const nextProject = { ...project, technologies: [...project.technologies] };
+        setProjects((currentProjects) => [...currentProjects, nextProject]);
+        
+        try {
+          await fetch(`${import.meta.env.BASE_URL}api/projects`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(nextProject),
+          });
+        } catch (err) {
+          console.error("Failed to save project", err);
+        }
       },
-      updateProject: (projectId, updates) => {
+      updateProject: async (projectId, updates) => {
+        let updatedProject: ProjectRecord | null = null;
+        
         setProjects((currentProjects) =>
-          currentProjects.map((project) =>
-            project.id === projectId
-              ? {
-                  ...project,
-                  ...updates,
-                  technologies: updates.technologies
-                    ? [...updates.technologies]
-                    : project.technologies,
-                }
-              : project,
-          ),
+          currentProjects.map((project) => {
+            if (project.id === projectId) {
+              updatedProject = {
+                ...project,
+                ...updates,
+                technologies: updates.technologies ? [...updates.technologies] : project.technologies,
+              };
+              return updatedProject;
+            }
+            return project;
+          }),
         );
+        
+        if (updatedProject) {
+          try {
+            await fetch(`${import.meta.env.BASE_URL}api/projects`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(updatedProject),
+            });
+          } catch (err) {
+            console.error("Failed to update project", err);
+          }
+        }
       },
-      deleteProject: (projectId) => {
+      deleteProject: async (projectId) => {
         setProjects((currentProjects) => currentProjects.filter((project) => project.id !== projectId));
+        
+        try {
+          await fetch(`${import.meta.env.BASE_URL}api/projects/${projectId}`, { method: 'DELETE' });
+        } catch (err) {
+          console.error("Failed to delete project", err);
+        }
       },
       resetProjects: () => {
         setProjects(cloneProjects(defaultProjects));
@@ -97,6 +94,5 @@ export function useProjects() {
   if (!context) {
     throw new Error("useProjects must be used within a ProjectProvider");
   }
-
   return context;
 }

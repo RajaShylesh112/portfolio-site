@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 
 const adminAuthStorageKey = "portfolio-admin-auth-v1";
-const fallbackAdminPassword = "crystal-nexus-gateway";
+const fallbackAdminPassword = "nexus";
 
 type AdminAuthValue = {
   isAuthenticated: boolean;

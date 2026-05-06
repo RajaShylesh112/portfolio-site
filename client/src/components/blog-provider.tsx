@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import { cloneBlogEntries, defaultBlogEntries, blogStorageKey, type BlogEntryRecord } from "@/lib/blog-store";
+import { cloneBlogEntries, defaultBlogEntries, type BlogEntryRecord } from "@/lib/blog-store";
 
 type BlogStoreValue = {
   blogEntries: BlogEntryRecord[];
@@ -11,84 +11,83 @@ type BlogStoreValue = {
 
 const BlogStoreContext = createContext<BlogStoreValue | undefined>(undefined);
 
-function readStoredBlogEntries() {
-  if (typeof window === "undefined") {
-    return cloneBlogEntries(defaultBlogEntries);
-  }
-
-  const storedValue = window.localStorage.getItem(blogStorageKey);
-  if (!storedValue) {
-    return cloneBlogEntries(defaultBlogEntries);
-  }
-
-  try {
-    const parsedValue = JSON.parse(storedValue) as BlogEntryRecord[];
-    if (!Array.isArray(parsedValue)) {
-      return cloneBlogEntries(defaultBlogEntries);
-    }
-
-    return parsedValue.map((entry) => ({
-      ...entry,
-      whatILearned: Array.isArray(entry.whatILearned) ? entry.whatILearned : [],
-      references: Array.isArray(entry.references) ? entry.references : [],
-      tags: Array.isArray(entry.tags) ? entry.tags : [],
-      links: entry.links ? { ...entry.links } : undefined,
-    }));
-  } catch {
-    return cloneBlogEntries(defaultBlogEntries);
-  }
-}
-
 export function BlogProvider({ children }: { children: React.ReactNode }) {
   const [blogEntries, setBlogEntries] = useState<BlogEntryRecord[]>(cloneBlogEntries(defaultBlogEntries));
-  const [hasHydrated, setHasHydrated] = useState(false);
 
   useEffect(() => {
-    setBlogEntries(readStoredBlogEntries());
-    setHasHydrated(true);
+    fetch(`${import.meta.env.BASE_URL}api/blogs`)
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data) && data.length > 0) {
+          setBlogEntries(data);
+        }
+      })
+      .catch(err => console.error("Failed to load blogs", err));
   }, []);
-
-  useEffect(() => {
-    if (!hasHydrated) {
-      return;
-    }
-
-    window.localStorage.setItem(blogStorageKey, JSON.stringify(blogEntries));
-  }, [blogEntries, hasHydrated]);
 
   const value = useMemo<BlogStoreValue>(() => {
     return {
       blogEntries,
-      addBlogEntry: (entry) => {
-        setBlogEntries((currentEntries) => [
-          ...currentEntries,
-          {
-            ...entry,
-            whatILearned: [...entry.whatILearned],
-            references: [...entry.references],
-            tags: [...entry.tags],
-            links: entry.links ? { ...entry.links } : undefined,
-          },
-        ]);
+      addBlogEntry: async (entry) => {
+        const nextEntry = {
+          ...entry,
+          whatILearned: [...entry.whatILearned],
+          references: [...entry.references],
+          tags: [...entry.tags],
+          links: entry.links ? { ...entry.links } : undefined,
+        };
+        setBlogEntries((currentEntries) => [...currentEntries, nextEntry]);
+        
+        try {
+          await fetch(`${import.meta.env.BASE_URL}api/blogs`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(nextEntry),
+          });
+        } catch (err) {
+          console.error("Failed to save blog", err);
+        }
       },
-      updateBlogEntry: (entryId, updates) => {
+      updateBlogEntry: async (entryId, updates) => {
+        let updatedEntry: BlogEntryRecord | null = null;
+        
         setBlogEntries((currentEntries) =>
-          currentEntries.map((entry) =>
-            entry.id === entryId
-              ? {
-                  ...entry,
-                  ...updates,
-                  whatILearned: updates.whatILearned ? [...updates.whatILearned] : entry.whatILearned,
-                  references: updates.references ? [...updates.references] : entry.references,
-                  tags: updates.tags ? [...updates.tags] : entry.tags,
-                  links: updates.links ? { ...updates.links } : entry.links,
-                }
-              : entry,
-          ),
+          currentEntries.map((entry) => {
+            if (entry.id === entryId) {
+              updatedEntry = {
+                ...entry,
+                ...updates,
+                whatILearned: updates.whatILearned ? [...updates.whatILearned] : entry.whatILearned,
+                references: updates.references ? [...updates.references] : entry.references,
+                tags: updates.tags ? [...updates.tags] : entry.tags,
+                links: updates.links ? { ...updates.links } : entry.links,
+              };
+              return updatedEntry;
+            }
+            return entry;
+          }),
         );
+        
+        if (updatedEntry) {
+          try {
+            await fetch(`${import.meta.env.BASE_URL}api/blogs`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(updatedEntry),
+            });
+          } catch (err) {
+            console.error("Failed to update blog", err);
+          }
+        }
       },
-      deleteBlogEntry: (entryId) => {
+      deleteBlogEntry: async (entryId) => {
         setBlogEntries((currentEntries) => currentEntries.filter((entry) => entry.id !== entryId));
+        
+        try {
+          await fetch(`${import.meta.env.BASE_URL}api/blogs/${entryId}`, { method: 'DELETE' });
+        } catch (err) {
+          console.error("Failed to delete blog", err);
+        }
       },
       resetBlogEntries: () => {
         setBlogEntries(cloneBlogEntries(defaultBlogEntries));
@@ -104,6 +103,5 @@ export function useBlogs() {
   if (!context) {
     throw new Error("useBlogs must be used within a BlogProvider");
   }
-
   return context;
 }
