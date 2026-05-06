@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowDown, Mail, Github, Linkedin } from "lucide-react";
-import { Link } from "wouter";
 import TypingAnimation from "./typing-animation";
 import Hero3DBackground from "./hero-3d-background";
 import FloatingTechIcons from "./floating-tech-icons";
@@ -112,7 +111,7 @@ export default function HeroSectionSimplified() {
               type: "spring",
               stiffness: 100
             }}
-            className="text-5xl md:text-7xl font-bold mb-6 relative z-10"
+            className="text-4xl md:text-5xl font-bold mb-6 relative z-10"
           >
             <motion.span
               className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
@@ -170,21 +169,7 @@ export default function HeroSectionSimplified() {
                 View Projects
               </Button>
             </motion.div>
-            <Link href="/about">
-              <motion.div
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <Button 
-                  size="lg" 
-                  variant="outline" 
-                  className="border-cyan-400/50 text-cyan-400 hover:bg-cyan-400/10 hover:border-cyan-400 px-8 py-3 text-lg backdrop-blur-sm"
-                >
-                  View Bio
-                </Button>
-              </motion.div>
-            </Link>
+            {/* View Bio removed per request */}
 
             <a href={resumePDF} download className="ml-0 sm:ml-4">
               <motion.div
