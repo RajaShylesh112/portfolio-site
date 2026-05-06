@@ -34,9 +34,6 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Fetch MongoDB Data for Static Site
-        run: node scripts/fetch-data.js
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

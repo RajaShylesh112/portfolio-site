@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node server.js",
     "dev:server": "node server.js",
-    "build": "vite build && node -e \"require('fs').copyFileSync('dist/public/index.html', 'dist/public/404.html')\"",
+    "build": "vite build && node -e \"require('fs').copyFileSync('dist/public/index.html', 'dist/public/404.html')\" && node scripts/fetch-data.js",
     "preview": "vite preview",
     "check": "tsc"
   },
