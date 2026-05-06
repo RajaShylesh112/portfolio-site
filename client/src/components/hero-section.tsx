@@ -102,12 +102,8 @@ export default function HeroSection() {
               transition={{ duration: 6, repeat: Infinity }}
               className="w-64 h-64 md:w-80 md:h-80 rounded-full bg-gradient-to-br from-cyan-400 to-purple-500 dark:from-cyan-400 dark:to-purple-600 p-1 glow-effect"
             >
-              <div className="w-full h-full rounded-full bg-background dark:bg-black flex items-center justify-center overflow-hidden backdrop-blur-sm border border-cyan-400/30">
-                <img 
-                  src="/attached_assets/1000025260-removebg_1753213343295.png"
-                  alt="Raja Shylesh - Backend Developer"
-                  className="w-full h-full object-cover object-center scale-110"
-                />
+              <div className="w-full h-full rounded-full bg-background dark:bg-black flex items-center justify-center overflow-hidden backdrop-blur-sm border border-cyan-400/30 text-7xl">
+                💻
               </div>
             </motion.div>
             <motion.div

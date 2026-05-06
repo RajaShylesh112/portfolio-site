@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -6,40 +6,24 @@ import { Badge } from "@/components/ui/badge";
 import { ExternalLink, Github, Filter, X } from "lucide-react";
 import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
-
-interface Project {
-  id: string;
-  title: string;
-  description: string;
-  longDescription: string;
-  image: string;
-  technologies: string[];
-  category: string;
-  githubUrl: string;
-  demoUrl?: string;
-  featured: boolean;
-}
-
-const projects: Project[] = [
-  {
-    id: "wanderguide",
-    title: "WanderGuide",
-    description: "Intelligent travel planning app for building multi-stop itineraries with dynamic routing and pricing estimates",
-    longDescription: "WanderGuide is a premium full-stack travel planning application built with Next.js 15, React 19, and Supabase. It lets users create multi-stop itineraries, visualize routes in real time with Leaflet and OpenRouteService, estimate travel costs, and personalize recommendations with travel preferences and community reviews.",
-    image: "/api/placeholder/400/300",
-    technologies: ["Next.js 15", "React 19", "TypeScript", "Supabase", "Leaflet", "OpenRouteService", "Geoapify"],
-    category: "Full-stack",
-    githubUrl: "https://github.com/RajaShylesh112/WanderGuide",
-    demoUrl: "https://wander-guide-website.vercel.app/",
-    featured: true
-  }
-];
-
-const categories = ["All", "Full-stack"];
+import { useProjects } from "@/components/project-provider";
+import type { ProjectRecord } from "@/lib/project-store";
 
 export default function Projects() {
+  const { projects } = useProjects();
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [selectedProject, setSelectedProject] = useState<ProjectRecord | null>(null);
+
+  // Dynamically collect unique categories from projects
+  const categories = useMemo(() => {
+    const uniqueCategories = new Set<string>();
+    projects.forEach(project => {
+      if (project.category) {
+        uniqueCategories.add(project.category);
+      }
+    });
+    return ["All", ...Array.from(uniqueCategories).sort()];
+  }, [projects]);
 
   const filteredProjects = selectedCategory === "All" 
     ? projects 
@@ -104,11 +88,15 @@ export default function Projects() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
               >
                 <Card 
-                  className="group bg-gray-50 dark:bg-slate-800/50 border-gray-200 dark:border-cyan-400/20 hover:border-cyan-500 dark:hover:border-cyan-400/50 transition-all duration-300 cursor-pointer h-full hover:shadow-lg"
+                  className="group bg-gray-50 dark:bg-slate-800/50 border-gray-200 dark:border-cyan-400/20 hover:border-cyan-500 dark:hover:border-cyan-400/50 transition-all duration-300 cursor-pointer h-full hover:shadow-lg overflow-hidden"
                   onClick={() => setSelectedProject(project)}
                 >
-                  <div className="aspect-video bg-gray-200 dark:bg-slate-700/50 rounded-t-lg flex items-center justify-center">
-                    <div className="text-4xl">🚀</div>
+                  <div className="aspect-video bg-gray-200 dark:bg-slate-700/50 rounded-t-lg overflow-hidden">
+                    {project.image ? (
+                      <img src={project.image} alt={project.title} className="h-full w-full object-cover" />
+                    ) : (
+                      <div className="h-full w-full flex items-center justify-center text-4xl">🚀</div>
+                    )}
                   </div>
                   <CardHeader>
                     <div className="flex items-start justify-between">
@@ -201,8 +189,12 @@ export default function Projects() {
                 </Button>
               </div>
               
-              <div className="aspect-video bg-gray-200 dark:bg-slate-700/50 rounded-lg flex items-center justify-center mb-6">
-                <div className="text-6xl">🚀</div>
+              <div className="aspect-video bg-gray-200 dark:bg-slate-700/50 rounded-lg overflow-hidden mb-6">
+                {selectedProject.image ? (
+                  <img src={selectedProject.image} alt={selectedProject.title} className="h-full w-full object-cover" />
+                ) : (
+                  <div className="h-full w-full flex items-center justify-center text-6xl">🚀</div>
+                )}
               </div>
 
               <p className="text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">

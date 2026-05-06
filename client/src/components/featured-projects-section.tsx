@@ -4,19 +4,12 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ExternalLink, Github, ArrowRight } from "lucide-react";
 import { Link } from "wouter";
-
-const featuredProjects = [
-  {
-    id: "wanderguide",
-    title: "WanderGuide",
-    description: "An intelligent travel planning app for building multi-stop itineraries with dynamic routing, pricing estimates, and personalized recommendations.",
-    technologies: ["Next.js 15", "React 19", "Supabase", "Leaflet", "TypeScript"],
-    githubUrl: "https://github.com/RajaShylesh112/WanderGuide",
-    demoUrl: "https://wander-guide-website.vercel.app/"
-  }
-];
+import { useProjects } from "@/components/project-provider";
 
 export default function FeaturedProjectsSection() {
+  const { projects } = useProjects();
+  const featuredProjects = projects.filter((project) => project.featured);
+
   return (
     <section id="featured-projects" className="py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
@@ -33,7 +26,7 @@ export default function FeaturedProjectsSection() {
             </span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            A selection of my best work showcasing backend development skills and modern technologies
+            A selection of my featured work, kept editable from the admin panel
           </p>
         </motion.div>
 
@@ -59,9 +52,13 @@ export default function FeaturedProjectsSection() {
               viewport={{ once: true }}
               style={{ perspective: 1000 }}
             >
-              <Card className="group bg-slate-800/50 border-cyan-400/20 hover:border-cyan-400/50 hover:shadow-2xl hover:shadow-cyan-400/20 transition-all duration-300 h-full backdrop-blur-sm">
-                <div className="aspect-video bg-slate-700/50 rounded-t-lg flex items-center justify-center">
-                  <div className="text-4xl">🚀</div>
+              <Card className="group bg-slate-800/50 border-cyan-400/20 hover:border-cyan-400/50 hover:shadow-2xl hover:shadow-cyan-400/20 transition-all duration-300 h-full backdrop-blur-sm overflow-hidden">
+                <div className="aspect-video bg-slate-700/50 rounded-t-lg overflow-hidden">
+                  {project.image ? (
+                    <img src={project.image} alt={project.title} className="h-full w-full object-cover" />
+                  ) : (
+                    <div className="h-full w-full flex items-center justify-center text-4xl">🚀</div>
+                  )}
                 </div>
                 <CardHeader>
                   <CardTitle className="text-lg group-hover:text-cyan-400 transition-colors">

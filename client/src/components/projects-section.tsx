@@ -5,18 +5,9 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useMouseFollower } from "@/hooks/use-gsap-animations";
 import { useRef } from "react";
+import { useProjects } from "@/components/project-provider";
 
-const projects = [
-  {
-    title: "WanderGuide",
-    description: "An intelligent travel planning application for building multi-stop itineraries, visualizing routes, and estimating trip costs with personalized recommendations.",
-    technologies: ["Next.js 15", "Supabase", "Leaflet", "OpenRouteService"],
-    period: "2026",
-    icon: "🧭",
-  },
-];
-
-function ProjectCard({ project, index }: { project: typeof projects[0], index: number }) {
+function ProjectCard({ project, index }: { project: ReturnType<typeof useProjects>["projects"][number], index: number }) {
   const cardRef = useRef<HTMLDivElement>(null);
   useMouseFollower(cardRef);
 
@@ -31,9 +22,16 @@ function ProjectCard({ project, index }: { project: typeof projects[0], index: n
     >
       <Card 
         ref={cardRef}
-        className="h-full bg-card dark:bg-black/50 border-border hover:border-primary dark:hover:neon-border transition-all duration-300 group glow-effect backdrop-blur-sm"
+        className="h-full bg-card dark:bg-black/50 border-border hover:border-primary dark:hover:neon-border transition-all duration-300 group glow-effect backdrop-blur-sm overflow-hidden"
       >
         <CardContent className="p-8 h-full flex flex-col relative overflow-hidden">
+          <div className="mb-6 aspect-video rounded-lg overflow-hidden bg-slate-800/60">
+            {project.image ? (
+              <img src={project.image} alt={project.title} className="h-full w-full object-cover" />
+            ) : (
+              <div className="h-full w-full flex items-center justify-center text-4xl">{project.icon}</div>
+            )}
+          </div>
           {/* Floating particles */}
           <div className="absolute top-4 right-4 w-2 h-2 bg-cyan-400 rounded-full floating-particle opacity-60" />
           <div className="absolute bottom-8 left-6 w-1 h-1 bg-purple-400 rounded-full floating-particle opacity-40" />
@@ -90,6 +88,8 @@ function ProjectCard({ project, index }: { project: typeof projects[0], index: n
 }
 
 export default function ProjectsSection() {
+  const { projects } = useProjects();
+
   return (
     <section id="projects" className="section-padding section-reveal">
       <div className="max-w-7xl mx-auto container-padding">
@@ -104,7 +104,7 @@ export default function ProjectsSection() {
             Featured <span className="text-primary dark:neon-text">Projects</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Explore my latest work showcasing full-stack development and problem-solving skills
+            Explore my latest editable project showcase
           </p>
         </motion.div>
 
