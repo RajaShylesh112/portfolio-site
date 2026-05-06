@@ -892,6 +892,7 @@ links:
                           className="font-mono text-xs bg-slate-950 text-white border-gray-600 focus:border-cyan-500 resize-vertical"
                         />
                       </div>
+                      </div>
                       <div className="mt-4 flex gap-2">
                         <Button onClick={saveBlog} className="flex-1 bg-cyan-600 hover:bg-cyan-700">
                           Save
