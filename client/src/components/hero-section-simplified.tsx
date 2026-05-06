@@ -111,7 +111,7 @@ export default function HeroSectionSimplified() {
               type: "spring",
               stiffness: 100
             }}
-            className="text-4xl md:text-5xl font-bold mb-6 relative z-10"
+            className="text-3xl md:text-4xl font-bold mb-6 relative z-10"
           >
             <motion.span
               className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
@@ -130,9 +130,9 @@ export default function HeroSectionSimplified() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-xl md:text-2xl text-gray-300 mb-8"
+            className="text-lg md:text-xl text-gray-300 mb-8"
           >
-            <p className="text-xl md:text-2xl text-gray-300">
+            <p className="text-lg md:text-xl text-gray-300">
               Building scalable backend systems with an interest in intelligent applications.
             </p>
           </motion.div>
