@@ -137,17 +137,7 @@ export default function HeroSectionSimplified() {
             </p>
           </motion.div>
 
-          {/* Brief Description */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-lg text-gray-400 max-w-2xl mx-auto mb-12"
-          >
-            <span className="text-gray-400">
-              Experienced in building reliable APIs, database-backed services, and scalable server architectures.
-            </span>
-          </motion.div>
+          {/* Brief Description removed per user request */}
 
           {/* CTA Buttons with enhanced hover effects */}
           <motion.div

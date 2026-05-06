@@ -67,7 +67,7 @@ export default function SkillsSummarySection() {
           </h2>
           
           {/* Terminal-style output */}
-          <div className="bg-slate-900/80 border border-slate-700 rounded-lg p-6 font-mono text-sm">
+          <div className="bg-slate-900/80 border border-slate-700 rounded-lg p-6 font-mono text-base">
             <div className="text-cyan-400 mb-4">raja@portfolio:~$ cat technical_skills.txt</div>
             
             <div className="space-y-3 text-gray-300">
