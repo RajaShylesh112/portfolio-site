@@ -121,7 +121,7 @@ export default function HeroSectionSimplified() {
             <motion.span 
               className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent ml-2"
             >
-              | AI Explorer
+              & CS Student
             </motion.span>
           </motion.h1>
 
@@ -133,7 +133,7 @@ export default function HeroSectionSimplified() {
             className="text-lg md:text-xl text-gray-300 mb-8"
           >
             <p className="text-lg md:text-xl text-gray-300">
-              Building scalable backend systems with an interest in intelligent applications.
+              Passionate about building reliable backend systems and developer-focused tools. I enjoy working on APIs, databases, intelligent workflows, and software that solves real problems efficiently.
             </p>
           </motion.div>
 
