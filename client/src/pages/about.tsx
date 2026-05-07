@@ -5,6 +5,7 @@ import { Download, Mail, Linkedin, Github, MapPin, Calendar, GraduationCap } fro
 import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
 import profileImage from "@assets/image.png";
+import resumePDF from "@assets/Resume.pdf";
 
 export default function About() {
   const timeline = [
@@ -221,19 +222,22 @@ export default function About() {
               Interested in discussing backend development or have questions about my projects? I'd love to hear from you.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Button size="lg" className="bg-cyan-600 hover:bg-cyan-700">
-                <Download className="w-5 h-5 mr-2" />
-                Download Resume
-              </Button>
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="border-cyan-500 dark:border-cyan-400/50 hover:bg-cyan-50 dark:hover:bg-cyan-400/10"
-                onClick={() => window.open('mailto:raja@example.com', '_blank')}
-              >
-                <Mail className="w-5 h-5 mr-2" />
-                Email Me
-              </Button>
+              <a href={resumePDF} download="Raja_Shylesh_Resume.pdf">
+                <Button size="lg" className="bg-cyan-600 hover:bg-cyan-700">
+                  <Download className="w-5 h-5 mr-2" />
+                  Download Resume
+                </Button>
+              </a>
+              <a href="mailto:rajashylesh@gmail.com">
+                <Button 
+                  size="lg" 
+                  variant="outline" 
+                  className="border-cyan-500 dark:border-cyan-400/50 hover:bg-cyan-50 dark:hover:bg-cyan-400/10"
+                >
+                  <Mail className="w-5 h-5 mr-2" />
+                  Email Me
+                </Button>
+              </a>
               <Button 
                 size="lg" 
                 variant="outline" 

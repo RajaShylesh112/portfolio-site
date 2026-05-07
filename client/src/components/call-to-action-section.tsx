@@ -1,10 +1,29 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Download, MessageCircle, ArrowRight } from "lucide-react";
+import { Download, Github, ArrowRight, Mail, Check } from "lucide-react";
 import { Link } from "wouter";
+import resumePDF from "@assets/Resume.pdf";
+import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
 
 export default function CallToActionSection() {
+  const { toast } = useToast();
+  const [copied, setCopied] = useState(false);
+
+  const copyEmail = () => {
+    navigator.clipboard.writeText("rajashylesh@gmail.com");
+    setCopied(true);
+    toast({
+      title: "Email Copied!",
+      description: "rajashylesh@gmail.com has been copied to your clipboard.",
+    });
+    setTimeout(() => setCopied(false), 2000);
+    
+    // Still try to open mailto
+    window.location.href = "mailto:rajashylesh@gmail.com";
+  };
+
   return (
     <section id="call-to-action" className="py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
@@ -35,24 +54,32 @@ export default function CallToActionSection() {
                   <Button 
                     size="lg" 
                     className="bg-cyan-600 hover:bg-cyan-700 text-white px-8 py-4 text-lg"
-                    onClick={() => window.open('mailto:raja@example.com?subject=Project Inquiry', '_blank')}
+                    onClick={() => window.open('https://github.com/RajaShylesh112?tab=repositories', '_blank')}
                   >
-                    <MessageCircle className="w-5 h-5 mr-2" />
+                    <Github className="w-5 h-5 mr-2" />
                     View Projects
                   </Button>
 
                   <Button 
                     size="lg" 
-                    variant="outline" 
+                    variant="outline"
                     className="border-cyan-400/50 text-cyan-400 hover:bg-cyan-400/10 px-8 py-4 text-lg"
-                    onClick={() => {
-                      // In a real app, this would trigger a download
-                      console.log('Download resume');
-                    }}
+                    onClick={copyEmail}
                   >
-                    <Download className="w-5 h-5 mr-2" />
-                    Download Resume
+                    {copied ? <Check className="w-5 h-5 mr-2" /> : <Mail className="w-5 h-5 mr-2" />}
+                    {copied ? "Copied!" : "Send Email"}
                   </Button>
+
+                  <a href={resumePDF} download="Raja_Shylesh_Resume.pdf">
+                    <Button 
+                      size="lg" 
+                      variant="outline" 
+                      className="border-cyan-400/50 text-cyan-400 hover:bg-cyan-400/10 px-8 py-4 text-lg"
+                    >
+                      <Download className="w-5 h-5 mr-2" />
+                      Download Resume
+                    </Button>
+                  </a>
                 </div>
 
                 <motion.div

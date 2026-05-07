@@ -9,6 +9,8 @@ import { useProjects } from "@/components/project-provider";
 export default function FeaturedProjectsSection() {
   const { projects } = useProjects();
   const featuredProjects = projects.filter((project) => project.featured);
+  const nonFeaturedProjects = projects.filter((project) => !project.featured);
+  const displayProjects = [...featuredProjects, ...nonFeaturedProjects].slice(0, 3);
 
   return (
     <section id="featured-projects" className="py-20 px-4 sm:px-6 lg:px-8">
@@ -31,7 +33,7 @@ export default function FeaturedProjectsSection() {
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-          {featuredProjects.map((project, index) => (
+          {displayProjects.map((project, index) => (
             <motion.div
               key={project.id}
               initial={{ opacity: 0, y: 30 }}

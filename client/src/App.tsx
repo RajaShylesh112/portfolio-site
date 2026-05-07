@@ -1,4 +1,5 @@
-import { Switch, Route, Router } from "wouter";
+import { Switch, Route, Router, useLocation } from "wouter";
+import { useEffect } from "react";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./lib/queryClient";
 import { Toaster } from "@/components/ui/toaster";
@@ -14,12 +15,23 @@ import Blog from "@/pages/blog";
 import Admin from "@/pages/admin";
 import NotFound from "@/pages/not-found";
 
+function ScrollToTop() {
+  const [location] = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [location]);
+
+  return null;
+}
+
 function AppRouter() {
   // Use the base path from Vite config, stripping trailing slash if present for wouter
   const base = import.meta.env.BASE_URL.replace(/\/$/, "");
   
   return (
     <Router base={base}>
+      <ScrollToTop />
       <Switch>
         <Route path="/" component={Home} />
         <Route path="/about" component={About} />

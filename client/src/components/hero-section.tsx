@@ -50,7 +50,7 @@ export default function HeroSection() {
             </Button>
             <Button
               variant="outline"
-              onClick={() => scrollToSection("projects")}
+              onClick={() => window.open("https://github.com/RajaShylesh112?tab=repositories", "_blank")}
               className="px-8 py-3 border-primary dark:border-cyan-400 dark:text-cyan-400 dark:hover:bg-cyan-400/10 cursor-pointer"
             >
               View Projects

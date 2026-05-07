@@ -1,14 +1,32 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowDown, Mail, Github, Linkedin } from "lucide-react";
+import { ArrowDown, Mail, Github, Linkedin, Copy, Check } from "lucide-react";
 import TypingAnimation from "./typing-animation";
 import Hero3DBackground from "./hero-3d-background";
 import FloatingTechIcons from "./floating-tech-icons";
 import ModernShapes from "./modern-shapes";
 import profileImage from "@assets/image.png";
 import resumePDF from "@assets/Resume.pdf";
+import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
 
 export default function HeroSectionSimplified() {
+  const { toast } = useToast();
+  const [copied, setCopied] = useState(false);
+
+  const copyEmail = () => {
+    navigator.clipboard.writeText("rajashylesh@gmail.com");
+    setCopied(true);
+    toast({
+      title: "Email Copied!",
+      description: "rajashylesh@gmail.com has been copied to your clipboard.",
+    });
+    setTimeout(() => setCopied(false), 2000);
+    
+    // Still try to open mailto
+    window.location.href = "mailto:rajashylesh@gmail.com";
+  };
+
   const scrollToProjects = () => {
     const element = document.getElementById("featured-projects");
     if (element) {
@@ -159,7 +177,22 @@ export default function HeroSectionSimplified() {
                 View Projects
               </Button>
             </motion.div>
-            {/* View Bio removed per request */}
+
+            <motion.div
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <Button 
+                size="lg" 
+                variant="outline"
+                onClick={copyEmail}
+                className="border-cyan-400/50 text-cyan-400 hover:bg-cyan-400/10 px-8 py-3 text-lg"
+              >
+                {copied ? <Check className="w-5 h-5 mr-2" /> : <Mail className="w-5 h-5 mr-2" />}
+                {copied ? "Copied!" : "Send Email"}
+              </Button>
+            </motion.div>
 
             <a href={resumePDF} download className="ml-0 sm:ml-4">
               <motion.div
@@ -186,7 +219,7 @@ export default function HeroSectionSimplified() {
             className="flex justify-center space-x-6"
           >
             <a
-              href="mailto:raja@example.com"
+              href="mailto:rajashylesh@gmail.com"
               className="text-gray-400 hover:text-cyan-400 transition-colors duration-200"
             >
               <Mail className="w-6 h-6" />

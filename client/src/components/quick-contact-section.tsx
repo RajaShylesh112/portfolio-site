@@ -1,9 +1,27 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Mail, Linkedin, Github, ExternalLink } from "lucide-react";
+import { Mail, Linkedin, Github, ExternalLink, Check } from "lucide-react";
+import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
 
 export default function QuickContactSection() {
+  const { toast } = useToast();
+  const [copied, setCopied] = useState(false);
+
+  const copyEmail = () => {
+    navigator.clipboard.writeText("rajashylesh@gmail.com");
+    setCopied(true);
+    toast({
+      title: "Email Copied!",
+      description: "rajashylesh@gmail.com has been copied to your clipboard.",
+    });
+    setTimeout(() => setCopied(false), 2000);
+    
+    // Still try to open mailto
+    window.location.href = "mailto:rajashylesh@gmail.com";
+  };
+
   return (
     <section id="quick-contact" className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-900/30">
       <div className="max-w-4xl mx-auto">
@@ -40,11 +58,11 @@ export default function QuickContactSection() {
                   Drop me a line and I'll get back to you within 24 hours
                 </p>
                 <Button 
-                  className="bg-cyan-600 hover:bg-cyan-700"
-                  onClick={() => window.open('mailto:raja@example.com', '_blank')}
+                  className="bg-cyan-600 hover:bg-cyan-700 w-full"
+                  onClick={copyEmail}
                 >
-                  <Mail className="w-4 h-4 mr-2" />
-                  Send Email
+                  {copied ? <Check className="w-4 h-4 mr-2" /> : <Mail className="w-4 h-4 mr-2" />}
+                  {copied ? "Copied!" : "Send Email"}
                 </Button>
               </CardContent>
             </Card>

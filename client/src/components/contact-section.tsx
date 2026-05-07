@@ -8,7 +8,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
 
+import { useToast } from "@/hooks/use-toast";
+
 export default function ContactSection() {
+  const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -23,8 +26,21 @@ export default function ContactSection() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would typically send the form data to your backend
-    console.log("Form submitted:", formData);
+    const mailtoLink = `mailto:rajashylesh@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`)}`;
+    
+    // Copy to clipboard as fallback
+    navigator.clipboard.writeText("rajashylesh@gmail.com");
+    toast({
+      title: "Message Prepared!",
+      description: "Email copied to clipboard. Your mail app should open now.",
+    });
+
+    // Using a hidden anchor tag and clicking it is the most reliable way 
+    // to trigger mailto without opening a blank tab in most browsers.
+    const tempLink = document.createElement('a');
+    tempLink.href = mailtoLink;
+    tempLink.click();
+    
     // Reset form
     setFormData({ name: "", email: "", subject: "", message: "" });
   };

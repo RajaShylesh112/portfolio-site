@@ -120,18 +120,20 @@ function parseMarkdownBlog(content: string): { frontmatter: FrontmatterData; sec
   for (const line of lines) {
     if (!line.trim()) continue;
 
-    if (line.startsWith("  - ")) {
+    const listMatch = line.match(/^\s*-\s+(.*)$/);
+    if (listMatch) {
       if (inArray && currentKey === "tags") {
-        const value = line.replace("  - ", "").trim();
-        frontmatter.tags.push(value);
+        frontmatter.tags.push(listMatch[1].trim());
       }
     } else if (line.includes(":")) {
       inArray = false;
-      const [key, ...valueParts] = line.split(":");
+      const [keyPart, ...valueParts] = line.split(":");
+      const key = keyPart.trim().toLowerCase();
       const value = valueParts.join(":").trim();
 
-      if (key === "title" || key === "category" || key === "readTime") {
-        (frontmatter as Record<string, unknown>)[key] = value.replace(/^["']|["']$/g, "");
+      if (key === "title" || key === "category" || key === "readtime") {
+        const fieldName = key === "readtime" ? "readTime" : key;
+        (frontmatter as Record<string, unknown>)[fieldName] = value.replace(/^["']|["']$/g, "");
       } else if (key === "date") {
         frontmatter.date = value;
       } else if (key === "level") {
@@ -139,32 +141,33 @@ function parseMarkdownBlog(content: string): { frontmatter: FrontmatterData; sec
       } else if (key === "featured") {
         frontmatter.featured = value.toLowerCase() === "true";
       } else if (key === "tags") {
-        currentKey = key;
+        currentKey = "tags";
         inArray = true;
       } else if (key === "links") {
         frontmatter.links = {};
-      } else if (key === "  github" || key === "  demo" || key === "  docs") {
-        const linkKey = key.trim();
+        currentKey = "links";
+      } else if (key === "github" || key === "demo" || key === "docs") {
         if (!frontmatter.links) frontmatter.links = {};
-        (frontmatter.links as Record<string, unknown>)[linkKey] = value.replace(/^["']|["']$/g, "");
+        (frontmatter.links as Record<string, unknown>)[key] = value.replace(/^["']|["']$/g, "");
       }
     }
   }
 
   // Parse sections from body
   const sections: Record<string, string> = {};
-  const bodyLines = bodyStr.split("\n");
+  const bodyLines = bodyStr.replace(/\r\n/g, "\n").split("\n");
   let currentSection = "";
   let currentContent: string[] = [];
 
   for (const line of bodyLines) {
-    if (line.startsWith("# ")) {
+    const headingMatch = line.match(/^#+\s*(.*)$/);
+    if (headingMatch) {
       // Save previous section if exists
-      if (currentSection && currentContent.length > 0) {
+      if (currentSection) {
         sections[currentSection] = currentContent.join("\n").trim();
       }
-      // Start new section
-      currentSection = line.replace(/^# /, "").trim();
+      // Start new section, normalizing name: lowercase, strip punctuation, collapse spaces
+      currentSection = headingMatch[1].replace(/[^a-zA-Z0-9\s]/g, "").replace(/\s+/g, " ").trim().toLowerCase();
       currentContent = [];
     } else if (currentSection) {
       currentContent.push(line);
@@ -172,13 +175,14 @@ function parseMarkdownBlog(content: string): { frontmatter: FrontmatterData; sec
   }
 
   // Don't forget the last section
-  if (currentSection && currentContent.length > 0) {
+  if (currentSection) {
     sections[currentSection] = currentContent.join("\n").trim();
   }
 
   // Parse whatILearned and references from markdown sections
-  if (sections["What I Learned"]) {
-    const content = sections["What I Learned"].trim();
+  const learnedSection = sections["what i learned"] || sections["what we learned"];
+  if (learnedSection) {
+    const content = learnedSection.trim();
     if (content) {
       frontmatter.whatILearned = content
         .split("\n")
@@ -187,8 +191,8 @@ function parseMarkdownBlog(content: string): { frontmatter: FrontmatterData; sec
     }
   }
 
-  if (sections["References"]) {
-    const content = sections["References"].trim();
+  if (sections["references"]) {
+    const content = sections["references"].trim();
     if (content) {
       frontmatter.references = content
         .split("\n")
@@ -263,11 +267,11 @@ function markdownToBlog(markdown: string, id: string): BlogEntryRecord {
     whatILearned: frontmatter.whatILearned,
     references: frontmatter.references,
     links: frontmatter.links,
-    hook: sections["Hook"] || "",
-    background: sections["Background"] || "",
-    whatITried: sections["What I Tried"] || "",
-    whereItFailed: sections["Where It Failed"] || "",
-    finalDecision: sections["Final Decision"] || "",
+    hook: sections["hook"] || sections["the hook"] || "",
+    background: sections["background"] || sections["the background"] || "",
+    whatITried: sections["what i tried"] || sections["what we tried"] || "",
+    whereItFailed: sections["where it failed"] || sections["where we failed"] || "",
+    finalDecision: sections["final decision"] || sections["our final decision"] || "",
   };
 }
 
@@ -292,8 +296,6 @@ level: Student Project
 readTime: ""
 featured: false
 tags:
-references:
-whatILearned:
 links:
 ---
 
@@ -474,7 +476,7 @@ readTime: ""
 featured: false
 tags:
 links:
----
+---` + `
 
 # Hook
 
