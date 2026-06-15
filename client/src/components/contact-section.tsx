@@ -214,7 +214,7 @@ export default function ContactSection() {
           <div className="flex flex-col md:flex-row items-center justify-between">
             <div className="text-center md:text-left mb-6 md:mb-0">
               <h3 className="text-xl font-bold text-primary dark:text-blue-400 mb-2">Raja Shylesh</h3>
-              <p className="text-muted-foreground">Backend Developer</p>
+              <p className="text-muted-foreground">Full Stack Developer</p>
               <p className="text-muted-foreground/80 text-sm mt-1 flex items-center justify-center md:justify-start">
                 <MapPin className="w-4 h-4 mr-1" />
                 Coimbatore, Tamil Nadu, India

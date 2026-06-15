@@ -13,6 +13,23 @@ import { useAdminAuth } from "@/components/admin-auth-provider";
 import { toast } from "@/hooks/use-toast";
 import { createEmptyProject, type ProjectRecord } from "@/lib/project-store";
 import { createEmptyBlogEntry, type BlogEntryRecord } from "@/lib/blog-store";
+import {
+  DndContext,
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+  type DragEndEvent,
+} from "@dnd-kit/core";
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  useSortable,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 
 function toProjectDraft(project: ProjectRecord): ProjectRecord {
   return {
@@ -60,6 +77,59 @@ function readFileAsDataUrl(file: File) {
     reader.onerror = () => reject(new Error("Unable to read file"));
     reader.readAsDataURL(file);
   });
+}
+
+function SortableProjectItem({
+  project,
+  isSelected,
+  onSelect,
+}: {
+  project: ProjectRecord;
+  isSelected: boolean;
+  onSelect: () => void;
+}) {
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
+    id: project.id,
+  });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    opacity: isDragging ? 0.5 : 1,
+    zIndex: isDragging ? 50 : undefined,
+  };
+
+  return (
+    <div ref={setNodeRef} style={style} className="relative">
+      <button
+        type="button"
+        onClick={onSelect}
+        className={`w-full text-left rounded-lg border px-4 py-3 transition-all ${
+          isSelected
+            ? "border-cyan-500 bg-cyan-50 dark:bg-cyan-400/10"
+            : "border-gray-200 dark:border-slate-700 hover:border-cyan-400/60"
+        }`}
+      >
+        <div className="flex items-center justify-between gap-3">
+          <div className="flex items-center gap-2 min-w-0">
+            <span
+              {...attributes}
+              {...listeners}
+              className="cursor-grab active:cursor-grabbing text-gray-400 dark:text-gray-500 hover:text-cyan-500 flex-shrink-0 touch-none"
+              title="Drag to reorder"
+            >
+              ⠿
+            </span>
+            <div className="min-w-0">
+              <div className="font-medium truncate">{project.title}</div>
+              <div className="text-sm text-gray-500 dark:text-gray-400">{project.category}</div>
+            </div>
+          </div>
+          {project.featured && <Badge className="bg-cyan-600 text-white flex-shrink-0">Featured</Badge>}
+        </div>
+      </button>
+    </div>
+  );
 }
 
 function ThumbnailPreview({ src, alt }: { src?: string; alt: string }) {
@@ -277,8 +347,26 @@ function markdownToBlog(markdown: string, id: string): BlogEntryRecord {
 
 export default function Admin() {
   const { isAuthenticated, login, logout } = useAdminAuth();
-  const { projects, addProject, updateProject, deleteProject, resetProjects } = useProjects();
+  const { projects, addProject, updateProject, deleteProject, reorderProjects, resetProjects } = useProjects();
   const { blogEntries, addBlogEntry, updateBlogEntry, deleteBlogEntry, resetBlogEntries } = useBlogs();
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, { activationConstraint: { distance: 5 } }),
+    useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates }),
+  );
+
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (!over || active.id === over.id) return;
+
+    const oldIndex = projects.findIndex((p) => p.id === active.id);
+    const newIndex = projects.findIndex((p) => p.id === over.id);
+    if (oldIndex === -1 || newIndex === -1) return;
+
+    const reordered = arrayMove(projects, oldIndex, newIndex);
+    reorderProjects(reordered.map((p) => p.id));
+    toast({ title: "Order updated", description: "Project order has been saved." });
+  };
 
   const [adminPassword, setAdminPassword] = useState("");
   const [activeSection, setActiveSection] = useState<"projects" | "blogs">("projects");
@@ -609,26 +697,25 @@ links:
                     <CardTitle className="text-lg">Projects</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-3">
-                    {projects.map((project) => (
-                      <button
-                        key={project.id}
-                        type="button"
-                        onClick={() => setSelectedProjectId(project.id)}
-                        className={`w-full text-left rounded-lg border px-4 py-3 transition-all ${
-                          selectedProjectId === project.id
-                            ? "border-cyan-500 bg-cyan-50 dark:bg-cyan-400/10"
-                            : "border-gray-200 dark:border-slate-700 hover:border-cyan-400/60"
-                        }`}
+                    <DndContext
+                      sensors={sensors}
+                      collisionDetection={closestCenter}
+                      onDragEnd={handleDragEnd}
+                    >
+                      <SortableContext
+                        items={projects.map((p) => p.id)}
+                        strategy={verticalListSortingStrategy}
                       >
-                        <div className="flex items-center justify-between gap-3">
-                          <div>
-                            <div className="font-medium">{project.title}</div>
-                            <div className="text-sm text-gray-500 dark:text-gray-400">{project.category}</div>
-                          </div>
-                          {project.featured && <Badge className="bg-cyan-600 text-white">Featured</Badge>}
-                        </div>
-                      </button>
-                    ))}
+                        {projects.map((project) => (
+                          <SortableProjectItem
+                            key={project.id}
+                            project={project}
+                            isSelected={selectedProjectId === project.id}
+                            onSelect={() => setSelectedProjectId(project.id)}
+                          />
+                        ))}
+                      </SortableContext>
+                    </DndContext>
                     <div className="pt-2 flex gap-2">
                       <Button onClick={saveProject} className="flex-1 bg-cyan-600 hover:bg-cyan-700">
                         Save

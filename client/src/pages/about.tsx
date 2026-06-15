@@ -56,7 +56,7 @@ export default function About() {
               About Raja Shylesh
             </h1>
             <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              Computer Science student and aspiring backend developer from Coimbatore, India
+              Computer Science student and full stack developer with an AI focus from Coimbatore, India
             </p>
           </motion.div>
 

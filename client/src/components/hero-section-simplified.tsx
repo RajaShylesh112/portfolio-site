@@ -134,12 +134,12 @@ export default function HeroSectionSimplified() {
             <motion.span
               className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
             >
-              Backend Developer
+              Full Stack Developer
             </motion.span>
             <motion.span 
               className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent ml-2"
             >
-              & CS Student
+              & AI Enthusiast
             </motion.span>
           </motion.h1>
 
@@ -151,7 +151,7 @@ export default function HeroSectionSimplified() {
             className="text-lg md:text-xl text-gray-300 mb-8"
           >
             <p className="text-lg md:text-xl text-gray-300">
-              Passionate about building reliable backend systems and developer-focused tools. I enjoy working on APIs, databases, intelligent workflows, and software that solves real problems efficiently.
+              Passionate about building full stack applications with an AI focus. I enjoy working on intelligent systems, APIs, databases, and software that leverages machine learning to solve real problems efficiently.
             </p>
           </motion.div>
 

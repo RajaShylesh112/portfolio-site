@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { cloneBlogEntries, defaultBlogEntries, type BlogEntryRecord } from "@/lib/blog-store";
+import { API_BASE_URL } from "@/lib/api";
 
 type BlogStoreValue = {
   blogEntries: BlogEntryRecord[];
@@ -15,7 +16,7 @@ export function BlogProvider({ children }: { children: React.ReactNode }) {
   const [blogEntries, setBlogEntries] = useState<BlogEntryRecord[]>(cloneBlogEntries(defaultBlogEntries));
 
   useEffect(() => {
-    fetch(`${import.meta.env.BASE_URL}api/blogs`)
+    fetch(`${API_BASE_URL}/api/blogs`)
       .then(res => res.json())
       .then(data => {
         if (Array.isArray(data) && data.length > 0) {
@@ -39,7 +40,7 @@ export function BlogProvider({ children }: { children: React.ReactNode }) {
         setBlogEntries((currentEntries) => [...currentEntries, nextEntry]);
         
         try {
-          await fetch(`${import.meta.env.BASE_URL}api/blogs`, {
+          await fetch(`${API_BASE_URL}/api/blogs`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(nextEntry),
@@ -64,7 +65,7 @@ export function BlogProvider({ children }: { children: React.ReactNode }) {
         setBlogEntries((currentEntries) => currentEntries.map((entry) => entry.id === entryId ? updatedEntry : entry));
         
         try {
-          const res = await fetch(`${import.meta.env.BASE_URL}api/blogs`, {
+          const res = await fetch(`${API_BASE_URL}/api/blogs`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(updatedEntry),
@@ -80,7 +81,7 @@ export function BlogProvider({ children }: { children: React.ReactNode }) {
         setBlogEntries((currentEntries) => currentEntries.filter((entry) => entry.id !== entryId));
         
         try {
-          await fetch(`${import.meta.env.BASE_URL}api/blogs/${entryId}`, { method: 'DELETE' });
+          await fetch(`${API_BASE_URL}/api/blogs/${entryId}`, { method: 'DELETE' });
         } catch (err) {
           console.error("Failed to delete blog", err);
         }

@@ -85,7 +85,7 @@ export default function AboutSection() {
                   </div>
                   <div className="flex justify-between items-center py-2">
                     <span className="text-muted-foreground">Preferred Role</span>
-                    <span className="font-semibold text-foreground">Backend Developer</span>
+                    <span className="font-semibold text-foreground">Full Stack Developer</span>
                   </div>
                 </div>
               </CardContent>

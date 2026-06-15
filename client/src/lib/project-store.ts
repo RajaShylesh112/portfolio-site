@@ -11,6 +11,7 @@ export interface ProjectRecord {
   featured: boolean;
   period?: string;
   icon?: string;
+  order?: number;
 }
 
 export const defaultProjects: ProjectRecord[] = [
@@ -26,7 +27,8 @@ export const defaultProjects: ProjectRecord[] = [
     demoUrl: "https://wander-guide-website.vercel.app/",
     featured: true,
     period: "2026",
-    icon: "🧭"
+    icon: "🧭",
+    order: 0
   },
   {
     id: "keyboard-3d",
@@ -40,7 +42,8 @@ export const defaultProjects: ProjectRecord[] = [
     demoUrl: "/portfolio-site/keyboard-3d-demo.mp4",
     featured: true,
     period: "May 2026",
-    icon: "⌨️"
+    icon: "⌨️",
+    order: 1
   }
 ];
 
@@ -67,5 +70,6 @@ export function createEmptyProject(): ProjectRecord {
     featured: false,
     period: "",
     icon: "🚀",
+    order: 999,
   };
 }

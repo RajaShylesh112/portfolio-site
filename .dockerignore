@@ -1,0 +1,9 @@
+node_modules
+dist
+client
+attached_assets
+.git
+.github
+.tmp
+*.md
+.env

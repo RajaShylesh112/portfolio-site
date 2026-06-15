@@ -30,7 +30,7 @@ export default function HeroSection() {
           
           <div className="hero-subtitle text-2xl lg:text-3xl text-muted-foreground mb-8 min-h-[3rem]">
             <TypingAnimation 
-              text="Backend Developer"
+              text="Full Stack Developer & AI Enthusiast"
               speed={100}
               startDelay={1000}
             />
